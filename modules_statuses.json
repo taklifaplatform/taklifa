@@ -9,5 +9,6 @@
     "Rating": true,
     "Support": true,
     "Notification": true,
-    "Services": true
+    "Services": true,
+    "Product": true
 }
