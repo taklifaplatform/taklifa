@@ -23,6 +23,7 @@ class VariantsRelationManager extends RelationManager
                 ->schema([
                     Forms\Components\TextInput::make('price')
                        ->label(__('Price'))
+                       ->numeric()
                        ->required(),
                     Forms\Components\TextInput::make('price_currency')
                        ->label(__('Price Currency'))
@@ -37,7 +38,8 @@ class VariantsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('price')
-                   ->label(__('Price')),
+                   ->label(__('Price'))
+                   ->money('SAR'),
                 Tables\Columns\TextColumn::make('price_currency')
                    ->label(__('Price Currency')),
             ])

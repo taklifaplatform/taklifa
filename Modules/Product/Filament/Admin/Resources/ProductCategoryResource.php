@@ -24,30 +24,30 @@ class ProductCategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make(__('Product Category Information'))
-                ->schema([
-                    Forms\Components\TextInput::make('name')
-                       ->label(__('Name'))
-                       ->required(),
-                    Forms\Components\TextInput::make('order')
-                       ->numeric()
-                       ->label(__('Order'))
-                       ->required(),
-                    Forms\Components\Select::make('parent_id')
-                       ->label(__('Parent Category'))
-                       ->relationship('parent', 'name')
-                       ->searchable()
-                       ->preload(),
-                    Forms\Components\Select::make('company_id')
-                       ->label(__('Company'))
-                       ->relationship('company', 'name')
-                       ->searchable()
-                       ->preload()
-                       ->required(),
-                    Forms\Components\Textarea::make('description')
-                       ->label(__('Description'))
-                       ->rows(5)
-                       ->columnSpanFull(),
-                ])->columns(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required(),
+                        Forms\Components\TextInput::make('order')
+                            ->numeric()
+                            ->label(__('Order'))
+                            ->required(),
+                        Forms\Components\Select::make('parent_id')
+                            ->label(__('Parent Category'))
+                            ->relationship('parent', 'name')
+                            ->searchable()
+                            ->preload(),
+                        Forms\Components\Select::make('company_id')
+                            ->label(__('Company'))
+                            ->relationship('company', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(__('Description'))
+                            ->rows(5)
+                            ->columnSpanFull(),
+                    ])->columns(2)
             ]);
     }
 
@@ -56,20 +56,26 @@ class ProductCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                   ->label(__('Name')),
+                    ->label(__('Name')),
+                Tables\Columns\TextColumn::make('description')
+                    ->label(__('Description'))
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('order')
-                   ->label(__('Order')),
+                    ->label(__('Order')),
                 Tables\Columns\TextColumn::make('parent.name')
-                   ->label(__('Parent Category')),
+                    ->label(__('Parent Category')),
                 Tables\Columns\TextColumn::make('company.name')
-                   ->label(__('Company')),
+                    ->label(__('Company')),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -91,6 +97,7 @@ class ProductCategoryResource extends Resource
             'index' => Pages\ListProductCategories::route('/'),
             'create' => Pages\CreateProductCategory::route('/create'),
             'edit' => Pages\EditProductCategory::route('/{record}/edit'),
+            'view' => Pages\ViewProductCategory::route('/{record}'),
         ];
     }
 

@@ -18,6 +18,10 @@ class ProductCategory extends BaseModel
         'company_id',
     ];
 
+    protected $attributes = [
+        'order' => 0,
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -26,6 +30,11 @@ class ProductCategory extends BaseModel
     public function parent()
     {
         return $this->belongsTo(ProductCategory::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(ProductCategory::class, 'parent_id');
     }
 
     public function products()

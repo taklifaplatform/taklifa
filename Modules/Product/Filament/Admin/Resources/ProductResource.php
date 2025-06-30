@@ -2,17 +2,14 @@
 
 namespace Modules\Product\Filament\Admin\Resources;
 
-use Modules\Product\Filament\Admin\Resources\ProductResource\RelationManagers\VariantsRelationManager;
-use Modules\Product\Filament\Admin\Resources\ProductResource\Pages;
-use Modules\Product\Filament\Admin\Resources\ProductResource\RelationManagers;
-use Modules\Product\Entities\Product;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Resource;
+use Modules\Product\Entities\Product;
+use Modules\Product\Filament\Admin\Resources\ProductResource\Pages;
+use Modules\Product\Filament\Admin\Resources\ProductResource\RelationManagers\VariantsRelationManager;
 
 class ProductResource extends Resource
 {
@@ -36,6 +33,11 @@ class ProductResource extends Resource
                        ->searchable()
                        ->preload()
                        ->required(),
+                    Forms\Components\Select::make('category_id')
+                       ->label(__('Category'))
+                       ->relationship('category', 'name')
+                       ->searchable()
+                       ->preload(),
                     Forms\Components\Textarea::make('description')
                        ->label(__('Description'))
                        ->rows(5)
@@ -52,15 +54,23 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                 ->label(__('Name')),
+                Tables\Columns\TextColumn::make('description')
+                ->label(__('Description'))
+                ->limit(50),
                 Tables\Columns\TextColumn::make('company.name')
                 ->label(__('Company')),
+                Tables\Columns\TextColumn::make('category.name')
+                ->label(__('Category')),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -82,6 +92,7 @@ class ProductResource extends Resource
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'view' => Pages\ViewProduct::route('/{record}'),
         ];
     }
 

@@ -30,7 +30,6 @@ class ProductCategoryController extends Controller
             ->when(!$request->category_id, static function ($query): void {
                 $query->where('parent_id', null);
             })
-            ->where('enabled', true)
             ->orderBy('order', 'asc');
 
         return ProductCategoryTransformer::collection(
@@ -46,7 +45,7 @@ class ProductCategoryController extends Controller
     public function retrieve(ProductCategory $productCategory)
     {
         return new ProductCategoryTransformer(
-            $productCategory->load(['parent', 'children', 'company'])
+            $productCategory->load(['parent', 'company'])
         );
     }
 
@@ -62,7 +61,7 @@ class ProductCategoryController extends Controller
         $productCategory = ProductCategory::create($updateProductCategoryRequest->validated());
 
         return new ProductCategoryTransformer(
-            $productCategory->load(['parent', 'children', 'company'])
+            $productCategory->load(['parent', 'company'])
         );
     }
 
@@ -77,7 +76,7 @@ class ProductCategoryController extends Controller
         $productCategory->update($updateProductCategoryRequest->validated());
 
         return new ProductCategoryTransformer(
-            $productCategory->load(['parent', 'children', 'company'])
+            $productCategory->load(['parent', 'company'])
         );
     }
 

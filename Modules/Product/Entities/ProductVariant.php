@@ -16,6 +16,10 @@ class ProductVariant extends BaseModel
         'product_id',
     ];
 
+    protected $attributes = [
+        'price_currency' => 'SAR',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class);
