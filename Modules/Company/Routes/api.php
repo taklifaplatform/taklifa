@@ -5,7 +5,6 @@ use Modules\Company\Http\Controllers\CompanyController;
 use Modules\Company\Http\Controllers\CompanyAdminController;
 use Modules\Company\Http\Controllers\CompanyBranchController;
 use Modules\Company\Http\Controllers\CompanyMemberController;
-use Modules\Company\Http\Controllers\CompanyVehiclesController;
 use Modules\Company\Http\Controllers\CompanyInvitationController;
 use Modules\Company\Http\Controllers\CompanyBranchAdminController;
 use Modules\Company\Http\Controllers\MemberAcceptInvitationController;
@@ -63,9 +62,6 @@ Route::prefix('/companies')->group(static function (): void {
 
     Route::get('/{company}/members', [CompanyMemberController::class, 'list']);
     Route::get('/{company}/members/{member}', [CompanyMemberController::class, 'retrieve']);
-
-    Route::get('/{company}/vehicles', [CompanyVehiclesController::class, 'list']);
-    Route::get('/{company}/vehicles/{vehicle}', [CompanyVehiclesController::class, 'retrieve']);
 
     Route::get('/{company}/branches', [CompanyBranchController::class, 'fetchAllBranches']);
     Route::get('/{company}/branches/{companyBranch}', [CompanyBranchController::class, 'retrieveBranch']);

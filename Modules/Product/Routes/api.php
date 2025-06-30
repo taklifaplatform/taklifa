@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Product\Http\Controllers\Api\ProductController;
-use Modules\Product\Http\Controllers\Api\ProductCategoryController;
+use Modules\Product\Http\Controllers\ProductController;
+use Modules\Product\Http\Controllers\ProductCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +22,18 @@ Route::middleware('auth:sanctum')->get('/product', function (Request $request) {
 
 // Product Categories API Routes
 Route::prefix('product-categories')->group(function () {
-    Route::get('/', [ProductCategoryController::class, 'index'])->name('product-categories.index');
-    Route::post('/', [ProductCategoryController::class, 'store'])->name('product-categories.store');
-    Route::get('/{productCategory}', [ProductCategoryController::class, 'show'])->name('product-categories.show');
-    Route::put('/{productCategory}', [ProductCategoryController::class, 'update'])->name('product-categories.update');
-    Route::delete('/{productCategory}', [ProductCategoryController::class, 'destroy'])->name('product-categories.destroy');
+    Route::get('/', [ProductCategoryController::class, 'list']);
+    Route::post('/', [ProductCategoryController::class, 'store']);
+    Route::get('/{productCategory}', [ProductCategoryController::class, 'retrieve']);
+    Route::put('/{productCategory}', [ProductCategoryController::class, 'update']);
+    Route::delete('/{productCategory}', [ProductCategoryController::class, 'delete']);
 });
 
 // Products API Routes
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('products.index');
-    Route::post('/', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
-    Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/', [ProductController::class, 'fetchAllProduct']);
+    Route::post('/', [ProductController::class, 'store']);
+    Route::get('/{product}', [ProductController::class, 'retrieveProduct']);
+    Route::put('/{product}', [ProductController::class, 'updateProduct']);
+    Route::delete('/{product}', [ProductController::class, 'deleteProduct']);
 });

@@ -8,7 +8,6 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\User\Entities\Profile;
 use Modules\Company\Entities\Company;
-use Modules\Vehicle\Entities\Vehicle;
 use Filament\Models\Contracts\HasName;
 use Modules\Core\Entities\PhoneNumber;
 use Modules\Services\Entities\Service;
@@ -20,9 +19,7 @@ use Modules\Geography\Entities\Location;
 use Illuminate\Notifications\Notification;
 use Filament\Models\Contracts\FilamentUser;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Modules\Analytics\Entities\UserAnalytic;
 use Modules\Rating\Entities\Traits\HasRating;
-use Modules\ServiceZone\Entities\ServiceZone;
 use Modules\Support\Entities\Traits\HasReport;
 use Modules\Company\Entities\Traits\HasCompany;
 use Modules\Geography\Entities\Traits\HasLocation;
@@ -71,8 +68,6 @@ use Modules\Auth\Entities\Traits\HasPhoneNumberVerification;
  * @property-read int|null $ratings_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Role> $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, ServiceZone> $serviceZones
- * @property-read int|null $service_zones_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  *

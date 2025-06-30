@@ -23,7 +23,7 @@ class ProductCategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Product Category Information')
+                Forms\Components\Section::make(__('Product Category Information'))
                 ->schema([
                     Forms\Components\TextInput::make('name')
                        ->label(__('Name'))
@@ -69,6 +69,7 @@ class ProductCategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

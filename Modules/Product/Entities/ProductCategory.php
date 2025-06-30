@@ -28,8 +28,8 @@ class ProductCategory extends BaseModel
         return $this->belongsTo(ProductCategory::class, 'parent_id');
     }
 
-    public function children()
+    public function products()
     {
-        return $this->hasMany(ProductCategory::class, 'parent_id');
+        return $this->hasMany(Product::class, 'category_id');
     }
 }

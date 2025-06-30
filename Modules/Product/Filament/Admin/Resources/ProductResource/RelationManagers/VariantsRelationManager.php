@@ -60,21 +60,21 @@ class VariantsRelationManager extends RelationManager
 
     protected static function getModelLabel(): string
     {
-        return __('Variant');
+        return __('Product Variant');
     }
 
     public static function getTitle(Model $model, string $pageClass): string
     {
-        return __('Variants');
+        return __('Product Variants');
     }
 
     public static function getLabel(): ?string
     {
-        return __('Variant');
+        return __('Product Variant');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return __('Variants');
+        return __('Product Variants');
     }
 }

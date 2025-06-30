@@ -2,21 +2,11 @@
 
 namespace Modules\Product\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
-use Modules\Api\Attributes as OpenApi;
-
-#[OpenApi\Parameters]
-class ListProductCategoriesRequest extends FormRequest
+use Modules\Core\Support\PaginatedQueryRequest;
+use Modules\Core\Http\Requests\QueryRequest;
+class ListProductCategoriesRequest extends QueryRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+    use PaginatedQueryRequest;
 
     /**
      * Get the validation rules that apply to the request.
@@ -25,7 +15,16 @@ class ListProductCategoriesRequest extends FormRequest
     {
         return [
             'search' => ['string', 'max:255'],
-            'company_id' => ['exists:companies,id', 'nullable'],
+            // 'company_id' => ['string', 'exists:companies,id', 'nullable'],
+            // 'parent_id' => ['string', 'exists:product_categories,id', 'nullable'],
         ];
     }
-} 
+
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+}

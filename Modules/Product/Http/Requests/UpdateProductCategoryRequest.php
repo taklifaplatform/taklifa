@@ -2,9 +2,8 @@
 
 namespace Modules\Product\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
+use Illuminate\Validation\Rule;
+use Modules\Core\Http\Requests\FormRequest;
 use Modules\Api\Attributes as OpenApi;
 
 #[OpenApi\RequestBody]
@@ -24,7 +23,11 @@ class UpdateProductCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'order' => ['nullable', 'integer', 'min:0'],
+            'parent_id' => ['nullable', 'integer', 'exists:product_categories,id'],
+            'company_id' => ['required', 'string', 'exists:companies,id'],
         ];
     }
-} 
+}

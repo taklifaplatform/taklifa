@@ -2,8 +2,9 @@
 
 namespace Modules\Product\Transformers;
 
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Modules\Core\Transformers\JsonTransformer;
+use Modules\Company\Transformers\CompanyTransformer;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 
 class ProductTransformer extends JsonTransformer
 {
@@ -19,11 +20,14 @@ class ProductTransformer extends JsonTransformer
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'company_id' => $this->company_id,
-            'company' => $this->whenLoaded('company', fn() => new \Modules\Company\Transformers\CompanyTransformer($this->company)),
-            'variants' => $this->whenLoaded('variants', fn() => ProductVariantTransformer::collection($this->variants)),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'company_id' => CompanyTransformer::make($this->company),
+            'category_id' => ProductCategoryTransformer::make($this->category),
+
+            // 'parent_id' => $this->parent_id,
+            // 'parent' => $this->whenLoaded('parent', fn() => new ProductCategoryTransformer($this->parent)),
+            // 'company_id' => $this->company_id,
+            // 'company' => $this->whenLoaded('company', fn() => new CompanyTransformer($this->company)),
+            // 'children' => $this->whenLoaded('children', fn() => ProductCategoryTransformer::collection($this->children)),
         ];
     }
 
@@ -35,12 +39,9 @@ class ProductTransformer extends JsonTransformer
                 Schema::string('name')->required(),
                 Schema::string('description')->nullable(),
                 Schema::integer('company_id')->required(),
-                Schema::ref('#/components/schemas/CompanyTransformer', 'company')->nullable(),
-                Schema::array('variants')->items(
-                    Schema::ref('#/components/schemas/ProductVariantTransformer')
-                )->nullable(),
-                Schema::string('created_at')->required(),
-                Schema::string('updated_at')->required(),
+                Schema::integer('category_id')->nullable(),
+                Schema::ref('#/components/schemas/CompanyTransformer', 'company'),
+                Schema::ref('#/components/schemas/ProductCategoryTransformer', 'category')
             );
     }
-} 
+}

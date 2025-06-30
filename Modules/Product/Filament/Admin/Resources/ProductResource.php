@@ -24,12 +24,12 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Product Information')
+                Forms\Components\Section::make(__('Product Information'))
                 ->schema([
                     Forms\Components\TextInput::make('name')
                        ->label(__('Name'))
                        ->required(),
-                    
+
                     Forms\Components\Select::make('company_id')
                        ->label(__('Company'))
                        ->relationship('company', 'name')
@@ -41,7 +41,7 @@ class ProductResource extends Resource
                        ->rows(5)
                        ->columnSpanFull()
                        ->required(),
-                    
+
                 ])->columns(2)
             ]);
     }
@@ -60,6 +60,7 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
