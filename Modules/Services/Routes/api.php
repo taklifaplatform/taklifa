@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Services\Http\Controllers\ServicesController;
 use Modules\Services\Http\Controllers\ManageServiceController;
+use Modules\Services\Http\Controllers\ServiceCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +19,23 @@ use Modules\Services\Http\Controllers\ManageServiceController;
 /**
  * Services endpoints
  */
-Route::prefix('/services')->group(static function (): void {
+Route::prefix('/Services')->group(static function (): void {
     // Public endpoints services
     Route::get('/', [ServicesController::class, 'listServices']);
-    Route::get('/companies/{company}/services', [ServicesController::class, 'listCompanyServices']);
-    Route::get('/drivers/{driver}/services', [ServicesController::class, 'listDriverServices']);
-    Route::get('/{service}', [ServicesController::class, 'retrieveZoneService']);
+    Route::get('/{Service}', [ServicesController::class, 'retrieveService']);
 });
 
-Route::middleware('auth:sanctum')->prefix('/services')->group(static function (): void {
+/**
+ * Service Categories endpoints
+ */
+Route::prefix('/Service-categories')->group(static function (): void {
+    // Public endpoints services
+    Route::get('/', [ServiceCategoriesController::class, 'listServiceCategories']);
+});
+
+
+Route::middleware('auth:sanctum')->prefix('/Services')->group(static function (): void {
     Route::post('/', [ManageServiceController::class, 'createService']);
-    Route::put('/{service}', [ManageServiceController::class, 'updateService']);
-    Route::delete('/{service}', [ManageServiceController::class, 'deleteService']);
+    Route::put('/{Service}', [ManageServiceController::class, 'updateService']);
+    Route::delete('/{Service}', [ManageServiceController::class, 'deleteService']);
 });

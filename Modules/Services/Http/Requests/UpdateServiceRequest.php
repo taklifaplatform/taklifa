@@ -17,10 +17,15 @@ class UpdateServiceRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
 
-            'price.value' => ['nullable', 'integer'],
-            'price.currency_id' => ['exists:currencies,id'],
+            'price' => ['nullable'],
 
-            ...TemporaryUpload::validationRules('cover'),
+            'category_id' => ['required', 'exists:Service_categories,id'],
+            'sub_category_id' => ['nullable', 'exists:Service_categories,id'],
+
+            'metadata' => ['nullable', 'array'],
+
+            'city' => ['nullable', 'string', 'max:255'],
+
             ...TemporaryUpload::validationRules('images.*'),
         ];
     }

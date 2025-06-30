@@ -497,10 +497,10 @@ Route::get('make-all-media-public', function () {
 //     ];
 
 //     foreach ($categories as $category) {
-//         $category = \Modules\Announcements\Entities\AnnouncementCategory::create($category);
+//         $category = \Modules\Services\Entities\ServiceCategory::create($category);
 //         foreach ($subCategories as $subCategory) {
 //             $subCategory['parent_id'] = $category->id;
-//             \Modules\Announcements\Entities\AnnouncementCategory::create($subCategory);
+//             \Modules\Services\Entities\ServiceCategory::create($subCategory);
 //         }
 //     }
 // });
@@ -1104,11 +1104,11 @@ Route::get('make-all-media-public', function () {
 //         ]
 //     ];
 
-//     foreach(\Modules\Announcements\Entities\AnnouncementCategory::where('parent_id', null)->get() as $category) {
+//     foreach(\Modules\Services\Entities\ServiceCategory::where('parent_id', null)->get() as $category) {
 //         foreach($subCategories as $subCategory) {
-//             $count = \Modules\Announcements\Entities\AnnouncementCategory::where('parent_id', $category->id)->count();
+//             $count = \Modules\Services\Entities\ServiceCategory::where('parent_id', $category->id)->count();
 //             $subCategory['order'] = $count + 1;
-//             \Modules\Announcements\Entities\AnnouncementCategory::create([
+//             \Modules\Services\Entities\ServiceCategory::create([
 //                 'parent_id' => $category->id,
 //                 ...$subCategory,
 //             ]);

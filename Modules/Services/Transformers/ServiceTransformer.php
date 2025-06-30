@@ -3,11 +3,10 @@
 namespace Modules\Services\Transformers;
 
 use Modules\Core\Transformers\JsonTransformer;
+use Modules\User\Transformers\UserTransformer;
 use Modules\Core\Transformers\MediaTransformer;
-use Modules\User\Transformers\DriverTransformer;
 use Modules\Geography\Transformers\PriceTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
-use Modules\Company\Transformers\SimpleCompanyTransformer;
 
 class ServiceTransformer extends JsonTransformer
 {
@@ -22,16 +21,27 @@ class ServiceTransformer extends JsonTransformer
         return [
             'id' => $this->id,
 
-            'company' => SimpleCompanyTransformer::make($this->company),
-            'driver' => DriverTransformer::make($this->driver),
+            'user' => UserTransformer::make($this->user),
 
             'title' => $this->title,
             'description' => $this->description,
 
-            'cover' => MediaTransformer::make($this->getFirstMedia('cover')),
             'images' => MediaTransformer::collection($this->getMedia('images')),
 
-            'price' => PriceTransformer::make($this->prices()->first()),
+            'price' => $this->price,
+
+            'city' => $this->city,
+
+            'metadata' => $this->metadata,
+            'metadata_fields' => $this->category?->metadata_fields ?? [],
+            'category_id' => $this->category_id,
+            'sub_category_id' => $this->sub_category_id,
+
+            'views_count' => $this->views_count ?? 0,
+            'likes_count' => $this->likes_count ?? 0,
+            'comments_count' => $this->comments_count ?? 0,
+
+            'created_at' => $this->created_at,
         ];
     }
 
@@ -41,15 +51,28 @@ class ServiceTransformer extends JsonTransformer
             ->properties(
                 Schema::integer('id')->required(),
 
-                Schema::ref('#/components/schemas/SimpleCompanyTransformer', 'companies'),
-                Schema::ref('#/components/schemas/DriverTransformer', 'driver'),
+                Schema::ref('#/components/schemas/UserTransformer', 'user'),
 
                 Schema::string('title')->required(),
                 Schema::string('description')->required(),
+                Schema::string('price')->required(),
+                Schema::string('city')->required(),
 
-                Schema::ref('#/components/schemas/MediaTransformer', 'cover'),
+                Schema::array('metadata')->required(),
+                Schema::array('metadata_fields')->required(),
+
+                Schema::integer('category_id')->required(),
+
+                Schema::integer('sub_category_id')->required(),
+
                 Schema::ref('#/components/schemas/MediaTransformer', 'images'),
                 Schema::ref('#/components/schemas/PriceTransformer', 'price'),
+
+                Schema::integer('views_count')->required(),
+                Schema::integer('likes_count')->required(),
+                Schema::integer('comments_count')->required(),
+
+                Schema::string('created_at')->required(),
             );
     }
 }

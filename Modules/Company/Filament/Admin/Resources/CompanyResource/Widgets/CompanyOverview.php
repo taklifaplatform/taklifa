@@ -9,7 +9,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use App\Models\User;
-use Modules\Announcements\Entities\Announcement;
+use Modules\Services\Entities\Service;
 
 class CompanyOverview extends BaseWidget
 {
@@ -31,10 +31,10 @@ class CompanyOverview extends BaseWidget
                 ->color('primary')
                 ->description(__('Total number of new user')),
 
-            Stat::make(__('Announcements'), Announcement::query()->count())
+            Stat::make(__('Services'), Service::query()->count())
                 ->icon('heroicon-s-megaphone')
                 ->color('primary')
-                ->description(__('Total number of new announcement')),
+                ->description(__('Total number of new Service')),
         ];
     }
 }

@@ -3,43 +3,38 @@
 namespace Modules\Services\Entities;
 
 use App\Models\User;
-use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\HasMedia;
 use Modules\Core\Entities\BaseModel;
-use Modules\Company\Entities\Company;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Modules\Geography\Entities\Traits\HasPrice;
-use Modules\Geography\Entities\Traits\HasLocation;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Service extends BaseModel implements HasMedia
+class Service extends BaseModel
 {
-    use HasFactory, HasLocation, HasPrice, InteractsWithMedia;
-
     protected $fillable = [
-        'company_id',
-        'driver_id',
         'title',
         'description',
+        'price',
+        'category_id',
+        'sub_category_id',
+        'user_id',
+        'metadata',
+        'city',
     ];
 
-    public function registerMediaConversions(?Media $media = null): void
+    protected $casts = [
+        'metadata' => 'array',
+        'price' => 'float',
+    ];
+
+    public function category()
     {
-        $this
-            ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 600, 600)
-            ->nonQueued();
+        return $this->belongsTo(ServiceCategory::class);
     }
 
-
-    public function company()
+    public function subCategory()
     {
-        return $this->belongsTo(Company::class, 'company_id');
+        return $this->belongsTo(ServiceCategory::class, 'sub_category_id');
     }
 
-    public function driver()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'driver_id');
+        return $this->belongsTo(User::class);
     }
 }

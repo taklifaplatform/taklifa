@@ -2,10 +2,12 @@
 
 namespace Modules\Services\Providers;
 
-use Modules\Services\Entities\Service;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Services\Entities\Service;
 use Modules\Services\Policies\ServicePolicy;
+use Modules\Services\Entities\ServiceCategory;
+use Modules\Services\Policies\ServiceCategoryPolicy;
 
 class ServicesServiceProvider extends ServiceProvider
 {
@@ -17,9 +19,10 @@ class ServicesServiceProvider extends ServiceProvider
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'services';
+    protected $moduleNameLower = 'Services';
 
     protected $policies = [
+        ServiceCategory::class => ServiceCategoryPolicy::class,
         Service::class => ServicePolicy::class,
     ];
 

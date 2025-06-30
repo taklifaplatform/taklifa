@@ -20,7 +20,7 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Modules\Company\Filament\Admin\Resources\CompanyResource\Widgets\CompanyOverview;
 use Modules\User\Filament\Admin\Resources\UserResource\Widgets\UserOverview;
 use App\Filament\Widgets\UsersPerDayChart;
-use App\Filament\Widgets\AnnouncementsPerDayChart;
+use App\Filament\Widgets\ServicesPerDayChart;
 use App\Filament\Widgets\CustomersPerDayChart;
 use App\Filament\Widgets\SoloDriversPerDayChart;
 
@@ -50,7 +50,7 @@ class AdminPanelProvider extends BasePanelProvider
             ->widgets([
                 CompanyOverview::class,
                 UsersPerDayChart::class,
-                AnnouncementsPerDayChart::class,
+                ServicesPerDayChart::class,
                 CustomersPerDayChart::class,
                 SoloDriversPerDayChart::class,
             ])

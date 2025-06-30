@@ -7,13 +7,13 @@
         <title>Module Services</title>
 
        {{-- Laravel Vite - CSS File --}}
-       {{-- {{ module_vite('build-services', 'Resources/assets/sass/app.scss') }} --}}
+       {{-- {{ module_vite('build-Services', 'Resources/assets/sass/app.scss') }} --}}
 
     </head>
     <body>
         @yield('content')
 
         {{-- Laravel Vite - JS File --}}
-        {{-- {{ module_vite('build-services', 'Resources/assets/js/app.js') }} --}}
+        {{-- {{ module_vite('build-Services', 'Resources/assets/js/app.js') }} --}}
     </body>
 </html>
