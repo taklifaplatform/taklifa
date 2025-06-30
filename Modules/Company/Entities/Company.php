@@ -4,6 +4,7 @@ namespace Modules\Company\Entities;
 
 use App\Models\User;
 use Spatie\Image\Enums\Fit;
+use Modules\Cart\Entities\Cart;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\Core\Entities\BaseModel;
 use Modules\Product\Entities\Product;
@@ -195,5 +196,10 @@ class Company extends BaseModel implements HasMedia
     public function productCategories()
     {
         return $this->hasMany(ProductCategory::class, 'company_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }
