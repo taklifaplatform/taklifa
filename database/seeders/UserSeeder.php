@@ -14,25 +14,17 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Sawaeed Admin',
+                'name' => 'Taklifa Admin',
                 'username' => 'admin',
-                'email' => 'admin@sawaeed.com',
+                'email' => 'admin@taklifa.com',
                 'phone_number' => '966000000000',
                 'role' => 'super_admin',
-                'password' => '#!@sawaeed',
-            ],
-            [
-                'name' => 'Solo Driver',
-                'username' => 'solo_driver',
-                'email' => 'solo.driver@sawaeed.com',
-                'phone_number' => '966111111111',
-                'role' => 'solo_driver',
-                'password' => '123456789',
+                'password' => '#!@taklifa',
             ],
             [
                 'name' => 'Company Owner',
                 'username' => 'company_owner',
-                'email' => 'company.owner@sawaeed.com',
+                'email' => 'company.owner@taklifa.com',
                 'phone_number' => '966222222222',
                 'role' => 'company_owner',
                 'password' => '123456789',
@@ -40,7 +32,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Company Manager',
                 'username' => 'company_manager',
-                'email' => 'company.manager@sawaeed.com',
+                'email' => 'company.manager@taklifa.com',
                 'phone_number' => '966333333333',
                 'role' => 'company_manager',
                 'password' => '123456789',
@@ -48,7 +40,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Customer',
                 'username' => 'customer',
-                'email' => 'customer@sawaeed.com',
+                'email' => 'customer@taklifa.com',
                 'phone_number' => '966444444444',
                 'role' => 'customer',
                 'password' => '123456789',

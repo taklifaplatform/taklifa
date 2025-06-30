@@ -1,7 +1,7 @@
 
 <img
-    src="{{ asset('images/icon.png') }}"
-    alt="Sawaeed"
+    src="{{ asset('images/taklifa.png') }}"
+    alt="Taklifa"
     class="h-11 w-auto"
 />
 

@@ -67,7 +67,7 @@ class DeewanChannel
 
         try {
             $requestBody = [
-                'senderName' => 'SAWAEED',
+                'senderName' => 'TAKLIFA',
                 'messageType' => 'text',
                 'messageText' => $message->getText(),
                 'recipients' => $to

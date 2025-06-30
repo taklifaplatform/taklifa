@@ -1,4 +1,4 @@
-## SawaeedTransport
+## Taklifa
 
 
 ## Installation
@@ -18,5 +18,3 @@ php artisan module:refresh
 npm i
 npm run build
 ```
-# taklifa-admin
-# taklifa-admin

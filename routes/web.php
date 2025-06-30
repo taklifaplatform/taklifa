@@ -68,7 +68,7 @@ $applinks = [
         "apps" => [],
         "details" => [
             [
-                "appID" =>  "DZPLAPPP9Y.app.sawaeed",
+                "appID" =>  "DZPLAPPP9Y.app.taklifa",
                 "paths" =>  [
                     "*"
                 ]

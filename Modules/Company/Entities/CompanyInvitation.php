@@ -68,7 +68,7 @@ class CompanyInvitation extends BaseModel
 
     public function getUrl()
     {
-        return "https://sawaeed.app/auth/invitations/{$this->invitation_code}";
+        return "https://taklifa.app/auth/invitations/{$this->invitation_code}";
     }
 
     public function sendInvitation()

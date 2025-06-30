@@ -1,5 +1,5 @@
 id: 65599
-name: Sawaeed
+name: Taklifa
 environments:
     production:
         octane: true
@@ -13,12 +13,12 @@ environments:
         cli-tmp-storage: 512
         queue-tmp-storage: 10240
         runtime: 'php-8.4:al2-arm'
-        database: sawaeed_prod
-        cache: sawaeed
-        storage: sawaeed
+        database: taklifa_prod
+        cache: taklifa
+        storage: taklifa
         domain:
-            - admin-old.sawaeed.app
-            - api-old.sawaeed.app
+            - admin-old.taklifa.app
+            - api-old.taklifa.app
         build:
             - 'composer install --no-dev'
             - 'php artisan cache:clear'
@@ -35,12 +35,12 @@ environments:
         cli-tmp-storage: 512
         queue-tmp-storage: 10240
         runtime: 'php-8.3:al2'
-        database: sawaeed-staging
-        storage: sawaeed-staging
-        # cache: sawaeed-staging
+        database: taklifa-staging
+        storage: taklifa-staging
+        # cache: taklifa-staging
         domain:
-            - admin-staging.sawaeed.app
-            - api-staging.sawaeed.app
+            - admin-staging.taklifa.app
+            - api-staging.taklifa.app
         build:
             - 'composer install --no-dev'
             - 'php artisan migrate --force'
