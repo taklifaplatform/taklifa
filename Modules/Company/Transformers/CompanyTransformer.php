@@ -22,7 +22,6 @@ class CompanyTransformer extends JsonTransformer
             'name' => $this->name,
             'about' => $this->about,
             'vehicles_count' => $this->vehicles_count,
-            'working_hours_id' => $this->workingHour?->id,
 
             'contact_number' => $this->owner?->phone_number,
 

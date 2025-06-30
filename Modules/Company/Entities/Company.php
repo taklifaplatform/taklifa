@@ -13,11 +13,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\Rating\Entities\Traits\HasRating;
 use Modules\ServiceZone\Entities\ServiceZone;
 use Modules\Support\Entities\Traits\HasReport;
-use Modules\Vehicle\Entities\Traits\HasVehicle;
 use Modules\Geography\Entities\Traits\HasLocation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Modules\WorkingHours\Entities\Traits\HasWorkingHour;
 
 /**
  * Modules\Company\Entities\Company
@@ -64,8 +62,6 @@ class Company extends BaseModel implements HasMedia
         HasLocation,
         HasRating,
         HasReport,
-        HasVehicle,
-        HasWorkingHour,
         InteractsWithMedia;
 
     /**
@@ -90,10 +86,6 @@ class Company extends BaseModel implements HasMedia
     protected static function boot()
     {
         parent::boot();
-
-        static::created(function ($company) {
-            $company->workingHour()->create();
-        });
     }
 
     public function registerMediaConversions(?Media $media = null): void

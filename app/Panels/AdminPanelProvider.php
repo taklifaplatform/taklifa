@@ -40,7 +40,7 @@ class AdminPanelProvider extends BasePanelProvider
             ->font('Poppins')
             ->authGuard('web')
             ->colors([
-                'primary' => Color::Yellow,
+                'primary' => Color::Emerald,
             ])
             ->login()
             ->passwordReset()

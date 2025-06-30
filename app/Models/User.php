@@ -25,8 +25,6 @@ use Modules\Rating\Entities\Traits\HasRating;
 use Modules\ServiceZone\Entities\ServiceZone;
 use Modules\Support\Entities\Traits\HasReport;
 use Modules\Company\Entities\Traits\HasCompany;
-use Modules\Vehicle\Entities\Traits\HasVehicle;
-use Modules\Shipment\Entities\Traits\HasShipment;
 use Modules\Geography\Entities\Traits\HasLocation;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
@@ -34,8 +32,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Auth\Entities\Traits\HasEmailVerification;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\UserVerification\Entities\UserVerification;
-use Modules\WorkingHours\Entities\Traits\HasWorkingHour;
 use Modules\Notification\Entities\Traits\HasNotifications;
 use Modules\Auth\Entities\Traits\HasPhoneNumberVerification;
 
@@ -79,10 +75,6 @@ use Modules\Auth\Entities\Traits\HasPhoneNumberVerification;
  * @property-read int|null $service_zones_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @property-read Vehicle|null $vehicle
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Vehicle> $vehicles
- * @property-read int|null $vehicles_count
- * @property-read UserVerification|null $verification
  *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -123,10 +115,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     use HasRating;
     use HasReport;
     use HasRoles;
-    use HasShipment;
     use HasUuids;
-    use HasVehicle;
-    use HasWorkingHour;
     use InteractsWithMedia;
 
     const ROLE_SOLO_DRIVER = 'solo_driver';
@@ -180,10 +169,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     protected static function boot()
     {
         parent::boot();
-
-        static::created(function ($company) {
-            $company->workingHour()->create();
-        });
     }
 
     public function getFilamentName(): string
@@ -221,11 +206,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         return $this->avatar_url ? Storage::url($this->avatar_url) : null;
     }
 
-    public function serviceZones()
-    {
-        return $this->morphMany(ServiceZone::class, 'ownable');
-    }
-
     public function services()
     {
         return $this->hasMany(Service::class, 'driver_id');
@@ -234,11 +214,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     public function phoneNumbers()
     {
         return $this->morphMany(PhoneNumber::class, 'phoneable');
-    }
-
-    public function verification()
-    {
-        return $this->hasOne(UserVerification::class);
     }
 
     public function canAccessFilament(): bool
@@ -298,20 +273,5 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         return [
             $this->phone_number,
         ];
-    }
-
-    public function analytics()
-    {
-        return $this->hasMany(UserAnalytic::class);
-    }
-
-    public function views()
-    {
-        return $this->analytics()->whereIn('action_type', ['profile_view', 'map_view']);
-    }
-
-    public function calls()
-    {
-        return $this->analytics()->where('action_type', 'call_press');
     }
 }

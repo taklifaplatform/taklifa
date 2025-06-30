@@ -122,21 +122,6 @@ class UserResource extends Resource
                     ->label(__('Verification Status'))
                     ->boolean(),
 
-                Tables\Columns\TextColumn::make('vehicles_count')
-                    ->counts('vehicles')
-                    ->label(__('Vehicles')),
-
-
-                Tables\Columns\TextColumn::make('views_count')
-                    ->counts('views')
-                    ->label(__('Views'))
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('calls_count')
-                    ->counts('calls')
-                    ->label(__('Calls'))
-                    ->sortable(),
-
                 Tables\Columns\ToggleColumn::make('urgency_service_provider')
                     ->label(__('Urgency Service Provider')),
 

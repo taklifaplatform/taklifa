@@ -95,7 +95,6 @@ class PublicDriversController extends Controller
                     });
                 })
                 ->with([
-                    'workingHour',
                     'ratings',
                     'media',
                     'roles',

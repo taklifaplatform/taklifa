@@ -58,7 +58,7 @@ abstract class BasePanelProvider extends PanelProvider
                 ),
 
         ])
-            ->favicon(asset('/images/icon.png'));
+            ->favicon(asset('/images/taklifa.png'));
 
         return $panel;
     }

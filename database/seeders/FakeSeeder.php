@@ -108,6 +108,17 @@ class FakeSeeder extends Seeder
         }
     }
 
+    public function createSoloDrivers()
+    {
+        for ($i = 0; $i < rand(10, 15); $i++) {
+            // create fake driver
+            $driver = User::factory()->create();
+            $driver->assignRole('solo_driver');
+
+            $this->createEntityRating($driver);
+        }
+    }
+
     public function createCompany(User $user, int $index)
     {
         $roles = ['company_driver', 'company_manager'];
@@ -180,10 +191,6 @@ class FakeSeeder extends Seeder
         }
 
         $this->createEntityRating($company);
-
-        for ($j = 0; $j < rand(2, 5); $j++) {
-            $this->createEntityVehicle($company);
-        }
     }
 
     public function createEntityRating(User|Company $entity)

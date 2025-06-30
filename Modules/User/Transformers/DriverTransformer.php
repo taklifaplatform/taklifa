@@ -26,7 +26,6 @@ class DriverTransformer extends JsonTransformer
             'phone_number' => $this->phone_number,
             'about' => $this->about,
             'username' => $this->username,
-            'working_hours_id' => $this->workingHour?->id,
             'latest_activity' => $this->latest_activity,
             'avatar' => MediaTransformer::make($this->getFirstMedia('avatar')),
 
