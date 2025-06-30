@@ -1,0 +1,22 @@
+{
+    "filament-shield::filament-shield.nav.group": "Users & Roles",
+    "draft": "Draft",
+    "searching": "Searching",
+    "assigned": "Assigned",
+    "delivering": "Delivering",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "pending": "Pending",
+    "expired": "Expired",
+    "rejected": "Rejected",
+    "completed": "Completed",
+    "failed": "Failed",
+    "returned": "Returned",
+    "lost": "Lost",
+    "damaged": "Damaged",
+    "stolen": "Stolen",
+    "other": "Other",
+    "document": "Document",
+    "box": "Box",
+    "multiple_boxes": "Multiple Boxes"
+}

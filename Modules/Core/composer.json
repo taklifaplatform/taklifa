@@ -1,0 +1,23 @@
+{
+    "name": "zixlab/core",
+    "description": "",
+    "authors": [
+        {
+            "name": "Badi Ifaoui",
+            "email": "badi.ifaoui@zixdev.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Core\\": ""
+        }
+    }
+}

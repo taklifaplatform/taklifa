@@ -1,0 +1,23 @@
+{
+    "name": "zixdev/api",
+    "description": "",
+    "authors": [
+        {
+            "name": "Chawki",
+            "email": "chawki@zixdev.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Api\\": ""
+        }
+    }
+}

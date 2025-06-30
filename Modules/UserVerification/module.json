@@ -1,0 +1,11 @@
+{
+    "name": "UserVerification",
+    "alias": "userverification",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\UserVerification\\Providers\\UserVerificationServiceProvider"
+    ],
+    "files": []
+}

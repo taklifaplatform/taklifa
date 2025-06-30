@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  pull_request:
+    types: [ closed ]
+    branches:
+      - "main"
+
+jobs:
+  release:
+    name: Create release
+    if: github.event.pull_request.merged == true
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ncipollo/release-action@v1
+        with:
+          name: ${{ github.event.pull_request.title }}
+          tag: ${{ github.event.pull_request.title }}
+          body: ${{ github.event.pull_request.body }}
+          prerelease: false
+          makeLatest: true
+          # uses the default GitHub actions app token
+          # github_token: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
+  postToSlack:
+    name: Post Release to Slack
+    needs: release
+    if: github.event.pull_request.merged == true
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: slackapi/slack-github-action@v1.22.0
+        with:
+          channel-id: 'github_releases' # TODO: CHANGE ME
+          payload: |
+            {
+              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${{ github.event.pull_request.title }}"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(github.event.pull_request.body) }}
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Release"
+                      },
+                      "url": ""
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} # TODO: Change this into the slack apps oAuth https://api.slack.com/apps/APP_ID/oauth?
+
+# TODO: Make sure the app is in the slack channel `/invite @APP_NAME`

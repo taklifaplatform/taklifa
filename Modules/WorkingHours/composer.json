@@ -1,0 +1,23 @@
+{
+    "name": "zixdev/workinghours",
+    "description": "",
+    "authors": [
+        {
+            "name": "ZIX DEV developer",
+            "email": "developers@zixdev.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\WorkingHours\\": ""
+        }
+    }
+}

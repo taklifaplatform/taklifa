@@ -1,0 +1,23 @@
+{
+    "name": "zixdev/shipment",
+    "description": "",
+    "authors": [
+        {
+            "name": "Chawki Ifaoui",
+            "email": "chawki@zixdev.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Shipment\\": ""
+        }
+    }
+}

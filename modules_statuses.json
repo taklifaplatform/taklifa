@@ -1,0 +1,23 @@
+{
+    "Core": true,
+    "Auth": true,
+    "Api": true,
+    "User": true,
+    "UserVerification": true,
+    "Geography": true,
+    "Company": true,
+    "Vehicle": true,
+    "ServiceZone": true,
+    "Media": true,
+    "Rating": true,
+    "Shipment": true,
+    "Chat": true,
+    "Job": true,
+    "Support": true,
+    "Notification": true,
+    "WorkingHours": true,
+    "Services": true,
+    "Announcements": true,
+    "Analytics": true,
+    "QuickShipment": true
+}

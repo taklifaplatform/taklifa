@@ -1,0 +1,12 @@
+{
+    "name": "Core",
+    "alias": "core",
+    "description": "zixdev Core module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Core\\Providers\\CoreServiceProvider"
+    ],
+    "files": [],
+    "version": "1.0.0"
+}

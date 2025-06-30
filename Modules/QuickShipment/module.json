@@ -1,0 +1,11 @@
+{
+    "name": "QuickShipment",
+    "alias": "quickshipment",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\QuickShipment\\Providers\\QuickShipmentServiceProvider"
+    ],
+    "files": []
+}

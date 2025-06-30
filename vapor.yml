@@ -1,0 +1,47 @@
+id: 65599
+name: Sawaeed
+environments:
+    production:
+        octane: true
+        # octane-database-session-persist: true #
+        # octane-database-session-ttl: 20 #
+        # warm: 2
+        timeout: 25
+        memory: 2048
+        cli-memory: 512
+        tmp-storage: 1024
+        cli-tmp-storage: 512
+        queue-tmp-storage: 10240
+        runtime: 'php-8.4:al2-arm'
+        database: sawaeed_prod
+        cache: sawaeed
+        storage: sawaeed
+        domain:
+            - admin-old.sawaeed.app
+            - api-old.sawaeed.app
+        build:
+            - 'composer install --no-dev'
+            - 'php artisan cache:clear'
+            - 'php artisan event:cache'
+            - 'php artisan route:cache'
+            - 'php artisan filament:optimize'
+            - 'php artisan queue:restart'
+        deploy:
+            - 'php artisan migrate --force'
+    staging:
+        memory: 1024
+        cli-memory: 512
+        tmp-storage: 1024
+        cli-tmp-storage: 512
+        queue-tmp-storage: 10240
+        runtime: 'php-8.3:al2'
+        database: sawaeed-staging
+        storage: sawaeed-staging
+        # cache: sawaeed-staging
+        domain:
+            - admin-staging.sawaeed.app
+            - api-staging.sawaeed.app
+        build:
+            - 'composer install --no-dev'
+            - 'php artisan migrate --force'
+            - 'php artisan event:cache'

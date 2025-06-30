@@ -1,0 +1,45 @@
+name: Static analysis
+
+on:
+  push:
+    paths-ignore:
+      - 'frontend/**'
+  pull_request:
+    types: [opened]
+    paths-ignore:
+      - 'frontend/**'
+
+jobs:
+  larastan:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.2]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+
+      - name: Testing PHP version
+        run: php -v
+
+      - name: Install Dependencies
+        run: |
+          composer clear-cache
+          composer install --no-ansi --no-interaction --no-scripts --prefer-dist
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # - name: Execute phpstan
+      #   run: ./vendor/bin/phpstan
+
+      - name: Execute phpinsights
+        run: ./vendor/bin/phpinsights
+

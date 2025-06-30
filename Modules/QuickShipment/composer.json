@@ -1,0 +1,23 @@
+{
+    "name": "zixdev/quickshipment",
+    "description": "",
+    "authors": [
+        {
+            "name": "ZIX DEV developer",
+            "email": "developers@zixdev.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\QuickShipment\\": ""
+        }
+    }
+}

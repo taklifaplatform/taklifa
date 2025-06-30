@@ -1,0 +1,23 @@
+{
+    "name": "zixdev/media",
+    "description": "",
+    "authors": [
+        {
+            "name": "zixdev developer",
+            "email": "developers@zixdev.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Media\\": ""
+        }
+    }
+}

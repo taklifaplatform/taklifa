@@ -1,0 +1,11 @@
+{
+    "name": "WorkingHours",
+    "alias": "workinghours",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\WorkingHours\\Providers\\WorkingHoursServiceProvider"
+    ],
+    "files": []
+}
