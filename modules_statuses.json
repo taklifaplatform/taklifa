@@ -8,5 +8,6 @@
     "Media": true,
     "Rating": true,
     "Support": true,
-    "Notification": true
+    "Notification": true,
+    "Services": true
 }
