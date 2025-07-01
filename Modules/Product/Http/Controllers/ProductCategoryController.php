@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Api\Attributes as OpenApi;
 use Modules\Product\Entities\ProductCategory;
@@ -23,15 +24,7 @@ class ProductCategoryController extends Controller
         $query = ProductCategory::query()
             ->when($request->search, static function ($query, $search): void {
                 $query->where('name', 'like', sprintf('%%%s%%', $search));
-            })
-            ->when($request->category_id, static function ($query, $categoryId): void {
-                $query->where('parent_id', $categoryId);
-            })
-            ->when(!$request->category_id, static function ($query): void {
-                $query->where('parent_id', null);
-            })
-            ->orderBy('order', 'asc');
-
+            });
         return ProductCategoryTransformer::collection(
             $query->paginate($request->per_page ?? 10)
         );
@@ -84,7 +77,8 @@ class ProductCategoryController extends Controller
      * Remove the specified product category.
      */
     #[OpenApi\Operation('deleteProductCategory', tags: ['Product Categories'])]
-    public function delete(ProductCategory $productCategory)
+    #[OpenApi\Response(factory: ProductCategoryTransformer::class)]
+    public function delete(ProductCategory $productCategory, Request $request)
     {
         $productCategory->delete();
 

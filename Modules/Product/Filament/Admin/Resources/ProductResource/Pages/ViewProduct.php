@@ -7,10 +7,9 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
-use Modules\Company\Filament\Admin\Resources\CompanyResource;
-use Modules\Product\Entities\Product;
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource;
 use Modules\Product\Filament\Admin\Resources\ProductResource;
+use Modules\Company\Filament\Admin\Resources\CompanyResource;
+use Modules\Product\Filament\Admin\Resources\ProductCategoryResource;
 
 class ViewProduct extends ViewRecord
 {
@@ -32,7 +31,7 @@ class ViewProduct extends ViewRecord
     {
         return $infolist
             ->schema([
-                Components\Section::make(__('Company Details'))
+                Components\Section::make(__('Product Details'))
                     ->schema([
                         Components\Split::make([
                             Components\Grid::make(2)

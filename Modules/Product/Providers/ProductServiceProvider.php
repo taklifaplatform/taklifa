@@ -2,8 +2,11 @@
 
 namespace Modules\Product\Providers;
 
+use Modules\Product\Entities\Product;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use Modules\Product\Policies\ProductPolicy;
+use Modules\Product\Entities\ProductCategory;
+use Modules\Product\Policies\ProductCategoryPolicy;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,12 @@ class ProductServiceProvider extends ServiceProvider
      * @var string $moduleNameLower
      */
     protected $moduleNameLower = 'product';
+
+    protected $policies = [
+        ProductCategory::class => ProductCategoryPolicy::class,
+        Product::class => ProductPolicy::class,
+    ];
+
 
     /**
      * Boot the application events.

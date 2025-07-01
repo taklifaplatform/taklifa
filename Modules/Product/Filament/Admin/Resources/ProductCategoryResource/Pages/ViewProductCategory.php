@@ -33,7 +33,7 @@ class ViewProductCategory extends ViewRecord
     {
         return $infolist
             ->schema([
-                Components\Section::make(__('Company Details'))
+                Components\Section::make(__('Product Category Details'))
                     ->schema([
                         Components\Split::make([
                             Components\Grid::make(2)

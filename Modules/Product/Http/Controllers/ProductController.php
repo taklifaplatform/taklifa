@@ -2,14 +2,15 @@
 
 namespace Modules\Product\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Modules\Api\Attributes as OpenApi;
 use Modules\Product\Entities\Product;
+use Modules\Api\Attributes as OpenApi;
 use Modules\Product\Entities\ProductVariant;
 use Modules\Product\Transformers\ProductTransformer;
 use Modules\Product\Http\Requests\ListProductsRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
-use Illuminate\Support\Facades\DB;
 
 #[OpenApi\PathItem]
 class ProductController extends Controller
@@ -111,7 +112,8 @@ class ProductController extends Controller
      * Remove the specified product.
      */
     #[OpenApi\Operation('deleteProduct', tags: ['Products'])]
-    public function deleteProduct(Product $product)
+    #[OpenApi\Response(factory: ProductTransformer::class)]
+    public function deleteProduct(Product $product, Request $request)
     {
         // Delete associated variants first
         $product->variants()->delete();
