@@ -28,6 +28,12 @@ class ProductController extends Controller
                 ->when($request->search, static function ($query, $search): void {
                     $query->where('name', 'like', sprintf('%%%s%%', $search));
                 })
+                ->when($request->company_id, static function ($query, $companyId): void {
+                    $query->where('company_id', $companyId);
+                })
+                ->when($request->category_id, static function ($query, $categoryId): void {
+                    $query->where('category_id', $categoryId);
+                })
                 ->paginate($request->per_page ?? 10)
         );
     }

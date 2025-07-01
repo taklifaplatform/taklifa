@@ -22,29 +22,29 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make(__('Product Information'))
-                ->schema([
-                    Forms\Components\TextInput::make('name')
-                       ->label(__('Name'))
-                       ->required(),
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required(),
 
-                    Forms\Components\Select::make('company_id')
-                       ->label(__('Company'))
-                       ->relationship('company', 'name')
-                       ->searchable()
-                       ->preload()
-                       ->required(),
-                    Forms\Components\Select::make('category_id')
-                       ->label(__('Category'))
-                       ->relationship('category', 'name')
-                       ->searchable()
-                       ->preload(),
-                    Forms\Components\Textarea::make('description')
-                       ->label(__('Description'))
-                       ->rows(5)
-                       ->columnSpanFull()
-                       ->required(),
+                        Forms\Components\Select::make('company_id')
+                            ->label(__('Company'))
+                            ->relationship('company', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Select::make('category_id')
+                            ->label(__('Category'))
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(__('Description'))
+                            ->rows(5)
+                            ->columnSpanFull()
+                            ->required(),
 
-                ])->columns(2)
+                    ])->columns(2)
             ]);
     }
 
@@ -53,14 +53,14 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                ->label(__('Name')),
+                    ->label(__('Name')),
                 Tables\Columns\TextColumn::make('description')
-                ->label(__('Description'))
-                ->limit(50),
+                    ->label(__('Description'))
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('company.name')
-                ->label(__('Company')),
+                    ->label(__('Company')),
                 Tables\Columns\TextColumn::make('category.name')
-                ->label(__('Category')),
+                    ->label(__('Category')),
             ])
             ->filters([
                 //
