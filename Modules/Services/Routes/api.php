@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Modules\Services\Http\Controllers\ServicesController;
 use Modules\Services\Http\Controllers\ServiceCategoriesController;
 use Modules\Services\Http\Controllers\ManageServiceController;
@@ -23,7 +23,7 @@ Route::prefix('/services')->group(static function (): void {
 });
 
 /**
- * Announcement Categories endpoints
+ * Service Categories
  */
 Route::prefix('/service-categories')->group(static function (): void {
     // Public endpoints services

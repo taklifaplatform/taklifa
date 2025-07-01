@@ -4,7 +4,6 @@ namespace Modules\Support\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Modules\Vehicle\Entities\Vehicle;
 use Modules\Company\Entities\Company;
 use Modules\Api\Attributes as OpenApi;
 use Modules\Support\Entities\ReportReason;
@@ -43,8 +42,6 @@ class ReportController extends Controller
     {
         if ($request->reportable_type == 'company') {
             $reportable = Company::find($request->reportable_id);
-        } elseif ($request->reportable_type == 'vehicle') {
-            $reportable = Vehicle::find($request->reportable_id);
         } elseif ($request->reportable_type == 'user') {
             $reportable = User::find($request->reportable_id);
         }

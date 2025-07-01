@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Shipment\Entities\Shipment;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -34,7 +33,6 @@ class GenericNotification extends Notification implements ShouldQueue
         public User $recipient,
         public ?User $sender = null,
         public ?Model $model = null,
-        public ?Shipment $shipment = null,
         public ?array $additionalData = [],
         public ?string $customMessage = null,
     ) {
@@ -154,34 +152,6 @@ class GenericNotification extends Notification implements ShouldQueue
             '{RECIPIENT_NAME}' => $this->recipient?->name,
             '{RECIPIENT_EMAIL}' => $this->recipient?->email,
             '{RECIPIENT_PHONE}' => $this->recipient?->phone_number,
-
-            '{SHIPMENT_CODE}' => $this->shipment?->code,
-            '{SHIPMENT_FROM}' => $this->shipment?->fromLocation?->address,
-            '{SHIPMENT_TO}' => $this->shipment?->toLocation?->address,
-            '{SHIPMENT_STATUS}' => $this->shipment?->status,
-
-            // shipment dates
-            '{SHIPMENT_PICK_DATE}' => $this->shipment?->pick_date?->format('d M Y'),
-            '{SHIPMENT_PICK_TIME}' => $this->shipment?->pick_time,
-            '{SHIPMENT_DELIVER_DATE}' => $this->shipment?->deliver_date?->format('d M Y'),
-            '{SHIPMENT_DELIVER_TIME}' => $this->shipment?->deliver_time,
-
-            // shipment items
-            '{SHIPMENT_ITEMS_TYPE}' => $this->shipment?->items_type,
-            '{SHIPMENT_ITEMS_COUNT}' => $this->shipment?->items->count(),
-            '{SHIPMENT_ITEMS_WEIGHT}' => $this->shipment?->items->sum('weight'),
-
-            // shipment budget
-            '{SHIPMENT_MIN_BUDGET}' => $this->shipment?->min_budget?->amount,
-            '{SHIPMENT_MAX_BUDGET}' => $this->shipment?->max_budget?->amount,
-
-            // shipment recipient
-            '{SHIPMENT_RECIPIENT_NAME}' => $this->shipment?->recipient_name,
-            '{SHIPMENT_RECIPIENT_PHONE}' => $this->shipment?->recipient_phone,
-
-            // shipent url
-            '{SHIPMENT_RECIPIENT_URL}' => $this->shipment?->getUrlFor('recipient'),
-            '{SHIPMENT_PROVIDER_URL}' => $this->shipment?->getUrlFor('provider'),
 
             "{MODEL_URL}" => method_exists($this->model, 'getUrl') ? $this->model->getUrl() : null,
 

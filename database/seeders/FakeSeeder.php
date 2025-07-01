@@ -6,14 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Modules\Company\Entities\Company;
-use Modules\Geography\Entities\State;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Chat\Entities\ChatChannel;
 use Modules\Rating\Entities\RatingType;
-use Modules\Vehicle\Entities\VehicleModel;
-use Modules\Shipment\Entities\ShipmentInvitation;
-use Modules\Shipment\ShipmentHelper\ShipmentHelper;
-
 
 class FakeSeeder extends Seeder
 {

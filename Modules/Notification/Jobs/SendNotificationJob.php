@@ -11,7 +11,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Modules\Notification\Entities\NotificationTemplate;
 use Modules\Notification\Notifications\GenericNotification;
-use Modules\Shipment\Entities\Shipment;
 
 class SendNotificationJob implements ShouldQueue
 {
@@ -29,7 +28,6 @@ class SendNotificationJob implements ShouldQueue
         public User $recipient,
         public ?User $sender = null,
         public ?Model $model = null,
-        public ?Shipment $shipment = null,
         public ?array $additionalData = [],
         public ?string $customMessage = null,
     ) {
@@ -53,7 +51,6 @@ class SendNotificationJob implements ShouldQueue
                 sender: $this->sender,
                 recipient: $this->recipient,
                 model: $this->model,
-                shipment: $this->shipment,
                 additionalData: $this->additionalData,
                 customMessage: $this->customMessage,
             )

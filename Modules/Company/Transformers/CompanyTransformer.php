@@ -21,7 +21,6 @@ class CompanyTransformer extends JsonTransformer
             'id' => $this->id,
             'name' => $this->name,
             'about' => $this->about,
-            'vehicles_count' => $this->vehicles_count,
 
             'contact_number' => $this->owner?->phone_number,
 
@@ -42,8 +41,6 @@ class CompanyTransformer extends JsonTransformer
                 Schema::string('id')->required(),
                 Schema::string('name')->required(),
                 Schema::string('about')->required(),
-                Schema::string('working_hours_id')->required(),
-                Schema::integer('vehicles_count')->required(),
                 Schema::string('contact_number')->required(),
                 Schema::ref('#/components/schemas/MediaTransformer', 'logo'),
                 Schema::string('location_id')->required(),

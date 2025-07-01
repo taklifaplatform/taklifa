@@ -22,7 +22,6 @@ class ListDriversQueryRequest extends QueryRequest
             'latitude_delta' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
             'longitude_delta' => ['nullable', 'numeric'],
-            'vehicle_model' => ['string'],
             'urgency_service_provider' => ['numeric', 'nullable'],
         ];
     }

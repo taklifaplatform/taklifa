@@ -36,8 +36,6 @@ class CompanyController extends Controller
     #[OpenApi\Response(factory: CompanyTransformer::class)]
     public function retrieveCompany(Company $company): CompanyTransformer
     {
-        $company->loadCount('vehicles');
-
         return new CompanyTransformer($company);
     }
 }

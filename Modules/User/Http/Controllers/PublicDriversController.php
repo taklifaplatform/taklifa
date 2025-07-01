@@ -42,7 +42,6 @@ class PublicDriversController extends Controller
                         User::ROLE_COMPANY_DRIVER,
                     ]);
                 })
-                ->whereHas('vehicle')
                 ->when($request->urgency_service_provider == 1, static function ($query): void {
                     $query->where('urgency_service_provider', true);
                 })
@@ -63,13 +62,6 @@ class PublicDriversController extends Controller
                             ->orWhere(DB::raw('lower(username)'), 'like', '%' . strtolower($search) . '%')
                             ->orWhere(DB::raw('lower(phone_number)'), 'like', '%' . strtolower($search) . '%');
                     });
-                })
-                ->when($request->vehicle_model, static function ($query, $vehicle_model): void {
-                    if ($vehicle_model && $vehicle_model !== 'all') {
-                        $query->whereHas('vehicle', static function ($query) use ($vehicle_model): void {
-                            $query->where('model_id', $vehicle_model);
-                        });
-                    }
                 })
                 ->when($shouldFilterByLocation, function ($query) use ($request) {
                     $query->where(function ($scopeQuery) use ($request) {
@@ -105,18 +97,9 @@ class PublicDriversController extends Controller
                     'location.state',
                     'location.country',
                     'latestLocation',
-                    'vehicle',
-                    'vehicle.media',
-                    'vehicle.information',
-                    'vehicle.fuelInformation',
-                    'vehicle.capacityDimensions',
-                    'vehicle.capacityWeight',
-                    'vehicle.model',
-                    'vehicle.model.media',
 
                 ])
                 ->paginate($perPage)
-            // ->paginate(($request->per_page * 10) ?? 100)
         );
     }
 
