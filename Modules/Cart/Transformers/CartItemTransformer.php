@@ -2,8 +2,10 @@
 
 namespace Modules\Cart\Transformers;
 
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Modules\Core\Transformers\JsonTransformer;
+use Modules\Product\Transformers\ProductTransformer;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use Modules\Product\Transformers\ProductVariantTransformer;
 
 class CartItemTransformer extends JsonTransformer
 {
@@ -23,8 +25,8 @@ class CartItemTransformer extends JsonTransformer
             'unit_price' => $this->unit_price,
             'quantity' => $this->quantity,
             'total_price' => $this->total_price,
-            'product' => $this->whenLoaded('product', fn() => new \Modules\Product\Transformers\ProductTransformer($this->product)),
-            'variant' => $this->whenLoaded('variant', fn() => new \Modules\Product\Transformers\ProductVariantTransformer($this->variant)),
+            'product' => ProductTransformer::make($this->product),
+            'variant' => ProductVariantTransformer::make($this->variant),
         ];
     }
 
@@ -32,7 +34,7 @@ class CartItemTransformer extends JsonTransformer
     {
         return Schema::object('CartItemTransformer')
             ->properties(
-                Schema::integer('id')->required(),
+                Schema::string('id')->required(),
                 Schema::string('cart_id')->required(),
                 Schema::string('product_id')->required(),
                 Schema::string('variant_id')->required(),
@@ -43,4 +45,4 @@ class CartItemTransformer extends JsonTransformer
                 Schema::ref('#/components/schemas/ProductVariantTransformer', 'variant')->nullable(),
             );
     }
-} 
+}

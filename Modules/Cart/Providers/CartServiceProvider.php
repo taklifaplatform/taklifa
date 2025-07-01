@@ -4,6 +4,8 @@ namespace Modules\Cart\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Cart\Entities\Cart;
+use Modules\Cart\Policies\CartPolicy;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,13 @@ class CartServiceProvider extends ServiceProvider
      * @var string $moduleNameLower
      */
     protected $moduleNameLower = 'cart';
+
+    /**
+     * @var array $policies
+     */
+    protected $policies = [
+        Cart::class => CartPolicy::class,
+    ];
 
     /**
      * Boot the application events.

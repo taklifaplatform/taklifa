@@ -24,7 +24,7 @@ class CartTransformer extends JsonTransformer
             'company_id' => $this->company_id,
             'total_items' => $this->total_items,
             'total_cost' => $this->total_cost,
-            'items' => $this->whenLoaded('items', fn() => CartItemTransformer::collection($this->items)),
+            'items' => CartItemTransformer::collection($this->items),
         ];
     }
 
@@ -43,4 +43,4 @@ class CartTransformer extends JsonTransformer
                     ->nullable(),
             );
     }
-} 
+}

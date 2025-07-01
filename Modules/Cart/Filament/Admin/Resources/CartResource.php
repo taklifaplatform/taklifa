@@ -58,7 +58,7 @@ class CartResource extends Resource
                 //
             ])
             ->actions([
-                //
+                // View only - no actions
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
