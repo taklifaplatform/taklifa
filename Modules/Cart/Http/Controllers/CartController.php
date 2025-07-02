@@ -10,8 +10,8 @@ use App\Http\Controllers\Controller;
 use Modules\Api\Attributes as OpenApi;
 use Modules\Product\Entities\ProductVariant;
 use Modules\Cart\Transformers\CartTransformer;
-use Modules\Cart\Transformers\CartItemTransformer;
 use Modules\Cart\Http\Requests\AddCartItemRequest;
+use Modules\Cart\Transformers\CartItemTransformer;
 use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 
 #[OpenApi\PathItem]
@@ -25,15 +25,15 @@ class CartController extends Controller
     public function getOrCreateCart(string $company_id, string $identifier, Request $request)
     {
         $user = $request->user();
+
         // Get or create cart
         $cart = Cart::firstOrCreate(
             [
-                'user_id' => $user ? $user->id : null,
                 'company_id' => $company_id,
                 'device_identifier' => $identifier,
             ],
             [
-               'user_id' => $user ? $user->id : null,
+                'user_id' => $user?->id,
                 'total_items' => 0,
                 'total_cost' => 0.00,
             ]
@@ -82,15 +82,20 @@ class CartController extends Controller
             // Get or create cart
             $cart = Cart::firstOrCreate(
                 [
-                    'user_id' => $user ? $user->id : null,
                     'company_id' => $company_id,
                     'device_identifier' => $identifier,
                 ],
                 [
+                    'user_id' => $user?->id,
                     'total_items' => 0,
                     'total_cost' => 0.00,
                 ]
             );
+
+            // Update user_id if user is now authenticated and cart doesn't have a user_id
+            if ($user && !$cart->user_id) {
+                $cart->update(['user_id' => $user->id]);
+            }
 
             // Get variant price
             $variant = ProductVariant::findOrFail($validated['variant_id']);
@@ -121,7 +126,6 @@ class CartController extends Controller
                 if ($validated['quantity'] > 0) {
                     CartItem::create([
                         'cart_id' => $cart->id,
-                        'user_id' => $user ? $user->id : null,
                         'product_id' => $validated['product_id'],
                         'variant_id' => $validated['variant_id'],
                         'unit_price' => $unitPrice,

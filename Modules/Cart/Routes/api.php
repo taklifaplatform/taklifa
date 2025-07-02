@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Cart\Http\Controllers\CartController;
 
@@ -13,14 +12,18 @@ use Modules\Cart\Http\Controllers\CartController;
 |
 */
 
-// Cart endpoints - Authentication is optional and handled in controller
+// Cart endpoints
 Route::prefix('cart')->group(function () {
-    // Get cart items
+    // Public cart routes (no authentication required)
     Route::get('{company_id}/{identifier}/items', [CartController::class, 'getCartItems']);
-});
 
-Route::middleware('auth:sanctum')->prefix('/cart')->group(static function (): void {
-    Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
-    Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
+    // Authenticated cart routes (optional authentication)
+    Route::middleware('auth:sanctum')->group(function () {
+        // Get or create cart (with user association if authenticated)
+        Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
+
+        // Add item to cart (with user association if authenticated)
+        Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
+    });
 });
 

@@ -30,7 +30,7 @@ class AddCartItemRequest extends FormRequest
                     return $query->where('product_id', $this->product_id);
                 })
             ],
-            'quantity' => ['required', 'integer', 'min:0'],
+            'quantity' => ['required', 'integer'],
         ];
     }
 } 

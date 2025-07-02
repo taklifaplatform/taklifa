@@ -80,4 +80,14 @@ class CartResource extends Resource
             'index' => Pages\ListCarts::route('/'),
         ];
     }
+
+    public static function getLabel(): ?string
+    {
+        return __('Cart');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return __('Carts');
+    }
 }
