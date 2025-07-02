@@ -14,28 +14,11 @@ class UpdateProductRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'company_id' => ['required', 'string', 'exists:companies,id'],
-            'category_id' => ['nullable', 'string'],
+            'category_id' => ['nullable', 'string', 'exists:product_categories,id'],
             'variants' => ['nullable', 'array'],
-            'variants.*.price' => ['required_with:variants', 'numeric', 'min:0'],
+            'variants.*.price' => ['required_with:variants', 'numeric', 'min:0.01'],
             'variants.*.price_currency' => ['required_with:variants', 'string', 'max:3'],
         ];
     }
-
-    /**
-     * Configure the validator instance.
-     */
-    public function withValidator($validator)
-    {
-        $validator->sometimes('category_id', 'exists:product_categories,id', function ($input) {
-            return !empty($input->category_id);
-        });
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+    
 }

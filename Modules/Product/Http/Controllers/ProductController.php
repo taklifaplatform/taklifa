@@ -45,9 +45,7 @@ class ProductController extends Controller
     #[OpenApi\Response(factory: ProductTransformer::class)]
     public function retrieveProduct(Product $product)
     {
-        return new ProductTransformer(
-            $product->load(['company', 'category', 'variants'])
-        );
+        return new ProductTransformer($product);
     }
 
     /**
@@ -58,24 +56,20 @@ class ProductController extends Controller
     #[OpenApi\Response(factory: ProductTransformer::class)]
     public function store(UpdateProductRequest $request)
     {
-        $data = $request->validated();
-        $variants = $data['variants'] ?? [];
-        unset($data['variants']);
+        $validatedData = $request->validated();
+        $variants = $validatedData['variants'] ?? [];
+        unset($validatedData['variants']);
 
-        return DB::transaction(function () use ($data, $variants) {
-            $product = Product::create($data);
+        return DB::transaction(function () use ($validatedData, $variants) {
+            // Create the product
+            $product = Product::create($validatedData);
 
             // Create variants if provided
             if (!empty($variants)) {
-                foreach ($variants as $variantData) {
-                    $variantData['product_id'] = $product->id;
-                    ProductVariant::create($variantData);
-                }
+                $this->createProductVariants($product, $variants);
             }
 
-            return new ProductTransformer(
-                $product->load(['company', 'category', 'variants'])
-            );
+            return new ProductTransformer($product);
         });
     }
 
@@ -87,30 +81,20 @@ class ProductController extends Controller
     #[OpenApi\Response(factory: ProductTransformer::class)]
     public function updateProduct(UpdateProductRequest $request, Product $product)
     {
-        $data = $request->validated();
-        $variants = $data['variants'] ?? null;
-        unset($data['variants']);
+        $validatedData = $request->validated();
+        $variants = $validatedData['variants'] ?? null;
+        unset($validatedData['variants']);
 
-        return DB::transaction(function () use ($product, $data, $variants) {
-            $product->update($data);
+        return DB::transaction(function () use ($product, $validatedData, $variants) {
+            // Update the product
+            $product->update($validatedData);
 
             // Update variants if provided
             if ($variants !== null) {
-                // Delete existing variants
-                $product->variants()->delete();
-
-                // Create new variants
-                if (!empty($variants)) {
-                    foreach ($variants as $variantData) {
-                        $variantData['product_id'] = $product->id;
-                        ProductVariant::create($variantData);
-                    }
-                }
+                $this->updateProductVariants($product, $variants);
             }
 
-            return new ProductTransformer(
-                $product->load(['company', 'category', 'variants'])
-            );
+            return new ProductTransformer($product->fresh());
         });
     }
 
@@ -121,11 +105,33 @@ class ProductController extends Controller
     #[OpenApi\Response(factory: ProductTransformer::class)]
     public function deleteProduct(Product $product, Request $request)
     {
-        // Delete associated variants first
-        $product->variants()->delete();
-
         $product->delete();
 
         return $this->success('Product deleted successfully.');
+    }
+
+    /**
+     * Create product variants for a given product.
+     */
+    private function createProductVariants(Product $product, array $variants): void
+    {
+        foreach ($variants as $variantData) {
+            $variantData['product_id'] = $product->id;
+            ProductVariant::create($variantData);
+        }
+    }
+
+    /**
+     * Update product variants for a given product.
+     */
+    private function updateProductVariants(Product $product, array $variants): void
+    {
+        // Delete existing variants
+        $product->variants()->delete();
+
+        // Create new variants if provided
+        if (!empty($variants)) {
+            $this->createProductVariants($product, $variants);
+        }
     }
 }

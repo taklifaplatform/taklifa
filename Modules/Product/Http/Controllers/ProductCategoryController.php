@@ -43,9 +43,7 @@ class ProductCategoryController extends Controller
     #[OpenApi\Response(factory: ProductCategoryTransformer::class)]
     public function retrieve(ProductCategory $productCategory)
     {
-        return new ProductCategoryTransformer(
-            $productCategory->load(['parent', 'company'])
-        );
+        return new ProductCategoryTransformer($productCategory);
     }
 
     /**
@@ -59,9 +57,7 @@ class ProductCategoryController extends Controller
     {
         $productCategory = ProductCategory::create($updateProductCategoryRequest->validated());
 
-        return new ProductCategoryTransformer(
-            $productCategory->load(['parent', 'company'])
-        );
+        return new ProductCategoryTransformer($productCategory);
     }
 
     /**
@@ -74,9 +70,7 @@ class ProductCategoryController extends Controller
     {
         $productCategory->update($updateProductCategoryRequest->validated());
 
-        return new ProductCategoryTransformer(
-            $productCategory->load(['parent', 'company'])
-        );
+        return new ProductCategoryTransformer($productCategory);
     }
 
     /**
