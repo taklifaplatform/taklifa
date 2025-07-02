@@ -9,7 +9,7 @@ use Filament\Tables\Table;
 use Modules\Cart\Entities\Cart;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
-use Modules\Cart\Filament\Admin\Resources\CartResource\Pages;;
+use Modules\Cart\Filament\Admin\Resources\CartResource\Pages;
 
 class CartResource extends Resource
 {
@@ -58,7 +58,7 @@ class CartResource extends Resource
                 //
             ])
             ->actions([
-                // View only - no actions
+                //
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

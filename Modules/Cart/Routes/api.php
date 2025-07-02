@@ -13,14 +13,14 @@ use Modules\Cart\Http\Controllers\CartController;
 |
 */
 
-// Cart endpoints
+// Cart endpoints - Authentication is optional and handled in controller
 Route::prefix('cart')->group(function () {
-    // Get or create cart by company_id and identifier
-    Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
-    
     // Get cart items
     Route::get('{company_id}/{identifier}/items', [CartController::class, 'getCartItems']);
-    
-    // Add item to cart
-    Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
 });
+
+Route::middleware('auth:sanctum')->prefix('/cart')->group(static function (): void {
+    Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
+    Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
+});
+

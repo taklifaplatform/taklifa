@@ -2,15 +2,17 @@
 
 namespace Modules\Cart\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Modules\Api\Attributes as OpenApi;
+use Illuminate\Http\Request;
 use Modules\Cart\Entities\Cart;
 use Modules\Cart\Entities\CartItem;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Modules\Api\Attributes as OpenApi;
+use Modules\Product\Entities\ProductVariant;
 use Modules\Cart\Transformers\CartTransformer;
 use Modules\Cart\Transformers\CartItemTransformer;
 use Modules\Cart\Http\Requests\AddCartItemRequest;
-use Modules\Product\Entities\ProductVariant;
-use Illuminate\Support\Facades\DB;
+use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 
 #[OpenApi\PathItem]
 class CartController extends Controller
@@ -18,21 +20,29 @@ class CartController extends Controller
     /**
      * Get or create cart by company_id and identifier.
      */
-    #[OpenApi\Operation('getOrCreateCart', tags: ['Cart'])]
+    #[OpenApi\Operation('getOrCreateCart', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\Response(factory: CartTransformer::class)]
-    public function getOrCreateCart(string $company_id, string $identifier)
+    public function getOrCreateCart(string $company_id, string $identifier, Request $request)
     {
+        $user = $request->user();
         // Get or create cart
         $cart = Cart::firstOrCreate(
             [
+                'user_id' => $user ? $user->id : null,
                 'company_id' => $company_id,
                 'device_identifier' => $identifier,
             ],
             [
+               'user_id' => $user ? $user->id : null,
                 'total_items' => 0,
                 'total_cost' => 0.00,
             ]
         );
+
+        // Update user_id if user is now authenticated and cart doesn't have a user_id
+        if ($user && !$cart->user_id) {
+            $cart->update(['user_id' => $user->id]);
+        }
 
         return new CartTransformer($cart->load('items.product', 'items.variant'));
     }
@@ -49,7 +59,7 @@ class CartController extends Controller
             ->first();
 
         if (!$cart) {
-            return response()->json(['message' => 'Cart not found'], 404);
+            abort(404, 'Cart not found');
         }
 
         return CartItemTransformer::collection(
@@ -60,17 +70,19 @@ class CartController extends Controller
     /**
      * Add item to cart.
      */
-    #[OpenApi\Operation('addCartItem', tags: ['Cart'])]
+    #[OpenApi\Operation('addCartItem', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\RequestBody(factory: AddCartItemRequest::class)]
     #[OpenApi\Response(factory: CartTransformer::class)]
     public function addCartItem(AddCartItemRequest $request, string $company_id, string $identifier)
     {
+        $user = $request->user();
         $validated = $request->validated();
 
-        return DB::transaction(function () use ($validated, $company_id, $identifier) {
+        return DB::transaction(function () use ($validated, $company_id, $identifier, $user) {
             // Get or create cart
             $cart = Cart::firstOrCreate(
                 [
+                    'user_id' => $user ? $user->id : null,
                     'company_id' => $company_id,
                     'device_identifier' => $identifier,
                 ],
@@ -109,6 +121,7 @@ class CartController extends Controller
                 if ($validated['quantity'] > 0) {
                     CartItem::create([
                         'cart_id' => $cart->id,
+                        'user_id' => $user ? $user->id : null,
                         'product_id' => $validated['product_id'],
                         'variant_id' => $validated['variant_id'],
                         'unit_price' => $unitPrice,

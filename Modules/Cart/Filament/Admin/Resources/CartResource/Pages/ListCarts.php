@@ -2,9 +2,8 @@
 
 namespace Modules\Cart\Filament\Admin\Resources\CartResource\Pages;
 
-use Modules\Cart\Filament\Admin\Resources\CartResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Modules\Cart\Filament\Admin\Resources\CartResource;
 
 class ListCarts extends ListRecords
 {
