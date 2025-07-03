@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(Localization::class);
+        $middleware->alias([
+            'company.owner' => \App\Http\Middleware\EnsureUserIsCompanyOwner::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -4,8 +4,6 @@ namespace App\Panels;
 
 use Filament\Panel;
 use App\Filament\Dashboard;
-use App\Filament\Widgets;
-use Filament\Pages;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Http\Middleware\Authenticate;
@@ -18,41 +16,29 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Modules\Company\Filament\Admin\Resources\CompanyResource\Widgets\CompanyOverview;
-use App\Filament\Widgets\UsersPerDayChart;
-use App\Filament\Widgets\ServicesPerDayChart;
-use App\Filament\Widgets\CustomersPerDayChart;
-use App\Filament\Widgets\SoloDriversPerDayChart;
 
-
-class AdminPanelProvider extends BasePanelProvider
+class CompanyPanelProvider extends BasePanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         $panel
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
-            ->default()
             ->maxContentWidth(MaxWidth::Full)
             ->sidebarCollapsibleOnDesktop()
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('company')
+            ->path('company')
             ->font('Poppins')
             ->authGuard('web')
             ->colors([
-                'primary' => Color::Emerald,
+                'primary' => Color::Blue,
             ])
             ->login()
             ->passwordReset()
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->widgets([
-                CompanyOverview::class,
-                UsersPerDayChart::class,
-                ServicesPerDayChart::class,
-                CustomersPerDayChart::class,
-                SoloDriversPerDayChart::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -62,17 +48,15 @@ class AdminPanelProvider extends BasePanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-                // DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
+                'company.owner',
             ])
-            ->databaseNotifications(true)
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'ar']),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
 
         return $this->preloadPanelModule($panel);
