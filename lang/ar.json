@@ -441,5 +441,13 @@
     "Price Currency" : "عملة السعر",
     "Product Category Details": "تفاصيل فئة المنتج",
     "Product Variant Information": "معلومات متغير المنتج",
-    "Product Details": "تفاصيل المنتج"
+    "Product Details": "تفاصيل المنتج",
+    "Total number of product categories": "إجمالي عدد فئات المنتج",
+    "Total number of products": "إجمالي عدد المنتجات",
+    "Total number of product variants": "إجمالي عدد متغيرات المنتج",
+    "Total number of new products" : "إجمالي عدد المنتجات الجديدة",
+    "Products Chart": "مخططات المنتج",
+    "Recent Products": "المنتجات الأخيرة",
+    "Variants": "المتغيرات",
+    "View" : "عرض"
 }
