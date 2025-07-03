@@ -3,14 +3,16 @@
 namespace App\Panels;
 
 use Filament\Panel;
-use App\Filament\Dashboard;
-use App\Filament\Widgets;
 use Filament\Pages;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Http\Middleware\Authenticate;
 use Filament\SpatieLaravelTranslatablePlugin;
 use Illuminate\Session\Middleware\StartSession;
+use App\Filament\Widgets\UsersPerDayChart;
+use App\Filament\Widgets\ServicesPerDayChart;
+use App\Filament\Widgets\CustomersPerDayChart;
+use App\Filament\Widgets\SoloDriversPerDayChart;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
@@ -18,11 +20,10 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
 use Modules\Company\Filament\Admin\Resources\CompanyResource\Widgets\CompanyOverview;
-use App\Filament\Widgets\UsersPerDayChart;
-use App\Filament\Widgets\ServicesPerDayChart;
-use App\Filament\Widgets\CustomersPerDayChart;
-use App\Filament\Widgets\SoloDriversPerDayChart;
+
 
 
 class AdminPanelProvider extends BasePanelProvider
@@ -62,16 +63,16 @@ class AdminPanelProvider extends BasePanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-                // DisableBladeIconComponents::class,
+                DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->databaseNotifications(true)
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'ar']),
+                    FilamentExceptionsPlugin::make(),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
 

@@ -33,8 +33,7 @@ class AppServiceProvider extends ServiceProvider
             $panelSwitch
                 ->simple()
                 ->excludes([
-                    'nora',
-                    'knowledge-base',
+
                 ])
                 ->visible(fn() => filament()->getCurrentPanel()->getId() !== 'company');
         });

@@ -30,7 +30,7 @@ class CompanyPanelProvider extends BasePanelProvider
             ->font('Poppins')
             ->authGuard('web')
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Emerald,
             ])
             ->login()
             ->passwordReset()
@@ -38,7 +38,9 @@ class CompanyPanelProvider extends BasePanelProvider
                 Dashboard::class,
             ])
             ->widgets([
-
+                \Modules\Product\Filament\Company\Widgets\ProductStatsOverview::class,
+                \Modules\Product\Filament\Company\Widgets\ProductsChart::class,
+                \Modules\Product\Filament\Company\Widgets\RecentProducts::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -52,7 +54,6 @@ class CompanyPanelProvider extends BasePanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                'company.owner',
             ])
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
