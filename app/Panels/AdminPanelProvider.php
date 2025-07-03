@@ -2,29 +2,28 @@
 
 namespace App\Panels;
 
-use Filament\Panel;
 use Filament\Pages;
+use Filament\Panel;
+use App\Panels\BasePanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Http\Middleware\Authenticate;
-use Filament\SpatieLaravelTranslatablePlugin;
-use Illuminate\Session\Middleware\StartSession;
+use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\UsersPerDayChart;
+use Filament\Http\Middleware\Authenticate;
 use App\Filament\Widgets\ServicesPerDayChart;
+use Filament\SpatieLaravelTranslatablePlugin;
 use App\Filament\Widgets\CustomersPerDayChart;
+use Illuminate\Session\Middleware\StartSession;
 use App\Filament\Widgets\SoloDriversPerDayChart;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Filament\Http\Middleware\DisableBladeIconComponents;
 use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
-use Modules\Company\Filament\Admin\Resources\CompanyResource\Widgets\CompanyOverview;
-
-
 
 class AdminPanelProvider extends BasePanelProvider
 {
@@ -49,7 +48,7 @@ class AdminPanelProvider extends BasePanelProvider
                 Pages\Dashboard::class,
             ])
             ->widgets([
-                CompanyOverview::class,
+                StatsOverview::class,
                 UsersPerDayChart::class,
                 ServicesPerDayChart::class,
                 CustomersPerDayChart::class,
@@ -72,7 +71,7 @@ class AdminPanelProvider extends BasePanelProvider
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'ar']),
-                    FilamentExceptionsPlugin::make(),
+                    // FilamentExceptionsPlugin::make(),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
 

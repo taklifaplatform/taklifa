@@ -48,7 +48,7 @@ abstract class BasePanelProvider extends PanelProvider
 
         $panel->plugins([
             SpatieLaravelTranslatablePlugin::make(),
-            // SpotlightPlugin::make(),
+            SpotlightPlugin::make(),
             BreezyCore::make()
                 ->myProfile(
                     shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
