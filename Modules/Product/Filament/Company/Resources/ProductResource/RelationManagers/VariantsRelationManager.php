@@ -37,8 +37,7 @@ class VariantsRelationManager extends RelationManager
 
             ->columns([
                 Tables\Columns\TextColumn::make('price')
-                ->label(__('Price'))
-                ->money('SAR'),
+                ->label(__('Price')),
              Tables\Columns\TextColumn::make('price_currency')
                 ->label(__('Price Currency')),
             ])

@@ -15,7 +15,7 @@ class ViewProduct extends ViewRecord
 {
     protected static string $resource = ProductResource::class;
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         return $this->getRecord()?->name ?? __('View Product');
     }
@@ -46,7 +46,7 @@ class ViewProduct extends ViewRecord
                                     Components\Group::make([
                                         Components\TextEntry::make('category.name')
                                             ->label(__('Category'))
-                                            ->visible(fn ($record) => $record->category)
+                                            ->visible(fn($record) => $record->category)
                                             ->url(function ($record) {
                                                 return ProductCategoryResource::getUrl('view', ['record' => $record->category]);
                                             }),
@@ -55,6 +55,17 @@ class ViewProduct extends ViewRecord
 
                         ])->from('lg'),
                     ]),
+
+
+                Components\Section::make(__('Description'))
+                    ->schema([
+                        Components\TextEntry::make('description')
+                            ->label(__('Description'))
+                            ->prose()
+                            ->markdown()
+                            ->hiddenLabel(),
+                    ])
+                    ->collapsible(),
             ]);
     }
 }

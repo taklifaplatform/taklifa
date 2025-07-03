@@ -59,7 +59,7 @@ class ProductResource extends Resource
                     ->label(__('Name')),
                 Tables\Columns\TextColumn::make('description')
                     ->label(__('Description'))
-                    ->limit(50),
+                    ->limit(10),
                 Tables\Columns\TextColumn::make('company.name')
                     ->label(__('Company')),
                 Tables\Columns\TextColumn::make('category.name')
