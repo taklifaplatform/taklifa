@@ -289,6 +289,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     public function isCompanyOwner(): bool
     {
         return $this->hasRole(self::ROLE_COMPANY_OWNER);
+    }
+
     public function carts()
     {
         return $this->hasMany(Cart::class);
