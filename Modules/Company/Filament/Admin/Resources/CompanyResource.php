@@ -16,7 +16,6 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Modules\Company\Filament\Admin\Resources\CompanyResource\Pages;
 use Modules\Company\Filament\Admin\Resources\CompanyResource\RelationManagers\CompanyDriversRelationManager;
 use Modules\Company\Filament\Admin\Resources\CompanyResource\RelationManagers\CompanyManagersRelationManager;
-use Modules\Company\Filament\Admin\Resources\CompanyResource\RelationManagers\CompanyVehiclesRelationManager;
 use Modules\Company\Filament\Admin\Resources\CompanyResource\RelationManagers\CompanyBranchRelationManager;
 
 class CompanyResource extends Resource
@@ -147,7 +146,6 @@ class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CompanyVehiclesRelationManager::class,
             CompanyManagersRelationManager::class,
             CompanyDriversRelationManager::class,
             CompanyBranchRelationManager::class,

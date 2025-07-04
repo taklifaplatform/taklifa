@@ -6,12 +6,12 @@ use App\Models\User;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\Core\Entities\BaseModel;
-use Modules\Vehicle\Entities\Vehicle;
+use Modules\Product\Entities\Product;
 use Modules\Services\Entities\Service;
 use Modules\Geography\Entities\Location;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Modules\Product\Entities\ProductCategory;
 use Modules\Rating\Entities\Traits\HasRating;
-use Modules\ServiceZone\Entities\ServiceZone;
 use Modules\Support\Entities\Traits\HasReport;
 use Modules\Geography\Entities\Traits\HasLocation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,10 +40,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read User|null $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Rating\Entities\Rating> $ratings
  * @property-read int|null $ratings_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, ServiceZone> $serviceZones
- * @property-read int|null $service_zones_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Vehicle> $vehicles
- * @property-read int|null $vehicles_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company newQuery()
@@ -133,11 +129,6 @@ class Company extends BaseModel implements HasMedia
         return $this->belongsTo(Location::class, 'location_id');
     }
 
-    public function serviceZones()
-    {
-        return $this->morphMany(ServiceZone::class, 'ownable');
-    }
-
     public function services()
     {
         return $this->hasMany(Service::class, 'company_id');
@@ -194,5 +185,15 @@ class Company extends BaseModel implements HasMedia
         $this->verified_by = null;
         $this->verification_status = self::VERIFICATION_STATUS_REJECTED;
         $this->save();
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'company_id');
+    }
+
+    public function productCategories()
+    {
+        return $this->hasMany(ProductCategory::class, 'company_id');
     }
 }

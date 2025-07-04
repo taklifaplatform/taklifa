@@ -3,8 +3,6 @@
 namespace Modules\Company\Filament\Admin\Resources\CompanyResource\Widgets;
 
 use Modules\Company\Entities\Company;
-use Modules\Shipment\Entities\Shipment;
-use Modules\Company\Entities\CompanyMember;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;

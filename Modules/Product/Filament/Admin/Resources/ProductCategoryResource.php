@@ -1,0 +1,118 @@
+<?php
+
+namespace Modules\Product\Filament\Admin\Resources;
+
+use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
+use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\RelationManagers;
+use Modules\Product\Entities\ProductCategory;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class ProductCategoryResource extends Resource
+{
+    protected static ?string $model = ProductCategory::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make(__('Product Category Information'))
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required(),
+                        Forms\Components\TextInput::make('order')
+                            ->numeric()
+                            ->label(__('Order'))
+                            ->required(),
+                        Forms\Components\Select::make('parent_id')
+                            ->label(__('Parent Category'))
+                            ->relationship('parent', 'name')
+                            ->searchable()
+                            ->preload(),
+                        Forms\Components\Select::make('company_id')
+                            ->label(__('Company'))
+                            ->relationship('company', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(__('Description'))
+                            ->rows(5)
+                            ->columnSpanFull(),
+                    ])->columns(2)
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('Name')),
+                Tables\Columns\TextColumn::make('description')
+                    ->label(__('Description'))
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('order')
+                    ->label(__('Order')),
+                Tables\Columns\TextColumn::make('parent.name')
+                    ->label(__('Parent Category')),
+                Tables\Columns\TextColumn::make('company.name')
+                    ->label(__('Company')),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make(),
+                ]),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListProductCategories::route('/'),
+            'create' => Pages\CreateProductCategory::route('/create'),
+            'edit' => Pages\EditProductCategory::route('/{record}/edit'),
+            'view' => Pages\ViewProductCategory::route('/{record}'),
+        ];
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Product Category');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return __('Product Categories');
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return __('Products');
+    }
+}

@@ -4,7 +4,6 @@ namespace Modules\User\Transformers;
 
 use Modules\Core\Transformers\JsonTransformer;
 use Modules\Core\Transformers\MediaTransformer;
-use Modules\Vehicle\Transformers\VehicleTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Modules\Geography\Transformers\LocationTransformer;
 use Modules\Company\Transformers\SimpleCompanyTransformer;
@@ -39,8 +38,6 @@ class DriverTransformer extends JsonTransformer
             'urgency_service_radius' => $this->urgency_service_radius,
 
             'rating_stats' => $this->getRatingsScoreAndCount(),
-
-            'vehicle' => VehicleTransformer::make($this->vehicle),
 
             'roles' => UserSimpleRoleTransformer::collection($this->roles),
         ];
@@ -78,8 +75,6 @@ class DriverTransformer extends JsonTransformer
                         Schema::number('score')->required(),
                         Schema::integer('count')->required(),
                     )->required(),
-
-                Schema::ref('#/components/schemas/VehicleTransformer', 'vehicle'),
 
                 Schema::array('roles')->items(
                     Schema::ref('#/components/schemas/UserSimpleRoleTransformer'),
