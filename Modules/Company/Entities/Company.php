@@ -4,6 +4,7 @@ namespace Modules\Company\Entities;
 
 use App\Models\User;
 use Spatie\Image\Enums\Fit;
+use Modules\Cart\Entities\Cart;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\Core\Entities\BaseModel;
 use Modules\Product\Entities\Product;
@@ -25,7 +26,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $owner_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Company\Entities\CompanyDriverInvitation> $driverInvitations
  * @property-read int|null $driver_invitations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $drivers
  * @property-read int|null $drivers_count
@@ -75,7 +75,6 @@ class Company extends BaseModel implements HasMedia
     protected $fillable = [
         'name',
         'about',
-
         'owner_id',
     ];
 
@@ -195,5 +194,10 @@ class Company extends BaseModel implements HasMedia
     public function productCategories()
     {
         return $this->hasMany(ProductCategory::class, 'company_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

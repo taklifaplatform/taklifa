@@ -10,5 +10,6 @@
     "Support": true,
     "Notification": true,
     "Services": true,
-    "Product": true
+    "Product": true,
+    "Cart": true
 }

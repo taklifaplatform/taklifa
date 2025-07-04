@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Spatie\Image\Enums\Fit;
 use Modules\Auth\Entities\Role;
+use Modules\Cart\Entities\Cart;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\User\Entities\Profile;
@@ -288,5 +289,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     public function isCompanyOwner(): bool
     {
         return $this->hasRole(self::ROLE_COMPANY_OWNER);
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }
