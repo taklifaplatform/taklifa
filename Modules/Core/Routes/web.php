@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,3 +12,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+// add get route to change the lang, route name should be change-lang it will accept lang, and redirect to the previous page
+Route::get('change-lang/{lang}', function ($lang) {
+    session()->put('locale', $lang);
+    app()->setLocale($lang);
+
+    return redirect()->back();
+})->name('change-lang');

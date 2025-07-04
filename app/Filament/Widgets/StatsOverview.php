@@ -1,15 +1,16 @@
 <?php
 
-namespace Modules\Company\Filament\Admin\Resources\CompanyResource\Widgets;
+namespace App\Filament\Widgets;
 
+use App\Models\User;
 use Modules\Company\Entities\Company;
+use Modules\Product\Entities\Product;
+use Modules\Services\Entities\Service;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use App\Models\User;
-use Modules\Services\Entities\Service;
 
-class CompanyOverview extends BaseWidget
+class StatsOverview extends BaseWidget
 {
     use InteractsWithPageTable;
 
@@ -33,6 +34,12 @@ class CompanyOverview extends BaseWidget
                 ->icon('heroicon-s-megaphone')
                 ->color('primary')
                 ->description(__('Total number of new Service')),
+
+                // stats for products
+            Stat::make(__('Products'), Product::query()->count())
+                ->icon('heroicon-s-cube')
+                ->color('primary')
+                ->description(__('Total number of new Products')),
         ];
     }
 }

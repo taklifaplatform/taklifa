@@ -219,6 +219,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
 
     public function canAccessPanel(\Filament\Panel $panel): bool
     {
+        if ($panel->getId() === 'company') {
+            return $this->isCompanyOwner();
+        }
+        
         return $this->id === 2 || $this->hasRole('admin') || $this->hasRole('super_admin');
     }
 
@@ -271,6 +275,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         ];
     }
 
+    /**
+     * Get the company owned by this user
+     */
+    public function ownedCompany()
+    {
+        return $this->hasOne(\Modules\Company\Entities\Company::class, 'owner_id');
+    }
+
+    /**
+     * Check if the user is a company owner
+     */
+    public function isCompanyOwner(): bool
+    {
+        return $this->hasRole(self::ROLE_COMPANY_OWNER);
     public function carts()
     {
         return $this->hasMany(Cart::class);

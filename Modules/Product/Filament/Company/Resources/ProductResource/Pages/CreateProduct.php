@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Product\Filament\Admin\Resources\ProductResource\Pages;
+namespace Modules\Product\Filament\Company\Resources\ProductResource\Pages;
 
-use Modules\Product\Filament\Admin\Resources\ProductResource;
 use Filament\Resources\Pages\CreateRecord;
+use Modules\Product\Filament\Company\Resources\ProductResource;
 
 class CreateProduct extends CreateRecord
 {

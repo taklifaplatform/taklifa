@@ -1,14 +1,15 @@
 <?php
 
-namespace Modules\Product\Filament\Admin\Resources;
+namespace Modules\Product\Filament\Company\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Product\Entities\ProductCategory;
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
+use Modules\Product\Filament\Company\Resources\ProductCategoryResource\Pages;
 
 class ProductCategoryResource extends Resource
 {
@@ -54,9 +55,6 @@ class ProductCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name')),
-                Tables\Columns\TextColumn::make('description')
-                    ->label(__('Description'))
-                    ->limit(50),
                 Tables\Columns\TextColumn::make('order')
                     ->label(__('Order')),
                 Tables\Columns\TextColumn::make('parent.name')
@@ -69,10 +67,10 @@ class ProductCategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                    Tables\Actions\ViewAction::make(),
-                ]),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -81,22 +79,16 @@ class ProductCategoryResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListProductCategories::route('/'),
             'create' => Pages\CreateProductCategory::route('/create'),
-            'edit' => Pages\EditProductCategory::route('/{record}/edit'),
             'view' => Pages\ViewProductCategory::route('/{record}'),
+            'edit' => Pages\EditProductCategory::route('/{record}/edit'),
         ];
     }
+
 
     public static function getLabel(): ?string
     {
@@ -106,10 +98,5 @@ class ProductCategoryResource extends Resource
     public static function getPluralLabel(): ?string
     {
         return __('Product Categories');
-    }
-
-    public static function getNavigationGroup(): string
-    {
-        return __('Products');
     }
 }

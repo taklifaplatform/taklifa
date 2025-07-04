@@ -2,41 +2,31 @@
 
 namespace App\Panels;
 
-use Filament\Pages;
 use Filament\Panel;
-use App\Panels\BasePanelProvider;
+use App\Filament\Dashboard;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
-use App\Filament\Widgets\StatsOverview;
-use App\Filament\Widgets\UsersPerDayChart;
 use Filament\Http\Middleware\Authenticate;
-use App\Filament\Widgets\ServicesPerDayChart;
 use Filament\SpatieLaravelTranslatablePlugin;
-use App\Filament\Widgets\CustomersPerDayChart;
 use Illuminate\Session\Middleware\StartSession;
-use App\Filament\Widgets\SoloDriversPerDayChart;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
 
-class AdminPanelProvider extends BasePanelProvider
+class CompanyPanelProvider extends BasePanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         $panel
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
-            ->default()
             ->maxContentWidth(MaxWidth::Full)
             ->sidebarCollapsibleOnDesktop()
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('company')
+            ->path('company')
             ->font('Poppins')
             ->authGuard('web')
             ->colors([
@@ -45,14 +35,12 @@ class AdminPanelProvider extends BasePanelProvider
             ->login()
             ->passwordReset()
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->widgets([
-                StatsOverview::class,
-                UsersPerDayChart::class,
-                ServicesPerDayChart::class,
-                CustomersPerDayChart::class,
-                SoloDriversPerDayChart::class,
+                \Modules\Product\Filament\Company\Widgets\ProductStatsOverview::class,
+                \Modules\Product\Filament\Company\Widgets\ProductsChart::class,
+                \Modules\Product\Filament\Company\Widgets\RecentProducts::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -62,7 +50,6 @@ class AdminPanelProvider extends BasePanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-                DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
@@ -71,8 +58,6 @@ class AdminPanelProvider extends BasePanelProvider
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'ar']),
-                    // FilamentExceptionsPlugin::make(),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
 
         return $this->preloadPanelModule($panel);

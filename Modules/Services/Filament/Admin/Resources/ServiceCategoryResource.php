@@ -3,7 +3,6 @@
 namespace Modules\Services\Filament\Admin\Resources;
 
 use Modules\Services\Filament\Admin\Resources\ServiceCategoryResource\Pages;
-use Modules\Services\Filament\Admin\Resources\ServiceCategoryResource\RelationManagers;
 use Modules\Services\Entities\ServiceCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ServiceCategoryResource extends Resource
 {
@@ -52,14 +50,14 @@ class ServiceCategoryResource extends Resource
                             ->searchable()
                             ->preload(),
 
-                        Forms\Components\Toggle::make('enabled')
-                            ->label(__('Enabled'))
-                            ->default(true),
-
                         Forms\Components\TextInput::make('order')
                             ->numeric()
                             ->required()
                             ->label(__('Order')),
+
+                        Forms\Components\Toggle::make('enabled')
+                            ->label(__('Enabled'))
+                            ->default(true),
 
                         Forms\Components\Repeater::make('metadata_fields')
                             ->label(__('Metadata Fields'))

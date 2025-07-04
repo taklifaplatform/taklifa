@@ -21,6 +21,15 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Filament\Support\Facades\FilamentView::registerRenderHook(
+            \Filament\View\PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE,
+            fn () => view('core::components.inline-lang-switcher'),
+            scopes: [
+                \Filament\Pages\Auth\Login::class,
+            ],
+        );
+
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

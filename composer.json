@@ -10,7 +10,9 @@
     "require": {
         "php": "^8.3",
         "aymanalhattami/filament-page-with-sidebar": "*",
+        "bezhansalleh/filament-exceptions": "^3.0",
         "bezhansalleh/filament-language-switch": "^3.1",
+        "bezhansalleh/filament-panel-switch": "^1.1",
         "bezhansalleh/filament-shield": "^3.0",
         "calebporzio/sushi": "^2.4",
         "dotswan/filament-map-picker": "^1.2",
