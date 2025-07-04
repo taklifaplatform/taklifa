@@ -7,7 +7,6 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
-use Modules\Company\Filament\Admin\Resources\CompanyResource;
 use Modules\Product\Filament\Company\Resources\ProductCategoryResource;
 
 class ViewProductCategory extends ViewRecord

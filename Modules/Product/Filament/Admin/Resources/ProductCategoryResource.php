@@ -2,16 +2,13 @@
 
 namespace Modules\Product\Filament\Admin\Resources;
 
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\RelationManagers;
-use Modules\Product\Entities\ProductCategory;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Resource;
+use Modules\Product\Entities\ProductCategory;
+use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
 
 class ProductCategoryResource extends Resource
 {
