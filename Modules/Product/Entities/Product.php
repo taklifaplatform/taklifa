@@ -5,6 +5,7 @@ namespace Modules\Product\Entities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Company\Entities\Company;
 use Modules\Core\Entities\BaseModel;
+use Modules\Cart\Entities\CartItem;
 
 class Product extends BaseModel
 {
@@ -30,5 +31,10 @@ class Product extends BaseModel
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
 }
