@@ -31,8 +31,7 @@ class CartPolicy
      */
     public function create(User $user): bool
     {
-        // Cart creation is not allowed in admin - only viewing
-        return false;
+        return $user->can('create_cart');
     }
 
     /**
@@ -40,8 +39,7 @@ class CartPolicy
      */
     public function update(User $user, Cart $cart): bool
     {
-        // Cart updating is not allowed in admin - only viewing
-        return false;
+        return $user->can('update_cart');
     }
 
     /**
@@ -49,8 +47,7 @@ class CartPolicy
      */
     public function delete(User $user, Cart $cart): bool
     {
-        // Cart deletion is not allowed in admin - only viewing
-        return false;
+        return $user->can('delete_cart');
     }
 
     /**
@@ -58,8 +55,7 @@ class CartPolicy
      */
     public function deleteAny(User $user): bool
     {
-        // Bulk cart deletion is not allowed in admin - only viewing
-        return false;
+        return $user->can('delete_any_cart');
     }
 
     /**
@@ -67,8 +63,7 @@ class CartPolicy
      */
     public function forceDelete(User $user, Cart $cart): bool
     {
-        // Force deletion is not allowed in admin - only viewing
-        return false;
+        return $user->can('force_delete_cart');
     }
 
     /**
@@ -76,8 +71,7 @@ class CartPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        // Force bulk deletion is not allowed in admin - only viewing
-        return false;
+        return $user->can('force_delete_any_cart');
     }
 
     /**
@@ -85,8 +79,7 @@ class CartPolicy
      */
     public function restore(User $user, Cart $cart): bool
     {
-        // Restoration is not allowed in admin - only viewing
-        return false;
+        return $user->can('restore_cart');
     }
 
     /**
@@ -94,8 +87,7 @@ class CartPolicy
      */
     public function restoreAny(User $user): bool
     {
-        // Bulk restoration is not allowed in admin - only viewing
-        return false;
+        return $user->can('restore_any_cart');
     }
 
     /**
@@ -103,8 +95,7 @@ class CartPolicy
      */
     public function replicate(User $user, Cart $cart): bool
     {
-        // Replication is not allowed in admin - only viewing
-        return false;
+        return $user->can('replicate_cart');
     }
 
     /**
@@ -112,7 +103,6 @@ class CartPolicy
      */
     public function reorder(User $user): bool
     {
-        // Reordering is not allowed in admin - only viewing
-        return false;
+        return $user->can('reorder_cart');
     }
-} 
+}

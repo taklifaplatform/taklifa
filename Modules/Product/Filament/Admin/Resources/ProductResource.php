@@ -54,13 +54,10 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name')),
-                Tables\Columns\TextColumn::make('description')
-                    ->label(__('Description'))
-                    ->limit(50),
                 Tables\Columns\TextColumn::make('company.name')
                     ->label(__('Company')),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label(__('Category')),
+                    ->label(__('Product Category')),
             ])
             ->filters([
                 //

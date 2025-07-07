@@ -54,9 +54,6 @@ class ProductCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name')),
-                Tables\Columns\TextColumn::make('description')
-                    ->label(__('Description'))
-                    ->limit(50),
                 Tables\Columns\TextColumn::make('order')
                     ->label(__('Order')),
                 Tables\Columns\TextColumn::make('parent.name')

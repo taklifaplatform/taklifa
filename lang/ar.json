@@ -451,5 +451,10 @@
     "Variants": "المتغيرات",
     "View" : "عرض",
     "Total number of new Service" : "إجمالي عدد الخدمات الجديدة",
-    "Total number of new Products" : "إجمالي عدد المنتجات الجديدة"
+    "Total number of new Products" : "إجمالي عدد المنتجات الجديدة",
+    "Cart" : "عربة التسوق",
+    "Carts" : "عربات التسوق",
+    "Cart User" : "مستخدم العربة",
+    "Total Items" : "إجمالي العناصر",
+    "Total Cost" : "إجمالي التكلفة"
 }

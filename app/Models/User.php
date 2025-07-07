@@ -222,7 +222,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         if ($panel->getId() === 'company') {
             return $this->isCompanyOwner();
         }
-        
+
         return $this->id === 2 || $this->hasRole('admin') || $this->hasRole('super_admin');
     }
 

@@ -26,10 +26,10 @@ class AppServiceProvider extends ServiceProvider
                 ->locales(['ar', 'en']);
         });
 
-        PanelSwitch::configureUsing(function (PanelSwitch $panelSwitch) {
-            $panelSwitch
-                ->simple()
-                ->visible(fn() => filament()->getCurrentPanel()->getId() !== 'company');
-        });
+        // PanelSwitch::configureUsing(function (PanelSwitch $panelSwitch) {
+        //     $panelSwitch
+        //         ->simple()
+        //         ->visible(fn() => filament()->getCurrentPanel()->getId() !== 'company');
+        // });
     }
 }
