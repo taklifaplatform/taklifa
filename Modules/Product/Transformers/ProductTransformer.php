@@ -5,6 +5,7 @@ namespace Modules\Product\Transformers;
 use Modules\Core\Transformers\JsonTransformer;
 use Modules\Company\Transformers\CompanyTransformer;
 use Modules\Product\Transformers\ProductCategoryTransformer;
+use Modules\Product\Transformers\ProductVariantTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 
 class ProductTransformer extends JsonTransformer
@@ -22,7 +23,7 @@ class ProductTransformer extends JsonTransformer
             'name' => $this->name,
             'description' => $this->description,
             'company' => CompanyTransformer::make($this->company),
-            'category' =>ProductCategoryTransformer::make($this->category),
+            'category' => ProductCategoryTransformer::make($this->category),
             'variants' => ProductVariantTransformer::collection($this->whenLoaded('variants')),
         ];
     }
