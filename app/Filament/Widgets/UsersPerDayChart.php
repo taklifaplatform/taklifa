@@ -19,8 +19,6 @@ class UsersPerDayChart extends LineChartWidget
 
     protected static ?int $sort = 1;
 
-    protected int | string | array $columnSpan = 'full';
-
     protected static ?string $maxHeight = '200px';
 
 
@@ -43,7 +41,7 @@ class UsersPerDayChart extends LineChartWidget
             'This year' => now()->startOfYear(),
             default => now()->subDays(7),
         };
-    
+
         $data = Trend::model(User::class)
             ->between(
                 start: $startDate,
@@ -51,7 +49,7 @@ class UsersPerDayChart extends LineChartWidget
             )
             ->perDay()
             ->count();
-    
+
         return [
             'datasets' => [
                 [

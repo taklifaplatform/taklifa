@@ -17,11 +17,6 @@ class CartItem extends BaseModel
         'total_price',
     ];
 
-    protected $casts = [
-        'unit_price' => 'decimal:2',
-        'total_price' => 'decimal:2',
-    ];
-
     public function cart()
     {
         return $this->belongsTo(Cart::class);

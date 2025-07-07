@@ -19,10 +19,6 @@ class Cart extends BaseModel
         'total_cost',
     ];
 
-    protected $casts = [
-        'total_cost' => 'decimal:2',
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);

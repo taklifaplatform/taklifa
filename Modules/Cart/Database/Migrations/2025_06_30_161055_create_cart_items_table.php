@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignUuid('cart_id')->constrained('carts')->onDelete('cascade');
             $table->foreignUuid('product_id')->constrained('products')->onDelete('cascade');
             $table->foreignUuid('variant_id')->constrained('product_variants')->onDelete('cascade');
-            $table->decimal('unit_price', 10, 2);
+            $table->integer('unit_price');
             $table->integer('quantity');
-            $table->decimal('total_price', 10, 2);
+            $table->integer('total_price');
 
             $table->timestamps();
         });

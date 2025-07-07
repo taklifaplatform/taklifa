@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('device_identifier', 60);
+            $table->string('device_identifier');
             $table->foreignUuid('company_id')->constrained('companies')->onDelete('cascade');
             $table->integer('total_items')->default(0);
-            $table->decimal('total_cost', 10, 2)->default(0.00);
+            $table->integer('total_cost')->default(0);
 
             $table->timestamps();
         });
