@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Service_categories', function (Blueprint $table) {
+        Schema::create('service_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             $table->text('name');
 
             $table->text('description')->nullable();
 
-            $table->foreignUuid('parent_id')->nullable()->constrained('Service_categories')->nullOnDelete();
+            $table->foreignUuid('parent_id')->nullable()->constrained('service_categories')->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Service_categories');
+        Schema::dropIfExists('service_categories');
     }
 };
