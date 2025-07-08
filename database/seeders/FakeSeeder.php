@@ -137,7 +137,7 @@ class FakeSeeder extends Seeder
             'role' => 'company_owner',
         ]);
 
-        $this->addMedia($company, "https://zix-images.zixdev.com/images/companies/transportation/$index/logo.png", 'logo');
+        // $this->addMedia($company, "https://zix-images.zixdev.com/images/companies/transportation/$index/logo.png", 'logo');
 
         $company->location_id  = $company->locations()->create([
             'country_id' => 185,
