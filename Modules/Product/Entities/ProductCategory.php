@@ -36,9 +36,4 @@ class ProductCategory extends BaseModel
     {
         return $this->hasMany(ProductCategory::class, 'parent_id');
     }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'category_id');
-    }
 }

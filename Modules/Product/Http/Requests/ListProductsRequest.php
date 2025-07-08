@@ -17,7 +17,6 @@ class ListProductsRequest extends QueryRequest
         return [
             'search' => ['string', 'max:255'],
             'company_id' => ['string', 'exists:companies,id', 'nullable'],
-            'category_id' => ['string', 'exists:product_categories,id', 'nullable'],
         ];
     }
 

@@ -23,7 +23,6 @@ class ProductTransformer extends JsonTransformer
             'name' => $this->name,
             'description' => $this->description,
             'company' => CompanyTransformer::make($this->company),
-            'category' => ProductCategoryTransformer::make($this->category),
             'variants' => ProductVariantTransformer::collection($this->whenLoaded('variants')),
         ];
     }
@@ -36,7 +35,6 @@ class ProductTransformer extends JsonTransformer
                 Schema::string('name')->required(),
                 Schema::string('description')->nullable(),
                 Schema::ref('#/components/schemas/CompanyTransformer', 'company'),
-                Schema::ref('#/components/schemas/ProductCategoryTransformer', 'category'),
                 Schema::array('variants')
                     ->items(Schema::ref('#/components/schemas/ProductVariantTransformer'))
                     ->nullable(),

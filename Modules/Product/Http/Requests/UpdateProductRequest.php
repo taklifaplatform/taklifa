@@ -14,11 +14,10 @@ class UpdateProductRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'company_id' => ['nullable', 'string', 'exists:companies,id'],
-            'category_id' => ['nullable', 'string', 'exists:product_categories,id'],
             'variants' => ['nullable', 'array'],
             'variants.*.price' => ['required_with:variants', 'numeric', 'min:0.01'],
             'variants.*.price_currency' => ['required_with:variants', 'string', 'max:3'],
         ];
     }
-    
+
 }

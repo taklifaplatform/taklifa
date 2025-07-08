@@ -36,11 +36,6 @@ class ProductResource extends Resource
                         ->searchable()
                         ->preload()
                         ->required(),
-                    Forms\Components\Select::make('category_id')
-                        ->label(__('Category'))
-                        ->relationship('category', 'name')
-                        ->searchable()
-                        ->preload(),
                     Forms\Components\Textarea::make('description')
                         ->label(__('Description'))
                         ->rows(5)
@@ -57,13 +52,8 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name')),
-                Tables\Columns\TextColumn::make('description')
-                    ->label(__('Description'))
-                    ->limit(10),
                 Tables\Columns\TextColumn::make('company.name')
                     ->label(__('Company')),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->label(__('Category')),
             ])
             ->filters([
                 //

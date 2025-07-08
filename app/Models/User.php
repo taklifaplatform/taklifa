@@ -263,6 +263,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         return $this->belongsTo(Company::class, 'active_company_id');
     }
 
+    /**
+     * Alias for activeCompany for convenience
+     */
+    public function company()
+    {
+        return $this->activeCompany();
+    }
+
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id');
