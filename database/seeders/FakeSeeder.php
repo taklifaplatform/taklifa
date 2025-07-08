@@ -117,13 +117,11 @@ class FakeSeeder extends Seeder
     {
         $roles = ['company_driver', 'company_manager'];
 
-        $companyInfoJsonUrl = "https://zix-images.zixdev.com/images/companies/transportation/$index/info.json";
-        $companyInfo = json_decode(file_get_contents($companyInfoJsonUrl), true);
 
         // create fake company
         $company = Company::create([
-            'name' => $companyInfo['name'],
-            'about' => $companyInfo['description'],
+            'name' => fake()->company(),
+            'about' => fake()->sentence(),
         ]);
 
         $company->owner_id = $user->id;
