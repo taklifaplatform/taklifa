@@ -30,8 +30,8 @@ Route::prefix('products')->group(function () {
     Route::get('/{product}', [ProductController::class, 'retrieveProduct']);
 });
 
-// Products Protected API Routes
-Route::prefix('products')->middleware('auth:sanctum')->group(function () {
+
+Route::middleware('auth:sanctum')->prefix('/products')->group(static function (): void {
     Route::post('/', [ManageProductController::class, 'storeProduct']);
     Route::put('/{product}', [ManageProductController::class, 'updateProduct']);
     Route::delete('/{product}', [ManageProductController::class, 'deleteProduct']);
