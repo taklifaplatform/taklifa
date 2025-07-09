@@ -15,8 +15,18 @@ return new class extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            $table->string('name')->nullable();
+
             $table->decimal('price', 10, 2);
             $table->string('price_currency')->default('SAR');
+
+            $table->string('type')->default('count');
+            $table->string('type_unit')->nullable();
+            $table->decimal('type_value', 10, 2)->nullable();
+
+            $table->integer('stock')->default(0);
+
             $table->foreignUuid('product_id')->constrained('products')->onDelete('cascade');
 
             $table->timestamps();

@@ -3,6 +3,8 @@
 namespace Modules\Product\Http\Requests;
 
 use Modules\Core\Http\Requests\FormRequest;
+use Modules\Media\Entities\TemporaryUpload;
+
 class UpdateProductRequest extends FormRequest
 {
     /**
@@ -13,10 +15,19 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'company_id' => ['nullable', 'string', 'exists:companies,id'],
-            'variants' => ['nullable', 'array'],
-            'variants.*.price' => ['required_with:variants', 'numeric', 'min:0.01'],
-            'variants.*.price_currency' => ['required_with:variants', 'string', 'max:3'],
+            'category_id' => ['nullable', 'string', 'exists:product_categories,id'],
+            'variant' => ['array'],
+            'variant.price' => ['numeric', 'min:0.01'],
+            'variant.price_currency' => ['string', 'max:3'],
+            'variant.type' => ['string', 'in:count,weight,size'],
+            'variant.type_unit' => ['string', 'in:g,kg,lb,oz,cm,m,in,ft'],
+            'variant.type_value' => ['numeric'],
+            'variant.stock' => ['numeric'],
+
+            'is_available' => ['boolean'],
+
+            ...TemporaryUpload::validationRules('images.*'),
+
         ];
     }
 

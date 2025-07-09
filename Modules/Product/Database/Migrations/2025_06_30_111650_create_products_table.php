@@ -15,9 +15,16 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
             $table->string('name');
             $table->text('description')->nullable();
+
             $table->foreignUuid('company_id')->constrained('companies')->onDelete('cascade');
+
+            $table->foreignUuid('category_id')->nullable()->constrained('product_categories')->nullOnDelete();
+
+            $table->boolean('is_available')->default(true);
+            $table->boolean('created_with_ai')->default(false);
 
             $table->timestamps();
         });

@@ -22,30 +22,34 @@ class ManageProductController extends Controller
     #[OpenApi\Operation('storeProduct', tags: ['Products'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\RequestBody(factory: UpdateProductRequest::class)]
     #[OpenApi\Response(factory: ProductTransformer::class)]
-    public function storeProduct(UpdateProductRequest $updateProductRequest)
+    public function storeProduct(UpdateProductRequest $request)
     {
-        $user = $updateProductRequest->user();
-        $validatedData = $updateProductRequest->validated();
+        $user = $request->user();
 
         // Ensure user has a company
         if (!$user->company) {
             abort(403, 'User must have a company to create products.');
         }
 
-        // Set company_id from user's company
-        $validatedData['company_id'] = $user->company->id;
-        $validatedData['user_id'] = $user->id;
+        return DB::transaction(function () use ($user, $request) {
+            $product = $user->company->products()->create($request->only(
+                'name',
+                'description',
+                'category_id',
+                'is_available',
+                'created_with_ai',
+            ));
 
-        $variants = $validatedData['variants'] ?? [];
-        unset($validatedData['variants']);
-
-        return DB::transaction(function () use ($validatedData, $variants) {
-            $product = Product::create($validatedData);
-            $this->createProductVariants($product, $variants);
-            return new ProductTransformer($product);
+            $product->variant()->create($request->only(
+                'variant.price',
+                'variant.price_currency',
+                'variant.type',
+                'variant.type_unit',
+                'variant.type_value',
+                'variant.stock',
+            ));
+            return new ProductTransformer($product->refresh());
         });
-
-
     }
 
     /**
@@ -54,10 +58,10 @@ class ManageProductController extends Controller
     #[OpenApi\Operation('updateProduct', tags: ['Products'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\RequestBody(factory: UpdateProductRequest::class)]
     #[OpenApi\Response(factory: ProductTransformer::class)]
-    public function updateProduct(UpdateProductRequest $updateProductRequest, Product $product)
+    public function updateProduct(UpdateProductRequest $request, Product $product)
     {
-        $user = $updateProductRequest->user();
-        $validatedData = $updateProductRequest->validated();
+        $user = $request->user();
+        $validatedData = $request->validated();
 
         // Ensure user has a company
         if (!$user->company) {
@@ -69,24 +73,25 @@ class ManageProductController extends Controller
             abort(403, 'You can only update products that belong to your company.');
         }
 
-        // Set company_id from user's company
-        $validatedData['company_id'] = $user->company->id;
-        $validatedData['user_id'] = $user->id;
 
-        $variants = $validatedData['variants'] ?? [];
-        unset($validatedData['variants']);
-
-        return DB::transaction(function () use ($product, $validatedData, $variants) {
+        return DB::transaction(function () use ($request, $product, $variants) {
             // Update the product
-            $product->update($validatedData);
+            $product->update($request->only(
+                'name',
+                'description',
+                'category_id',
+                'is_available',
+                'created_with_ai',
+            ));
 
-            // Update variants if provided
-            if (!empty($variants)) {
-                $this->updateProductVariants($product, $variants);
-            } else {
-                // If no variants provided, delete existing ones
-                $product->variants()->delete();
-            }
+            $product->variant()->update($request->only(
+                'variant.price',
+                'variant.price_currency',
+                'variant.type',
+                'variant.type_unit',
+                'variant.type_value',
+                'variant.stock',
+            ));
             return new ProductTransformer($product);
         });
     }
@@ -123,7 +128,7 @@ class ManageProductController extends Controller
     /**
      * Create product variants for a given product.
      */
-    private function createProductVariants(Product $product, array $variants): void
+    private function createOrUpdateProduct(Product $product, array $variants): void
     {
         foreach ($variants as $variantData) {
             $variantData['product_id'] = $product->id;
@@ -131,17 +136,4 @@ class ManageProductController extends Controller
         }
     }
 
-    /**
-     * Update product variants for a given product.
-     */
-    private function updateProductVariants(Product $product, array $variants): void
-    {
-        // Delete existing variants
-        $product->variants()->delete();
-
-        // Create new variants if provided
-        if (!empty($variants)) {
-            $this->createProductVariants($product, $variants);
-        }
-    }
 }

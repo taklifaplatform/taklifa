@@ -27,6 +27,13 @@ class ProductResource extends Resource
                             ->label(__('Name'))
                             ->required(),
 
+
+                        Forms\Components\Textarea::make('short_description')
+                            ->label(__('Short Description'))
+                            ->rows(5)
+                            ->columnSpanFull()
+                            ->required(),
+
                         Forms\Components\Select::make('company_id')
                             ->label(__('Company'))
                             ->relationship('company', 'name')

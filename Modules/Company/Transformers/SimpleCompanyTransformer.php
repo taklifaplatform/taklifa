@@ -24,8 +24,6 @@ class SimpleCompanyTransformer extends JsonTransformer
             'verification_status' => $this->verification_status,
             'logo' => MediaTransformer::make($this->getFirstMedia('logo')),
             'contact_number' => $this->owner?->phone_number,
-
-            'branches' => CompanyBranchTransformer::collection($this->branches),
         ];
     }
 
@@ -41,8 +39,6 @@ class SimpleCompanyTransformer extends JsonTransformer
 
                 Schema::ref('#/components/schemas/MediaTransformer', 'logo'),
                 Schema::string('contact_number')->required(),
-
-                Schema::ref('#/components/schemas/CompanyBranchTransformer', 'branches'),
             );
     }
 }

@@ -27,6 +27,16 @@ class Product extends BaseModel
         return $this->hasMany(ProductVariant::class);
     }
 
+    public function variant()
+    {
+        return $this->hasOne(ProductVariant::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class);
+    }
+
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);
