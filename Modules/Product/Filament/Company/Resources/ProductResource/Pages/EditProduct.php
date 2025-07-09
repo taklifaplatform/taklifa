@@ -17,4 +17,13 @@ class EditProduct extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-} 
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // Preserve the original creator and company
+        $data['created_by'] = $this->record->created_by;
+        $data['company_id'] = $this->record->company_id;
+        // Optionally, you can add any additional logic here
+        return $data;
+    }
+}

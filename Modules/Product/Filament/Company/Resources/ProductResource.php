@@ -9,8 +9,6 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Product\Entities\Product;
-use Modules\Product\Entities\ProductCategory;
-use Modules\Company\Entities\Company;
 use Modules\Product\Filament\Company\Resources\ProductResource\Pages;
 use Modules\Product\Filament\Company\Resources\ProductResource\RelationManagers;
 
@@ -27,22 +25,14 @@ class ProductResource extends Resource
                 Forms\Components\Section::make(__('Product Information'))
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                        ->label(__('Name'))
-                        ->required(),
-
-                    Forms\Components\Select::make('company_id')
-                        ->label(__('Company'))
-                        ->relationship('company', 'name')
-                        ->searchable()
-                        ->preload()
-                        ->required(),
-                    Forms\Components\Textarea::make('description')
-                        ->label(__('Description'))
-                        ->rows(5)
-                        ->columnSpanFull()
-                        ->required(),
-
-                ])->columns(2)
+                            ->label(__('Name'))
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(__('Description'))
+                            ->rows(5)
+                            ->columnSpanFull()
+                            ->required(),
+                    ])->columns(1)
             ]);
     }
 
@@ -51,9 +41,17 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('Name')),
-                Tables\Columns\TextColumn::make('company.name')
-                    ->label(__('Company')),
+                    ->label(__('Name'))
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('variants_count')
+                    ->label(__('Variants'))
+                    ->counts('variants')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('Created At'))
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -69,7 +67,17 @@ class ProductResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('created_by', auth()->id())
+            ->when(auth()->user()->ownedCompany, function (Builder $query) {
+                $query->where('company_id', auth()->user()->ownedCompany->id);
+            });
     }
 
     public static function getRelations(): array

@@ -8,7 +8,6 @@ use Filament\Infolists\Components;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Modules\Product\Filament\Company\Resources\ProductResource;
-use Modules\Product\Filament\Company\Resources\ProductCategoryResource;
 
 class ViewProduct extends ViewRecord
 {
@@ -41,20 +40,10 @@ class ViewProduct extends ViewRecord
                                         Components\TextEntry::make('company.name')
                                             ->label(__('Company')),
                                     ]),
-
-                                    Components\Group::make([
-                                        Components\TextEntry::make('category.name')
-                                            ->label(__('Category'))
-                                            ->visible(fn($record) => $record->category)
-                                            ->url(function ($record) {
-                                                return ProductCategoryResource::getUrl('view', ['record' => $record->category]);
-                                            }),
-                                    ]),
                                 ]),
 
                         ])->from('lg'),
                     ]),
-
 
                 Components\Section::make(__('Description'))
                     ->schema([
