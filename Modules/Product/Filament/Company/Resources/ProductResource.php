@@ -9,6 +9,8 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Product\Entities\Product;
+use Modules\Product\Entities\ProductCategory;
+use Modules\Company\Entities\Company;
 use Modules\Product\Filament\Company\Resources\ProductResource\Pages;
 use Modules\Product\Filament\Company\Resources\ProductResource\RelationManagers;
 
@@ -74,7 +76,6 @@ class ProductResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('created_by', auth()->id())
             ->when(auth()->user()->ownedCompany, function (Builder $query) {
                 $query->where('company_id', auth()->user()->ownedCompany->id);
             });

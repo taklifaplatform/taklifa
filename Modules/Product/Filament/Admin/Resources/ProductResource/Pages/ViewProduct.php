@@ -48,12 +48,12 @@ class ViewProduct extends ViewRecord
                                     ]),
 
                                     Components\Group::make([
-                                        Components\TextEntry::make('category.name')
-                                            ->label(__('Category'))
-                                            ->visible(fn ($record) => $record->category)
-                                            ->url(function ($record) {
-                                                return ProductCategoryResource::getUrl('view', ['record' => $record->category]);
-                                            }),
+                                        Components\IconEntry::make('is_available')
+                                            ->label(__('Is Available'))
+                                            ->trueIcon('heroicon-o-check-badge')
+                                            ->falseIcon('heroicon-o-x-mark')
+                                            ->boolean()
+
                                     ]),
                                 ]),
 

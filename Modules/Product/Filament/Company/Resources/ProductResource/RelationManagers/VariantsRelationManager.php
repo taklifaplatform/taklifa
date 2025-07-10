@@ -18,28 +18,68 @@ class VariantsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\Section::make()
-                    ->schema([
-                        Forms\Components\TextInput::make('price')
-                            ->label(__('Price'))
-                            ->numeric()
-                            ->required(),
-                        Forms\Components\TextInput::make('price_currency')
-                            ->label(__('Price Currency'))
-                            ->required()
-                            ->default('SAR'),
-                    ])->columns(2)
+                ->schema([
+                    Forms\Components\TextInput::make('name')
+                       ->label(__('Name'))
+                       ->maxLength(255),
+                    Forms\Components\TextInput::make('price')
+                       ->label(__('Price'))
+                       ->numeric()
+                       ->required(),
+                    Forms\Components\TextInput::make('price_currency')
+                       ->label(__('Price Currency'))
+                       ->required()
+                       ->default('SAR'),
+                    Forms\Components\Select::make('type')
+                       ->label(__('Type'))
+                       ->options([
+                           'count' => __('Count'),
+                           'weight' => __('Weight'),
+                           'volume' => __('Volume'),
+                           'length' => __('Length'),
+                       ])
+                       ->default('count')
+                       ->required(),
+                    Forms\Components\TextInput::make('type_unit')
+                       ->label(__('Type Unit'))
+                       ->maxLength(255),
+                    Forms\Components\TextInput::make('type_value')
+                       ->label(__('Type Value'))
+                       ->numeric()
+                       ->step(0.01),
+                    Forms\Components\TextInput::make('stock')
+                       ->label(__('Stock'))
+                       ->numeric()
+                       ->integer()
+                       ->default(0)
+                       ->required(),
+                ])->columns(2)
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-
             ->columns([
+                Tables\Columns\TextColumn::make('name')
+                   ->label(__('Name'))
+                   ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->label(__('Price')),
+                   ->label(__('Price'))
+                   ->money('SAR'),
                 Tables\Columns\TextColumn::make('price_currency')
-                    ->label(__('Price Currency')),
+                   ->label(__('Price Currency')),
+                Tables\Columns\TextColumn::make('type')
+                   ->label(__('Type'))
+                   ->badge(),
+                Tables\Columns\TextColumn::make('type_unit')
+                   ->label(__('Type Unit')),
+                Tables\Columns\TextColumn::make('type_value')
+                   ->label(__('Type Value')),
+                Tables\Columns\TextColumn::make('stock')
+                   ->label(__('Stock'))
+                   ->badge()
+                   ->color(fn ($state) => $state > 0 ? 'success' : 'danger'),
             ])
             ->filters([
                 //
@@ -55,8 +95,7 @@ class VariantsRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->defaultSort('price', 'asc');
+            ]);
     }
 
     protected static function getModelLabel(): string

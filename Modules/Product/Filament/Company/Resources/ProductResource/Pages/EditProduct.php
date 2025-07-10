@@ -20,10 +20,8 @@ class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        // Preserve the original creator and company
-        $data['created_by'] = $this->record->created_by;
+        // Preserve the original company
         $data['company_id'] = $this->record->company_id;
-        // Optionally, you can add any additional logic here
         return $data;
     }
 }

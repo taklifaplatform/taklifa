@@ -32,9 +32,7 @@ class ProductCategoryResource extends Resource
                             ->required(),
                         Forms\Components\Select::make('parent_id')
                             ->label(__('Parent Category'))
-                            ->relationship('parent', 'name->en', function (Builder $query) {
-                                return $query->whereNull('parent_id');
-                            })
+                            ->relationship('parent', 'name')
                             ->searchable()
                             ->preload(),
                         Forms\Components\Select::make('company_id')
@@ -65,13 +63,7 @@ class ProductCategoryResource extends Resource
                     ->label(__('Company')),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('parent_id')
-                    ->label(__('Parent Category'))
-                    ->relationship('parent', 'name->' . app()->getLocale(), function (Builder $query) {
-                        return $query->whereNull('parent_id');
-                    })
-                    ->searchable()
-                    ->preload(),
+                //
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
@@ -85,27 +77,8 @@ class ProductCategoryResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->modifyQueryUsing(function (Builder $query) {
-                $query->when(
-                    request()->query('parent_id'),
-                    fn(Builder $query, $parentId) => $query->where('parent_id', $parentId),
-                    fn(Builder $query) => $query->whereNull('parent_id')
-                );
-            })
             ->headerActions([
-                Tables\Actions\Action::make('all')
-                    ->label(__('All main categories'))
-                    ->url(fn() => route('filament.admin.resources.product-categories.index'))
-                    ->badge()
-                    ->color(request()->query('parent_id') ? 'gray' : 'primary'),
-                ...static::getParentCategories()->map(function ($category) {
-                    $isActive = request()->query('parent_id') == $category->id;
-                    return Tables\Actions\Action::make($category->id)
-                        ->label($category->getTranslation('name', app()->getLocale()))
-                        ->url(fn() => route('filament.admin.resources.product-categories.index', ['parent_id' => $category->id]))
-                        ->badge()
-                        ->color($isActive ? 'primary' : 'gray');
-                })->toArray(),
+               //
             ]);
     }
 

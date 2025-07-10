@@ -15,6 +15,14 @@ class Product extends BaseModel
         'name',
         'description',
         'company_id',
+        'category_id',
+        'is_available',
+        'created_with_ai',
+    ];
+
+    protected $attributes = [
+        'is_available' => true,
+        'created_with_ai' => false,
     ];
 
     public function company()

@@ -27,23 +27,23 @@ class ProductResource extends Resource
                             ->label(__('Name'))
                             ->required(),
 
-
-                        Forms\Components\Textarea::make('short_description')
-                            ->label(__('Short Description'))
-                            ->rows(5)
-                            ->columnSpanFull()
-                            ->required(),
-
                         Forms\Components\Select::make('company_id')
                             ->label(__('Company'))
                             ->relationship('company', 'name')
                             ->searchable()
                             ->preload()
                             ->required(),
+
+
+                        Forms\Components\Textarea::make('short_description')
+                            ->label(__('Short Description'))
+                            ->rows(5)
+                            ->required(),
+
+
                         Forms\Components\Textarea::make('description')
                             ->label(__('Description'))
                             ->rows(5)
-                            ->columnSpanFull()
                             ->required(),
 
                     ])->columns(2)
@@ -58,6 +58,10 @@ class ProductResource extends Resource
                     ->label(__('Name')),
                 Tables\Columns\TextColumn::make('company.name')
                     ->label(__('Company')),
+
+                Tables\Columns\IconColumn::make('is_available')
+                    ->boolean()
+                    ->label(__('Available')),
             ])
             ->filters([
                 //

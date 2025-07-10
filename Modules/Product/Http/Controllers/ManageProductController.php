@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Modules\Product\Entities\Product;
 use Modules\Api\Attributes as OpenApi;
-use Modules\Product\Entities\ProductVariant;
 use Modules\Product\Transformers\ProductTransformer;
-use Modules\Product\Http\Requests\ListProductsRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
 use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 
@@ -31,7 +29,7 @@ class ManageProductController extends Controller
             abort(403, 'User must have a company to create products.');
         }
 
-        return DB::transaction(function () use ($user, $request) {
+                return DB::transaction(function () use ($user, $request) {
             $product = $user->company->products()->create($request->only(
                 'name',
                 'description',
@@ -40,14 +38,15 @@ class ManageProductController extends Controller
                 'created_with_ai',
             ));
 
-            $product->variant()->create($request->only(
-                'variant.price',
-                'variant.price_currency',
-                'variant.type',
-                'variant.type_unit',
-                'variant.type_value',
-                'variant.stock',
-            ));
+            // Extract variant data from nested structure
+            $variantData = $request->input('variant', []);
+            $product->variant()->create($variantData);
+            
+            // Handle images
+            if ($request->has('images')) {
+                $this->addMultipleMedia($product, $request->input('images'), 'images', true);
+            }
+            
             return new ProductTransformer($product->refresh());
         });
     }
@@ -61,7 +60,6 @@ class ManageProductController extends Controller
     public function updateProduct(UpdateProductRequest $request, Product $product)
     {
         $user = $request->user();
-        $validatedData = $request->validated();
 
         // Ensure user has a company
         if (!$user->company) {
@@ -73,8 +71,7 @@ class ManageProductController extends Controller
             abort(403, 'You can only update products that belong to your company.');
         }
 
-
-        return DB::transaction(function () use ($request, $product, $variants) {
+                return DB::transaction(function () use ($request, $product) {
             // Update the product
             $product->update($request->only(
                 'name',
@@ -84,14 +81,17 @@ class ManageProductController extends Controller
                 'created_with_ai',
             ));
 
-            $product->variant()->update($request->only(
-                'variant.price',
-                'variant.price_currency',
-                'variant.type',
-                'variant.type_unit',
-                'variant.type_value',
-                'variant.stock',
-            ));
+            // Extract variant data from nested structure
+            $variantData = $request->input('variant', []);
+            if (!empty($variantData)) {
+                $product->variant()->update($variantData);
+            }
+            
+            // Handle images
+            if ($request->has('images')) {
+                $this->addMultipleMedia($product, $request->input('images'), 'images', true);
+            }
+            
             return new ProductTransformer($product);
         });
     }
@@ -123,17 +123,6 @@ class ManageProductController extends Controller
         });
 
         return $this->success('Product deleted successfully.');
-    }
-
-    /**
-     * Create product variants for a given product.
-     */
-    private function createOrUpdateProduct(Product $product, array $variants): void
-    {
-        foreach ($variants as $variantData) {
-            $variantData['product_id'] = $product->id;
-            ProductVariant::create($variantData);
-        }
     }
 
 }

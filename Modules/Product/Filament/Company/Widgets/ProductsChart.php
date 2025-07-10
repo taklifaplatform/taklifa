@@ -45,8 +45,10 @@ class ProductsChart extends LineChartWidget
             default => now()->subDays(7),
         };
 
+        $companyId = auth()->user()->ownedCompany?->id;
+
         $data = Trend::query(
-                Product::query()
+                Product::query()->where('company_id', $companyId)
             )
             ->between(
                 start: $startDate,

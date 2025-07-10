@@ -40,7 +40,6 @@ class CompanyPanelProvider extends BasePanelProvider
             ->widgets([
                 \Modules\Product\Filament\Company\Widgets\ProductStatsOverview::class,
                 \Modules\Product\Filament\Company\Widgets\ProductsChart::class,
-                \Modules\Product\Filament\Company\Widgets\RecentProducts::class,
             ])
             ->middleware([
                 EncryptCookies::class,

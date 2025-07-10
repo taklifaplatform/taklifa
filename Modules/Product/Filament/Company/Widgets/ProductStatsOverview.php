@@ -16,18 +16,22 @@ class ProductStatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
+        $companyId = auth()->user()->ownedCompany?->id;
+        
         return [
-            Stat::make(__('Product Categories'), ProductCategory::query()->count())
+            Stat::make(__('Product Categories'), ProductCategory::query()->where('company_id', $companyId)->count())
                 ->icon('heroicon-s-archive-box')
                 ->color('primary')
                 ->description(__('Total number of product categories')),
 
-            Stat::make(__('Products'), Product::query()->count())
+            Stat::make(__('Products'), Product::query()->where('company_id', $companyId)->count())
                 ->icon('heroicon-s-cube')
                 ->color('success')
                 ->description(__('Total number of products')),
 
-            Stat::make(__('Product Variants'), ProductVariant::query()->count())
+            Stat::make(__('Product Variants'), ProductVariant::query()->whereHas('product', function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })->count())
                 ->icon('heroicon-s-squares-2x2')
                 ->color('info')
                 ->description(__('Total number of product variants')),

@@ -12,8 +12,13 @@ class ProductVariant extends BaseModel
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'price',
         'price_currency',
+        'type',
+        'type_unit',
+        'type_value',
+        'stock',
         'product_id',
     ];
 
