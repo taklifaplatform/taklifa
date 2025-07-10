@@ -15,11 +15,6 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'username' => [
-            //     'required', 'string', 'max:255',
-            //     Rule::unique('users', 'username')->whereNotNull('phone_number_verified_at'),
-
-            // ],
             'name' => ['nullable', 'string', 'max:255'],
             'phone_number' => [
                 'required', 'string', 'max:255',
@@ -29,7 +24,8 @@ class RegisterRequest extends FormRequest
             'password_confirmation' => 'required',
 
             'is_customer' => 'boolean',
-            'is_solo_driver' => 'boolean',
+            'is_company_owner' => 'boolean',
+            'is_service_provider' => 'boolean',
         ];
     }
 }

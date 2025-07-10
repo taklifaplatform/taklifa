@@ -58,14 +58,6 @@ class RegisterController extends Controller
             $user->setActiveRole('customer');
         }
 
-        if ($request->is_solo_driver) {
-            if (! $user->hasRole('solo_driver')) {
-                $user->assignRole('solo_driver');
-            }
-
-            $user->setActiveRole('solo_driver');
-        }
-
         event(new Registered($user));
 
         // send sms verification code
