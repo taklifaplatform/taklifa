@@ -18,42 +18,68 @@ class VariantsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\Section::make()
-                ->schema([
-                    Forms\Components\TextInput::make('name')
-                       ->label(__('Name'))
-                       ->maxLength(255),
-                    Forms\Components\TextInput::make('price')
-                       ->label(__('Price'))
-                       ->numeric()
-                       ->required(),
-                    Forms\Components\TextInput::make('price_currency')
-                       ->label(__('Price Currency'))
-                       ->required()
-                       ->default('SAR'),
-                    Forms\Components\Select::make('type')
-                       ->label(__('Type'))
-                       ->options([
-                           'count' => __('Count'),
-                           'weight' => __('Weight'),
-                           'volume' => __('Volume'),
-                           'length' => __('Length'),
-                       ])
-                       ->default('count')
-                       ->required(),
-                    Forms\Components\TextInput::make('type_unit')
-                       ->label(__('Type Unit'))
-                       ->maxLength(255),
-                    Forms\Components\TextInput::make('type_value')
-                       ->label(__('Type Value'))
-                       ->numeric()
-                       ->step(0.01),
-                    Forms\Components\TextInput::make('stock')
-                       ->label(__('Stock'))
-                       ->numeric()
-                       ->integer()
-                       ->default(0)
-                       ->required(),
-                ])->columns(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(__('Name')),
+
+                        Forms\Components\TextInput::make('stock')
+                            ->label(__('Stock'))
+                            ->numeric()
+                            ->integer()
+                            ->default(0)
+                            ->required(),
+
+                        Forms\Components\TextInput::make('price')
+                            ->label(__('Price'))
+                            ->numeric()
+                            ->required(),
+
+                        Forms\Components\TextInput::make('price_currency')
+                            ->label(__('Price Currency'))
+                            ->required()
+                            ->default('SAR'),
+
+                        Forms\Components\Select::make('type')
+                            ->label(__('Type'))
+                            ->options([
+                                'count' => __('Count'),
+                                'weight' => __('Weight'),
+                                'size' => __('Size'),
+                            ])
+                            ->default('count')
+                            ->live(),
+
+                        Forms\Components\Select::make('type_unit')
+                            ->label(__('Type Unit'))
+                            ->options(function (Forms\Get $get) {
+                                $type = $get('type');
+
+                                return match ($type) {
+                                    'weight' => [
+                                        'g' => __('Grams (g)'),
+                                        'kg' => __('Kilograms (kg)'),
+                                        'lb' => __('Pounds (lb)'),
+                                        'oz' => __('Ounces (oz)'),
+                                    ],
+                                    'size' => [
+                                        'cm' => __('Centimeters (cm)'),
+                                        'm' => __('Meters (m)'),
+                                        'in' => __('Inches (in)'),
+                                        'ft' => __('Feet (ft)'),
+                                    ],
+                                    default => [],
+                                };
+                            })
+                            ->visible(fn(Forms\Get $get) => in_array($get('type'), ['weight', 'size']))
+                            ->required(fn(Forms\Get $get) => in_array($get('type'), ['weight', 'size'])),
+
+                        Forms\Components\TextInput::make('type_value')
+                            ->label(__('Type Value'))
+                            ->numeric()
+                            ->step(0.01)
+                            ->visible(fn(Forms\Get $get) => $get('type') !== null),
+
+                    ])->columns(2)
             ]);
     }
 
@@ -62,24 +88,22 @@ class VariantsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                   ->label(__('Name'))
-                   ->searchable(),
+                    ->label(__('Name'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                   ->label(__('Price'))
-                   ->money('SAR'),
+                    ->label(__('Price'))
+                    ->money('SAR'),
                 Tables\Columns\TextColumn::make('price_currency')
-                   ->label(__('Price Currency')),
+                    ->label(__('Price Currency')),
                 Tables\Columns\TextColumn::make('type')
-                   ->label(__('Type'))
-                   ->badge(),
+                    ->label(__('Type'))
+                    ->badge(),
                 Tables\Columns\TextColumn::make('type_unit')
-                   ->label(__('Type Unit')),
+                    ->label(__('Type Unit')),
                 Tables\Columns\TextColumn::make('type_value')
-                   ->label(__('Type Value')),
+                    ->label(__('Type Value')),
                 Tables\Columns\TextColumn::make('stock')
-                   ->label(__('Stock'))
-                   ->badge()
-                   ->color(fn ($state) => $state > 0 ? 'success' : 'danger'),
+                    ->label(__('Stock')),
             ])
             ->filters([
                 //

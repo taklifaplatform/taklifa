@@ -34,12 +34,10 @@ class ProductResource extends Resource
                             ->preload()
                             ->required(),
 
-
                         Forms\Components\Textarea::make('short_description')
                             ->label(__('Short Description'))
                             ->rows(5)
                             ->required(),
-
 
                         Forms\Components\Textarea::make('description')
                             ->label(__('Description'))
@@ -61,7 +59,7 @@ class ProductResource extends Resource
 
                 Tables\Columns\IconColumn::make('is_available')
                     ->boolean()
-                    ->label(__('Available')),
+                    ->label(__('Is Available')),
             ])
             ->filters([
                 //

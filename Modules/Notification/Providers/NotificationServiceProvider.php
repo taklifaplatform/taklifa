@@ -5,6 +5,10 @@ namespace Modules\Notification\Providers;
 use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Support\ServiceProvider;
 use Modules\Notification\Drivers\Expo\ExpoChannel;
+use Modules\Notification\Entities\NotificationSetting;
+use Modules\Notification\Entities\NotificationTemplate;
+use Modules\Notification\Policies\NotificationSettingPolicy;
+use Modules\Notification\Policies\NotificationTemplatePolicy;
 
 class NotificationServiceProvider extends ServiceProvider
 {

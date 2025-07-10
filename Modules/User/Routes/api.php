@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\User\Http\Controllers\PublicDriversController;
 use Modules\User\Http\Controllers\PublicUsersController;
 use Modules\User\Http\Controllers\UserController;
 
@@ -26,11 +25,6 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(static function (): voi
     Route::post('user/change-active-role', [UserController::class, 'changeActiveRole']);
     Route::delete('user/delete-account', [UserController::class, 'deleteAccount']);
     Route::post('user/enable-customer-role', [UserController::class, 'enableCustomerRole']);
-});
-
-Route::prefix('drivers')->group(function () {
-    Route::get('/', [PublicDriversController::class, 'fetchAllDrivers']);
-    Route::get('/{driver}', [PublicDriversController::class, 'retrieveDriver']);
 });
 
 Route::middleware('auth:sanctum')->prefix('users')->group(function () {

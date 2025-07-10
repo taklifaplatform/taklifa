@@ -269,7 +269,6 @@
     "Import Car Option Values" : "قيم خيارات السيارات المستوردة",
     "Logo" : "شعار",
     "Total number of companies": "إجمالي عدد الشركات",
-    "Total number drivers of companies": "إجمالي عدد السائقين للشركات",
     "Driver of Companies": "سائقين الشركات",
     "Pickup Information": "معلومات الاستلام",
     "Recipient Information": "معلومات المستلم",
@@ -281,7 +280,6 @@
     "Verified At": "تم التحقق في",
     "Verified By": "تم التحقق بواسطة",
     "Company Details": "تفاصيل الشركة",
-    "Company Drivers": "سائقين الشركة",
     "Company Managers" : "مديرين الشركة",
     "Latest Activity": "أحدث نشاط",
     "Report Reason Information": "معلومات سبب البلاغ",
@@ -413,9 +411,7 @@
     "Last month" : "الشهر الماضي",
     "This year" : "هذا العام",
     "Customers Registered" : "العملاء المسجلين",
-    "Solo Drivers Registered" : "السائقين المستقلين المسجلين",
     "Total number of new customers" : "إجمالي عدد العملاء الجدد",
-    "Total number of new solo drivers" : "إجمالي عدد السائقين المستقلين الجدد",
     "Company Branch" : "فرع الشركة",
     "Company Branches" : "فروع الشركة",
     "Contact Number" : "التواصل",
@@ -456,5 +452,10 @@
     "Carts" : "عربات التسوق",
     "Cart User" : "مستخدم العربة",
     "Total Items" : "إجمالي العناصر",
-    "Total Cost" : "إجمالي التكلفة"
+    "Total Cost" : "إجمالي التكلفة",
+    "Type Unit" : "نوع الوحدة",
+    "Type Value" : "قيمة النوع",
+    "Stock" : "المخزون",
+    "Is Available" : "متاح",
+    "Short Description" : "وصف قصير"
 }

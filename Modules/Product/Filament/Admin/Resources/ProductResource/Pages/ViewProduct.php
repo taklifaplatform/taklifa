@@ -9,7 +9,6 @@ use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Modules\Product\Filament\Admin\Resources\ProductResource;
 use Modules\Company\Filament\Admin\Resources\CompanyResource;
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource;
 
 class ViewProduct extends ViewRecord
 {
