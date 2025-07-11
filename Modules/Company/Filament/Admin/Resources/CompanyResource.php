@@ -147,7 +147,6 @@ class CompanyResource extends Resource
     {
         return [
             CompanyManagersRelationManager::class,
-            CompanyDriversRelationManager::class,
             CompanyBranchRelationManager::class,
         ];
     }

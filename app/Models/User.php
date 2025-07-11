@@ -114,10 +114,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     use HasUuids;
     use InteractsWithMedia;
 
-    const ROLE_SOLO_DRIVER = 'solo_driver';
-
-    const ROLE_COMPANY_DRIVER = 'company_driver';
-
     const ROLE_COMPANY_ADMIN = 'company_admin';
 
     const ROLE_COMPANY_OWNER = 'company_owner';
@@ -204,7 +200,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
 
     public function services()
     {
-        return $this->hasMany(Service::class, 'driver_id');
+        return $this->hasMany(Service::class);
     }
 
     public function phoneNumbers()

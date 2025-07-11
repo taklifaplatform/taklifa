@@ -39,27 +39,27 @@ Route::get('/test', function () {
     return $locations;
 });
 
-Route::get('/fix', function () {
-    $drivers = User::query()
-        ->whereHas('roles', static function ($query): void {
-            $query->whereIn('name', [
-                User::ROLE_SOLO_DRIVER,
-                User::ROLE_COMPANY_DRIVER,
-            ]);
-        })->get();
-    foreach ($drivers as $driver) {
-        foreach ($driver->locations as $location) {
-            $location->update([
-                'country_id' => 185,
-                'address' => fake()->address(),
-                'latitude' => fake()->latitude(24.5, 24.9),
-                'longitude' => fake()->longitude(46.6, 46.97),
-            ]);
-        }
-    }
+// Route::get('/fix', function () {
+//     $drivers = User::query()
+//         ->whereHas('roles', static function ($query): void {
+//             $query->whereIn('name', [
+//                 User::ROLE_SOLO_DRIVER,
+//                 User::ROLE_COMPANY_DRIVER,
+//             ]);
+//         })->get();
+//     foreach ($drivers as $driver) {
+//         foreach ($driver->locations as $location) {
+//             $location->update([
+//                 'country_id' => 185,
+//                 'address' => fake()->address(),
+//                 'latitude' => fake()->latitude(24.5, 24.9),
+//                 'longitude' => fake()->longitude(46.6, 46.97),
+//             ]);
+//         }
+//     }
 
-    return $drivers;
-});
+//     return $drivers;
+// });
 
 
 

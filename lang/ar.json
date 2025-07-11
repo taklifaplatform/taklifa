@@ -331,10 +331,8 @@
     "Service" : "الخدمة",
     "Service Information" : "معلومات الخدمة",
     "Cover" : "الغلاف",
-    "Driver" : "السائق",
     "Service Details" : "تفاصيل الخدمة",
     "Images" : "الصور",
-    "Company Driver" : "سائق الشركة",
     "Sort" : "الترتيب",
     "Notifications" : "الإشعارات",
     "Notification Template" : "قالب الإشعار",
@@ -457,5 +455,6 @@
     "Type Value" : "قيمة النوع",
     "Stock" : "المخزون",
     "Is Available" : "متاح",
-    "Short Description" : "وصف قصير"
+    "Short Description" : "وصف قصير",
+    "The key is used to identify the field in the metadata array. It must be unique and cannot be changed later." : "المفتاح يستخدم لتحديد الحقل في مصفوفة البيانات الوصفية. يجب أن يكون فريدًا ولا يمكن تغييره لاحقًا."
 }

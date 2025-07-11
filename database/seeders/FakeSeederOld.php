@@ -42,10 +42,10 @@ class FakeSeederOld extends Seeder
             $company->save();
 
             // create fake drivers
-            User::factory()->count(rand(3, 10))->create()->map(function ($user) use ($company) {
-                $company->drivers()->attach($user->id);
-                $user->assignRole('company_driver');
-            });
+            // User::factory()->count(rand(3, 10))->create()->map(function ($user) use ($company) {
+            //     $company->drivers()->attach($user->id);
+            //     $user->assignRole('company_driver');
+            // });
 
             // create fake managers
             User::factory()->count(rand(3, 10))->create()->map(function ($user) use ($company) {

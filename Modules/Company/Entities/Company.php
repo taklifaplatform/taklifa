@@ -26,7 +26,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $owner_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read int|null $driver_invitations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $drivers
  * @property-read int|null $drivers_count
  * @property-read \Modules\Geography\Entities\Location|null $location
@@ -111,12 +110,6 @@ class Company extends BaseModel implements HasMedia
     {
         return $this->belongsToMany(User::class, 'company_members', 'company_id', 'user_id')
             ->wherePivot('role', 'company_manager');
-    }
-
-    public function drivers()
-    {
-        return $this->belongsToMany(User::class, 'company_members', 'company_id', 'user_id')
-            ->wherePivot('role', 'company_driver');
     }
     public function invitations()
     {

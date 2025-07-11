@@ -16,7 +16,7 @@ class ListInvitationQueryRequest extends QueryRequest
     {
         return [
             'search' => ['nullable', 'string'],
-            'role' => ['nullable', 'string', 'in:company_manager,company_driver'],
+            'role' => ['nullable', 'string', 'in:company_manager'],
         ];
     }
 }

@@ -17,7 +17,7 @@ class ListCompanyMembersQueryRequest extends QueryRequest
         return [
             'search' => ['nullable', 'string'],
             'status' => ['nullable', 'string', 'in:online,busy,offline'],
-            'role' => ['nullable', 'string', 'in:company_driver,company_manager'],
+            'role' => ['nullable', 'string', 'in:company_manager'],
         ];
     }
 }

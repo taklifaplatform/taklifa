@@ -19,9 +19,7 @@ class ShieldSeeder extends Seeder
         $rolesWithPermissions = [
             ['name' => 'admin', 'guard_name' => 'web', 'permissions' => []],
             ['name' => 'company_owner', 'guard_name' => 'web', 'permissions' => []],
-            ['name' => 'company_driver', 'guard_name' => 'web', 'permissions' => []],
             ['name' => 'company_manager', 'guard_name' => 'web', 'permissions' => []],
-            ['name' => 'solo_driver', 'guard_name' => 'web', 'permissions' => []],
             ['name' => 'customer', 'guard_name' => 'web', 'permissions' => []],
         ];
         $directPermissions = [];

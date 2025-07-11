@@ -56,10 +56,6 @@ class MemberAcceptInvitationController extends Controller
             'role' => $invitation->role,
         ]);
 
-        if (! $user->hasRole('company_driver') && $invitation->role === 'company_driver') {
-            $user->assignRole('company_driver');
-        }
-
         if (! $user->hasRole('company_manager') && $invitation->role === 'company_manager') {
             $user->assignRole('company_manager');
         }

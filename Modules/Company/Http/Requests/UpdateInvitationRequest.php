@@ -16,7 +16,7 @@ class UpdateInvitationRequest extends FormRequest
             'phone_number' => ['required', 'string',],
             'email' => ['nullable', 'string', 'email', 'max:255'],
             'message' => 'nullable|string',
-            'role' => 'required|string|in:company_manager,company_driver',
+            'role' => 'required|string|in:company_manager',
         ];
     }
 }

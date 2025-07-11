@@ -13,7 +13,6 @@ class CompanyBranch extends BaseModel
         'contact_number',
         'name',
         'description',
-
         'company_id',
         'creator_id',
 
