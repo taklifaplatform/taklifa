@@ -47,7 +47,6 @@ class ProductVariantTransformer extends JsonTransformer
                 ]),
                 Schema::number('type_value')->nullable(),
 
-
                 Schema::number('stock')->nullable(),
 
                 Schema::number('price')->required(),

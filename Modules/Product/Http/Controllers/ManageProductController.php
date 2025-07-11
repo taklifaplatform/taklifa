@@ -29,24 +29,28 @@ class ManageProductController extends Controller
             abort(403, 'User must have a company to create products.');
         }
 
-                return DB::transaction(function () use ($user, $request) {
-            $product = $user->company->products()->create($request->only(
+        return DB::transaction(function () use ($user, $request) {
+            // Get validated data
+            $productData = $request->validated();
+
+            // Create the product
+            $product = $user->company->products()->create($request->only([
                 'name',
                 'description',
                 'category_id',
                 'is_available',
                 'created_with_ai',
-            ));
+            ]));
 
-            // Extract variant data from nested structure
-            $variantData = $request->input('variant', []);
-            $product->variant()->create($variantData);
-            
-            // Handle images
-            if ($request->has('images')) {
-                $this->addMultipleMedia($product, $request->input('images'), 'images', true);
+            // Handle product variant
+            if (isset($productData['variant']) && !empty($productData['variant'])) {
+                $product->variant()->create($productData['variant']);
             }
-            
+
+            if (isset($productData['images'])) {
+                $this->addMultipleMedia($product, $product['images'], 'images', true);
+            }
+
             return new ProductTransformer($product->refresh());
         });
     }
@@ -71,28 +75,34 @@ class ManageProductController extends Controller
             abort(403, 'You can only update products that belong to your company.');
         }
 
-                return DB::transaction(function () use ($request, $product) {
+        return DB::transaction(function () use ($request, $product) {
+            // Get validated data
+            $productData = $request->validated();
+
             // Update the product
-            $product->update($request->only(
+            $product->update($request->only([
                 'name',
                 'description',
                 'category_id',
                 'is_available',
                 'created_with_ai',
-            ));
+            ]));
 
-            // Extract variant data from nested structure
-            $variantData = $request->input('variant', []);
-            if (!empty($variantData)) {
-                $product->variant()->update($variantData);
+            // Handle product variant update
+            if (isset($productData['variant']) && !empty($productData['variant'])) {
+                if ($product->variant) {
+                    $product->variant->update($productData['variant']);
+                } else {
+                    $product->variant()->create($productData['variant']);
+                }
             }
-            
-            // Handle images
-            if ($request->has('images')) {
-                $this->addMultipleMedia($product, $request->input('images'), 'images', true);
+
+            // Handle images using the same pattern as the example
+            if (isset($productData['images'])) {
+                $this->addMultipleMedia($product, $productData['images'], 'images', true);
             }
-            
-            return new ProductTransformer($product);
+
+            return new ProductTransformer($product->refresh());
         });
     }
 
@@ -109,6 +119,7 @@ class ManageProductController extends Controller
         if (!$user->company) {
             abort(403, 'User must have a company to delete products.');
         }
+
         // Check if the product belongs to the user's company
         if ($product->company_id !== $user->company->id) {
             abort(403, 'You can only delete products that belong to your company.');
@@ -116,13 +127,16 @@ class ManageProductController extends Controller
 
         // Delete the product and its variants
         DB::transaction(function () use ($product) {
-            // Delete variants first
+            // Delete all variants
             $product->variants()->delete();
-            // Then delete the product
+
+            // Clear media files
+            $product->clearMediaCollection('images');
+
+            // Delete the product
             $product->delete();
         });
 
         return $this->success('Product deleted successfully.');
     }
-
 }
