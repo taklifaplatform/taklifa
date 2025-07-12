@@ -28,13 +28,26 @@ class FakeSeeder extends Seeder
 
     public function createCompanies()
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $owner = User::inRandomOrder()->first();
 
             $company = Company::create([
                 'name' => fake()->company(),
                 'owner_id' => $owner->id,
             ]);
+
+            $address = fake()->address();
+            // remove any break lines
+            $address = Str::of($address)->replace('\n', ', ')->toString();
+            $company->location_id = $company->locations()->create([
+                'country_id' => 185,
+                'address' => $address,
+                'latitude' => fake()->latitude(24.5, 24.9),
+                'longitude' => fake()->longitude(46.6, 46.97),
+            ])->id;
+
+            $company->is_verified = true;
+            $company->save();
 
             $this->createProducts($company);
         }
