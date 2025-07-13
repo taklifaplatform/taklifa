@@ -33,7 +33,7 @@ trait HasPhoneNumberVerification
     public function sendPhoneNumberVerificationNotification(): void
     {
         // generate pin code
-        $pinCode = env('FAKE_PIN_CODE', false) ? 123456 : rand(100000, 999999);
+        $pinCode = env('FAKE_PIN_CODE', false) ? 1234 : rand(100000, 999999);
         // delete old pin code
         DB::table('password_reset_tokens')
             ->where('phone_number', $this->getPhoneNumberForVerification())
