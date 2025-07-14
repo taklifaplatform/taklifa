@@ -211,18 +211,6 @@ php artisan migrate --force
 
 ## 🔧 Development Commands
 
-### Code Quality
-```bash
-# Fix code style
-./vendor/bin/pint
-
-# Static analysis
-./vendor/bin/phpstan analyse
-
-# Generate IDE helpers
-php artisan ide-helper:generate
-```
-
 ### Database
 ```bash
 # Fresh migration with seeding
