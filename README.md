@@ -130,30 +130,6 @@ php artisan storage:link
 php artisan filament:optimize
 ```
 
-### Development
-```bash
-# Start the development server
-php artisan serve
-
-# Start the queue worker
-php artisan queue:work
-
-# Watch for asset changes
-npm run dev
-```
-
-### Production
-```bash
-# Optimize the application
-php artisan optimize
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-
-# Start the production server (with Octane)
-php artisan octane:start --host=0.0.0.0 --port=8000
-```
-
 ## 📚 API Documentation
 
 The API documentation is automatically generated and available at:
@@ -163,17 +139,6 @@ The API documentation is automatically generated and available at:
 ### Authentication
 
 All API endpoints require authentication using Bearer tokens:
-
-```bash
-# Login to get a token
-curl -X POST http://localhost:8000/api/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "admin@taklifa.com", "password": "#!@taklifa"}'
-
-# Use the token in subsequent requests
-curl -X GET http://localhost:8000/api/user \
-  -H "Authorization: Bearer YOUR_TOKEN"
-```
 
 ## 🎨 Admin Panel Access
 
