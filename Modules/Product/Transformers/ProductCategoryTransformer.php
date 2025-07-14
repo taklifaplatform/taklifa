@@ -4,7 +4,6 @@ namespace Modules\Product\Transformers;
 
 use Modules\Core\Transformers\JsonTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
-use Modules\Company\Transformers\SimpleCompanyTransformer;
 
 class ProductCategoryTransformer extends JsonTransformer
 {
@@ -21,7 +20,6 @@ class ProductCategoryTransformer extends JsonTransformer
             'name' => $this->name,
             'description' => $this->description,
             'order' => $this->order,
-            'company' => SimpleCompanyTransformer::make($this->company),
         ];
     }
 
@@ -33,7 +31,6 @@ class ProductCategoryTransformer extends JsonTransformer
                 Schema::string('name')->required(),
                 Schema::string('description')->nullable(),
                 Schema::integer('order')->default(0),
-                Schema::ref('#/components/schemas/SimpleCompanyTransformer', 'company'),
             );
     }
 }

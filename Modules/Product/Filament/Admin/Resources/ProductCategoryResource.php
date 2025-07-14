@@ -35,12 +35,7 @@ class ProductCategoryResource extends Resource
                             ->relationship('parent', 'name')
                             ->searchable()
                             ->preload(),
-                        Forms\Components\Select::make('company_id')
-                            ->label(__('Company'))
-                            ->relationship('company', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
+
                         Forms\Components\Textarea::make('description')
                             ->label(__('Description'))
                             ->rows(5)

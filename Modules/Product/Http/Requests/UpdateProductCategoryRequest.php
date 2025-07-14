@@ -14,7 +14,6 @@ class UpdateProductCategoryRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'order' => ['nullable', 'integer', 'min:0'],
-            'company_id' => ['required', 'string', 'exists:companies,id'],
         ];
     }
 

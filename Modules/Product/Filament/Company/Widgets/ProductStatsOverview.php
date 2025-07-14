@@ -19,7 +19,7 @@ class ProductStatsOverview extends BaseWidget
         $companyId = auth()->user()->ownedCompany?->id;
         
         return [
-            Stat::make(__('Product Categories'), ProductCategory::query()->where('company_id', $companyId)->count())
+            Stat::make(__('Product Categories'), ProductCategory::query()->count())
                 ->icon('heroicon-s-archive-box')
                 ->color('primary')
                 ->description(__('Total number of product categories')),
