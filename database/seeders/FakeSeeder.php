@@ -7,8 +7,6 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Modules\Company\Entities\Company;
 use Modules\Product\Entities\Product;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Rating\Entities\RatingType;
 
 class FakeSeeder extends Seeder
 {
@@ -28,29 +26,35 @@ class FakeSeeder extends Seeder
 
     public function createCompanies()
     {
-        for ($i = 0; $i < 20; $i++) {
-            $owner = User::inRandomOrder()->first();
+        User::inRandomOrder()->take(50)->each(function ($user) {
+            $this->createComapny($user);
+        });
+    }
 
-            $company = Company::create([
-                'name' => fake()->company(),
-                'owner_id' => $owner->id,
-            ]);
+    public function createComapny(User $owner)
+    {
+        $company = Company::create([
+            'name' => fake()->company(),
+            'owner_id' => $owner->id,
+        ]);
 
-            $address = fake()->address();
-            // remove any break lines
-            $address = Str::of($address)->replace('\n', ', ')->toString();
-            $company->location_id = $company->locations()->create([
-                'country_id' => 185,
-                'address' => $address,
-                'latitude' => fake()->latitude(24.5, 24.9),
-                'longitude' => fake()->longitude(46.6, 46.97),
-            ])->id;
+        $owner->active_company_id = $company->id;
+        $owner->save();
 
-            $company->is_verified = true;
-            $company->save();
+        $address = fake()->address();
+        // remove any break lines
+        $address = Str::of($address)->replace('\n', ', ')->toString();
+        $company->location_id = $company->locations()->create([
+            'country_id' => 185,
+            'address' => $address,
+            'latitude' => fake()->latitude(24.5, 24.9),
+            'longitude' => fake()->longitude(46.6, 46.97),
+        ])->id;
 
-            $this->createProducts($company);
-        }
+        $company->is_verified = true;
+        $company->save();
+
+        $this->createProducts($company);
     }
 
     public function createProducts($company)
