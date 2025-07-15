@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ShieldSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(\Modules\Product\Database\Seeders\ProductCategorySeeder::class);
         if (app()->isLocal()) {
             $this->call(FakeSeeder::class);
         }

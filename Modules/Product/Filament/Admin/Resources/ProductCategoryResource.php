@@ -50,12 +50,10 @@ class ProductCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name')),
-                Tables\Columns\TextColumn::make('order')
-                    ->label(__('Order')),
                 Tables\Columns\TextColumn::make('parent.name')
                     ->label(__('Parent Category')),
-                Tables\Columns\TextColumn::make('company.name')
-                    ->label(__('Company')),
+                Tables\Columns\TextColumn::make('order')
+                    ->label(__('Order')),
             ])
             ->filters([
                 //
