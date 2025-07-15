@@ -36,7 +36,6 @@ class ServicesController extends Controller
                 })
                 ->orderBy($request->sort_by ?? 'created_at', $request->sort_direction ?? 'desc')
                 ->with('category')
-                ->withCount('views')
                 ->paginate($request->per_page ?? 10)
         );
     }
@@ -48,8 +47,6 @@ class ServicesController extends Controller
     #[OpenApi\Response(factory: ServiceTransformer::class)]
     public function retrieveService(Service $Service): ServiceTransformer
     {
-        $Service->loadCount('views');
-
         return new ServiceTransformer($Service);
     }
 }
