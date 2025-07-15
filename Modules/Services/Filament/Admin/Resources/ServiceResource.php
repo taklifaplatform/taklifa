@@ -2,18 +2,18 @@
 
 namespace Modules\Services\Filament\Admin\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Modules\Services\Entities\Service;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Services\Entities\ServiceCategory;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\User\Filament\Admin\Resources\UserResource;
 use Modules\Services\Filament\Admin\Resources\ServiceResource\Pages;
 use Modules\Services\Filament\Admin\Resources\ServiceResource\RelationManagers;
-use Modules\Services\Entities\Service;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Users\Filament\Admin\Resources\UserResource;
-use Modules\Services\Entities\ServiceCategory;
 
 class ServiceResource extends Resource
 {
