@@ -20,13 +20,32 @@ class ProductCategory extends BaseModel
         'order' => 0,
     ];
 
+    protected $casts = [
+        'name' => 'array',
+    ];
+
+    public $translatable = [
+        'name',
+        'parent_id',
+    ];
+
     public function parent()
     {
         return $this->belongsTo(ProductCategory::class, 'parent_id');
     }
 
-    public function children()
+    public function subCategories()
     {
         return $this->hasMany(ProductCategory::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(ProductCategory::class, 'parent_id')->orderBy('order');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
     }
 }

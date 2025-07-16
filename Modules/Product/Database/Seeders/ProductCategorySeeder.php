@@ -13,19 +13,23 @@ class ProductCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $now = now();
-
+        // Clean up existing data if needed (optional - uncomment if you want to start fresh)
+        // ProductCategory::truncate();
+        
+        // Clean up duplicates first
+        $this->cleanupDuplicates();
+        
         $categories = [
             [
                 'name' => [
                     'en' => 'Industrial Machines',
-                    'ar' => 'آلات-صناعية'
+                    'ar' => 'آلات صناعية'
                 ],
                 'categories' => [
                     [
                         'name' => [
                             'en' => 'Plastic Machines',
-                            'ar' => 'آلات-البلاستيك'
+                            'ar' => 'آلات البلاستيك'
                         ],
                         'categories' => [
                             [
@@ -13875,13 +13879,9637 @@ class ProductCategorySeeder extends Seeder
                                 ],
                             ],
                         ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Rings',
+                            'ar' => 'الخواتم'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Wedding rings',
+                                    'ar' => 'خواتم الزفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Engagement rings',
+                                    'ar' => 'خواتم الخطوبة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diamond rings',
+                                    'ar' => 'خواتم الماس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gold rings',
+                                    'ar' => 'خواتم ذهبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silver rings',
+                                    'ar' => 'خواتم فضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gemstone rings',
+                                    'ar' => 'خواتم الأحجار الكريمة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fashion rings',
+                                    'ar' => 'خواتم الموضة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s rings',
+                                    'ar' => 'خواتم رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s rings',
+                                    'ar' => 'خواتم نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Children\'s rings',
+                                    'ar' => 'خواتم أطفال'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Earrings',
+                            'ar' => 'الأقراط'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Diamond earrings',
+                                    'ar' => 'أقراط الماس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gemstone earrings',
+                                    'ar' => 'أقراط الأحجار الكريمة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gold earrings',
+                                    'ar' => 'أقراط ذهبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pearl earrings',
+                                    'ar' => 'أقراط اللؤلؤ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silver earrings',
+                                    'ar' => 'أقراط فضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crystal earrings',
+                                    'ar' => 'أقراط كريستال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stud earrings',
+                                    'ar' => 'أقراط مسمارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hoop earrings',
+                                    'ar' => 'أقراط حلقية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Drop earrings',
+                                    'ar' => 'أقراط متدلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Chandelier earrings',
+                                    'ar' => 'أقراط ثريا'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Bracelets',
+                            'ar' => 'الأساور'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Ankle bracelets',
+                                    'ar' => 'أساور الكاحل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bead bracelets',
+                                    'ar' => 'أساور الخرز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cuff bracelets',
+                                    'ar' => 'أساور الكف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diamond bracelets',
+                                    'ar' => 'أساور الماس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gold bracelets',
+                                    'ar' => 'أساور ذهبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Leather bracelets',
+                                    'ar' => 'أساور جلدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Magnetic bracelets',
+                                    'ar' => 'أساور مغناطيسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Medical bracelets',
+                                    'ar' => 'أساور طبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silicon bracelets',
+                                    'ar' => 'أساور سيليكون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silver bracelets',
+                                    'ar' => 'أساور فضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sport bracelets',
+                                    'ar' => 'أساور رياضية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Watches',
+                            'ar' => 'الساعات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Children\'s watches',
+                                    'ar' => 'ساعات أطفال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Digital watches',
+                                    'ar' => 'ساعات رقمية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Luxury watches',
+                                    'ar' => 'ساعات فاخرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s watches',
+                                    'ar' => 'ساعات رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'MP3 watches',
+                                    'ar' => 'ساعات MP3'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pocket watches',
+                                    'ar' => 'ساعات جيب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sports watches',
+                                    'ar' => 'ساعات رياضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Unisex watches',
+                                    'ar' => 'ساعات الجنسين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Used watches',
+                                    'ar' => 'ساعات مستعملة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Watch sets',
+                                    'ar' => 'أطقم ساعات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s watches',
+                                    'ar' => 'ساعات نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Watch accessories',
+                                    'ar' => 'إكسسوارات الساعات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Watch spare parts',
+                                    'ar' => 'قطع غيار الساعات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Necklaces',
+                            'ar' => 'القلائد'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Bead necklaces',
+                                    'ar' => 'قلادات خرزية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diamond necklaces',
+                                    'ar' => 'قلادات الماس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gemstone necklaces',
+                                    'ar' => 'قلادات أحجار كريمة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gold necklaces',
+                                    'ar' => 'قلادات ذهبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crystal necklaces',
+                                    'ar' => 'قلادات كريستالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silver necklaces',
+                                    'ar' => 'قلادات فضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gemstone and precious necklaces',
+                                    'ar' => 'قلادات أحجار كريمة ونفيسة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pearl necklaces',
+                                    'ar' => 'قلادات لؤلؤ'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Pendants and Hair Ornaments',
+                            'ar' => 'المعلقات وزينة الشعر'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Pendants',
+                                    'ar' => 'معلقات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair ornaments',
+                                    'ar' => 'زينة الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair clips',
+                                    'ar' => 'مشابك الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair bands',
+                                    'ar' => 'أربطة الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair pins',
+                                    'ar' => 'دبابيس الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair crowns',
+                                    'ar' => 'تيجان الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair flowers',
+                                    'ar' => 'زهور الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair chains',
+                                    'ar' => 'سلاسل الشعر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Jewelry Sets',
+                            'ar' => 'طقم مجوهرات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Bridal jewelry sets',
+                                    'ar' => 'طقم مجوهرات عروس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crystal jewelry sets',
+                                    'ar' => 'طقم مجوهرات كريستال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diamond jewelry sets',
+                                    'ar' => 'طقم مجوهرات ألماس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gemstone jewelry sets',
+                                    'ar' => 'طقم مجوهرات أحجار كريمة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gold jewelry sets',
+                                    'ar' => 'طقم مجوهرات ذهب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silver jewelry sets',
+                                    'ar' => 'طقم مجوهرات فضة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pearl jewelry sets',
+                                    'ar' => 'طقم مجوهرات لؤلؤ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Engagement jewelry sets',
+                                    'ar' => 'طقم مجوهرات مقلد للخطوبة'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Accessories - Jewelry',
+                            'ar' => 'إكسسوارات المجوهرات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry boxes and cases',
+                                    'ar' => 'صناديق ومحافظ المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry cleaners',
+                                    'ar' => 'منظفات المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry holders and displays',
+                                    'ar' => 'حاملات وعرض المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry packaging',
+                                    'ar' => 'تغليف المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry cleaner',
+                                    'ar' => 'ملمع المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry scales',
+                                    'ar' => 'موازين المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jewelry tools',
+                                    'ar' => 'أدوات المجوهرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pins and needles',
+                                    'ar' => 'دبابيس وإبر'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Vehicles and their accessories',
+                    'ar' => 'المركبات وملحقاتها'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Buses',
+                            'ar' => 'الحافلات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'City buses',
+                                    'ar' => 'حافلات المدينة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'School buses',
+                                    'ar' => 'حافلات المدارس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Intercity buses',
+                                    'ar' => 'حافلات بين المدن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tourist buses',
+                                    'ar' => 'حافلات سياحية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diesel-powered buses',
+                                    'ar' => 'حافلات تعمل بالديزل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electric buses',
+                                    'ar' => 'حافلات كهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hybrid buses',
+                                    'ar' => 'حافلات هجينة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Buses available for people with disabilities',
+                                    'ar' => 'حافلات متاحة لذوي الإعاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Luxury buses',
+                                    'ar' => 'حافلات فاخرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bus spare parts',
+                                    'ar' => 'قطع غيار الحافلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bus accessories',
+                                    'ar' => 'اكسسوارات الحافلات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Bicycles',
+                            'ar' => 'الدراجات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Racing bicycles',
+                                    'ar' => 'دراجات سباق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sports bicycles',
+                                    'ar' => 'دراجات رياضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mountain bicycles',
+                                    'ar' => 'دراجات جبلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tourism bicycles',
+                                    'ar' => 'دراجات سياحية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commuting bicycles',
+                                    'ar' => 'دراجات تنقل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Recreational bicycles',
+                                    'ar' => 'دراجات ترفيهية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bicycle spare parts',
+                                    'ar' => 'قطع غيار الدراجات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bicycle accessories',
+                                    'ar' => 'اكسسوارات الدراجات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Ships and Boats',
+                            'ar' => 'السفن والقوارب'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Auxiliary ships',
+                                    'ar' => 'السفن المساعدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bulk cargo ships',
+                                    'ar' => 'السفن البضائع السائبة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tourist boats',
+                                    'ar' => 'قوارب سياحية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Freight boats',
+                                    'ar' => 'قوارب شحن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial fishing boats',
+                                    'ar' => 'قوارب الصيد التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Container ships',
+                                    'ar' => 'سفن الحاويات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ferries',
+                                    'ar' => 'العبارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fishing boats',
+                                    'ar' => 'قوارب صيد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Oil tankers',
+                                    'ar' => 'ناقلات النفط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Passenger ships',
+                                    'ar' => 'سفن ركاب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Patrol boats',
+                                    'ar' => 'قوارب الدوريات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Racing boats',
+                                    'ar' => 'قوارب سباق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Recreational boats',
+                                    'ar' => 'قوارب ترفيهية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rescue boats',
+                                    'ar' => 'قوارب الإنقاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Scientific research boats',
+                                    'ar' => 'قوارب البحث العلمي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rowing boats',
+                                    'ar' => 'قوارب تجديف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized ships',
+                                    'ar' => 'السفن المتخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ships and boats spare parts',
+                                    'ar' => 'قطع غيار السفن والقوارب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ships and boats accessories',
+                                    'ar' => 'اكسسوارات السفن والقوارب'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Cars',
+                            'ar' => 'السيارات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Electric cars',
+                                    'ar' => 'سيارات كهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hybrid cars',
+                                    'ar' => 'سيارات هجينة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Petrol cars',
+                                    'ar' => 'سيارات بنزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diesel cars',
+                                    'ar' => 'سيارات ديزل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sedan cars',
+                                    'ar' => 'سيارات سيدان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Coupe cars',
+                                    'ar' => 'سيارات كوبيه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hatchback cars',
+                                    'ar' => 'سيارات هاتشباك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Station wagon cars',
+                                    'ar' => 'سيارات ستيشن واغن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Van cars',
+                                    'ar' => 'سيارات فان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'SUV cars',
+                                    'ar' => 'سيارات دفع رباعي (SUV)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pickup cars',
+                                    'ar' => 'سيارات بيك اب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sports cars',
+                                    'ar' => 'سيارات رياضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Classic cars',
+                                    'ar' => 'سيارات كلاسيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'New cars',
+                                    'ar' => 'سيارات جديدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Used cars',
+                                    'ar' => 'سيارات مستعملة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Luxury cars',
+                                    'ar' => 'سيارات فاخرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Common cars',
+                                    'ar' => 'سيارات شائعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized cars',
+                                    'ar' => 'سيارات متخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial vehicles',
+                                    'ar' => 'مركبات تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Convertible cars',
+                                    'ar' => 'سيارات مكشوفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Food delivery cars',
+                                    'ar' => 'سيارات تقديم الطعام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Car spare parts',
+                                    'ar' => 'قطع غيار السيارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Car accessories',
+                                    'ar' => 'اكسسوارات السيارات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Trucks',
+                            'ar' => 'الشاحنات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Cargo trucks',
+                                    'ar' => 'شاحنة بضائع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Farm trucks',
+                                    'ar' => 'شاحنات فلاحية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tractor trucks',
+                                    'ar' => 'شاحنات جرار'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tank trucks',
+                                    'ar' => 'شاحنات صهريجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crane trucks',
+                                    'ar' => 'شاحنات مزودة برافعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized trucks',
+                                    'ar' => 'شاحنات متخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sewage suction trucks',
+                                    'ar' => 'شاحنات شفط مياه الصرف الصحي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Construction trucks',
+                                    'ar' => 'شاحنات بناء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Transport trucks',
+                                    'ar' => 'شاحنات نقل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Agricultural trucks',
+                                    'ar' => 'شاحنات زراعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Military trucks',
+                                    'ar' => 'شاحنات عسكرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Refrigerated trucks',
+                                    'ar' => 'مبردة شاحنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'High-altitude trucks',
+                                    'ar' => 'شاحنات تشتغل على ارتفاعات عالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Truck spare parts',
+                                    'ar' => 'قطع غيار الشاحنات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Truck accessories',
+                                    'ar' => 'اكسسوارات الشاحنات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Trailers',
+                            'ar' => 'المقطورات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Cargo trailers',
+                                    'ar' => 'مقطورات الشحن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boat trailers',
+                                    'ar' => 'مقطورات القوارب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Multi-purpose trailers',
+                                    'ar' => 'مقطورات متعددة الاستخدامات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Recreational vehicle trailers',
+                                    'ar' => 'مقطورات المركبات الترفيهية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Livestock trailers',
+                                    'ar' => 'مقطورات الماشية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flatbed trailers',
+                                    'ar' => 'مقطورات ذات قاعدة مسطحة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dump trailers',
+                                    'ar' => 'مقطورات ذات قاعدة قابلة للإغراق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Enclosed trailers',
+                                    'ar' => 'مقطورات مغلقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'ATV trailers',
+                                    'ar' => 'مقطورات ATV'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Car trailers',
+                                    'ar' => 'مقطورات السيارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Truck trailers',
+                                    'ar' => 'مقطورات الشاحنات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Trailer spare parts',
+                                    'ar' => 'قطع غيار المقطورات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Trailer accessories',
+                                    'ar' => 'اكسسوارات المقطورات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Scooters',
+                            'ar' => 'سكوتر'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Motorcycle scooters',
+                                    'ar' => 'سكوتر موتوسيكل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foldable scooters',
+                                    'ar' => 'سكوتر قابل للطي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'General use scooters',
+                                    'ar' => 'سكوتر للاستخدام العام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'High-performance scooters',
+                                    'ar' => 'سكوتر عالي الأداء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'City scooters',
+                                    'ar' => 'سكوتر للمدينة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Recreational scooters',
+                                    'ar' => 'سكوتر ترفيهي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Delivery scooters',
+                                    'ar' => 'سكوتر للتوصيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rough terrain scooters',
+                                    'ar' => 'سكوتر للتضاريس الوعرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Disability scooters',
+                                    'ar' => 'سكوتر للمعاقين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Scooter spare parts',
+                                    'ar' => 'قطع غيار السكوتر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Scooter accessories',
+                                    'ar' => 'اكسسوارات السكوتر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Emergency Vehicles',
+                            'ar' => 'مركبات الطوارئ'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Ambulances',
+                                    'ar' => 'سيارات الإسعاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fire trucks',
+                                    'ar' => 'سيارات الإطفاء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rescue vehicles',
+                                    'ar' => 'سيارات الإنقاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tow trucks',
+                                    'ar' => 'سيارات السحب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hazmat vehicles',
+                                    'ar' => 'سيارات المواد الخطرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Four-wheel drive',
+                                    'ar' => 'دفع رباعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Emergency vehicles spare parts',
+                                    'ar' => 'قطع غيار مركبات الطوارئ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Emergency vehicles accessories',
+                                    'ar' => 'اكسسوارات مركبات الطوارئ'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Vehicle Cleaning Supplies',
+                            'ar' => 'مستلزمات تنظيف المركبات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Pressure washers',
+                                    'ar' => 'غسالة الضغط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Car wash soap or shampoo',
+                                    'ar' => 'صابون غسيل السيارات أو الشامبو'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Microfiber cloths or sponges',
+                                    'ar' => 'فقاعات أو إسفنجات الألياف الدقيقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wheel and tire cleaner',
+                                    'ar' => 'منظف العجلات والإطارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polishing clay',
+                                    'ar' => 'طين التلميع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polishing compounds and pads',
+                                    'ar' => 'مركبات التلميع والوسادات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wax or sealant',
+                                    'ar' => 'شمع أو مانع التسرب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Vacuum cleaner',
+                                    'ar' => 'مكنسة كهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fabric cleaner',
+                                    'ar' => 'منظف الأقمشة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Leather cleaner and conditioner',
+                                    'ar' => 'منظف الجلد ومكيفه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glass cleaner',
+                                    'ar' => 'منظف الزجاج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Interior cleaning wipes',
+                                    'ar' => 'مناديل التنظيف الداخلية'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Metals and Mining',
+                    'ar' => 'المعادن والتعدين'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Aluminum',
+                            'ar' => 'الألومنيوم'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum tubing',
+                                    'ar' => 'قضبان الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pure aluminum foil',
+                                    'ar' => 'رقائق الألومنيوم النقية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Intercity buses',
+                                    'ar' => 'حافلات بين المدن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum Pipes',
+                                    'ar' => 'أنابيب الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum powder ',
+                                    'ar' => 'مسحوق الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum extrusions and profiles',
+                                    'ar' => 'مقاطع وبروفيلات ألمنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum sheets',
+                                    'ar' => 'صفائح الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum alloys',
+                                    'ar' => 'الواح الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum wires',
+                                    'ar' => 'أسلاك الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other aluminum',
+                                    'ar' => 'ألومنيوم آخر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Graphite and its products',
+                            'ar' => 'الجرافيت ومنتجاته'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Natural graphite',
+                                    'ar' => 'جرافيت طبيعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Industrial graphite',
+                                    'ar' => 'جرافيت صناعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Expandable graphite',
+                                    'ar' => 'جرافيت قابل للتمدد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphene',
+                                    'ar' => 'جرافين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite powder',
+                                    'ar' => 'مسحوق جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite molds',
+                                    'ar' => 'قوالب جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite crucibles',
+                                    'ar' => 'بوتقات جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite electrodes',
+                                    'ar' => 'أقطاب جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite components',
+                                    'ar' => 'مكونات جرافيتية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite blocks',
+                                    'ar' => 'كتل جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite rings',
+                                    'ar' => 'حلقات جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite rods',
+                                    'ar' => 'قضبان جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite sheets',
+                                    'ar' => 'صفائح جرافيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graphite and other products',
+                                    'ar' => 'جرافيت ومنتجات أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Iron',
+                            'ar' => 'الحديد'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Iron rods',
+                                    'ar' => 'قضبان الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron wire',
+                                    'ar' => 'أسلاك الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron foils',
+                                    'ar' => 'رقائق الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron pipes',
+                                    'ar' => 'أنابيب الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron powder',
+                                    'ar' => 'مسحوق الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron sheets',
+                                    'ar' => 'صفائح الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron plates',
+                                    'ar' => 'ألواح الحديد'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Metal Scrap',
+                            'ar' => 'الخردة المعدنية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum scrap',
+                                    'ar' => 'خردة الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper scrap',
+                                    'ar' => 'خردة النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron scrap',
+                                    'ar' => 'خردة الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lead scrap',
+                                    'ar' => 'خردة الرصاص'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel scrap',
+                                    'ar' => 'خردة فولاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Titanium scrap',
+                                    'ar' => 'خردة التيتانيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other scrap',
+                                    'ar' => 'خردة أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Alloys',
+                            'ar' => 'السبائك'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum alloys',
+                                    'ar' => 'سبائك الألومنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Antimony alloys',
+                                    'ar' => 'سبائك الأنتيمون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bismuth alloys',
+                                    'ar' => 'سبائك البزموت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper alloys',
+                                    'ar' => 'سبائك النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Indium alloys',
+                                    'ar' => 'سبائك الإنديوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lead alloys',
+                                    'ar' => 'سبائك الرصاص'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Magnesium alloys',
+                                    'ar' => 'سبائك المغنيسيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Manganese alloys',
+                                    'ar' => 'سبائك المنجنيز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel alloys',
+                                    'ar' => 'سبائك فولاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Titanium alloys',
+                                    'ar' => 'سبائك التيتانيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Zinc alloys',
+                                    'ar' => 'سبائك الزنك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other alloys',
+                                    'ar' => 'سبائك أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Copper',
+                            'ar' => 'النحاس'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Copper rods',
+                                    'ar' => 'قضبان النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper cathode',
+                                    'ar' => 'كاثود النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper pipes',
+                                    'ar' => 'أنابيب النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper powder',
+                                    'ar' => 'مسحوق النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper sheets',
+                                    'ar' => 'صفائح النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper plates',
+                                    'ar' => 'ألواح النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper wires',
+                                    'ar' => 'أسلاك النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper profiles and sections',
+                                    'ar' => 'مقاطع وبروفيلات نحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other copper',
+                                    'ar' => 'نحاس آخر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Wire Mesh',
+                            'ar' => 'شبكة سلكية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Aluminum wire mesh',
+                                    'ar' => 'شبكة سلك الألمنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copper wire mesh',
+                                    'ar' => 'شبكة سلك النحاس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Iron wire mesh',
+                                    'ar' => 'شبكة سلك الحديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stainless steel wire mesh',
+                                    'ar' => 'شبكة سلك الاستانلس ستيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel wire mesh',
+                                    'ar' => 'شبكة سلك الفولاذ'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Steel',
+                            'ar' => 'فولاذ'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Steel pipes and razors',
+                                    'ar' => 'أنابيب وموانع فولاذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stainless steel',
+                                    'ar' => 'الفولاذ المقاوم للصدأ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel strips and sheets',
+                                    'ar' => 'لفائف وشرائط فولاذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel angles',
+                                    'ar' => 'زوايا فولاذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel channels',
+                                    'ar' => 'قناة فولاذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel profiles and sections',
+                                    'ar' => 'مقاطع وبروفيلات فولاذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel bars and rods',
+                                    'ar' => 'قضبان السكك الحديدية الفولاذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Reinforced steel bars',
+                                    'ar' => 'قضبان فولاذية مسلحة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel rods',
+                                    'ar' => 'قضبان الفولاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel sheets and plates',
+                                    'ar' => 'صفائح وألواح الفولاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel structures',
+                                    'ar' => 'هياكل الفولاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel wires',
+                                    'ar' => 'أسلاك الفولاذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Steel and other products',
+                                    'ar' => 'فولاذ ومنتجات أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        [
+                            'en' => 'Non-metallic minerals',
+                            'ar' => 'معادن-لا-فلزية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Ceramics and pottery materials',
+                                    'ar' => 'السيراميك ومواد الفخار'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glass materials',
+                                    'ar' => 'مواد الزجاج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stone and marble',
+                                    'ar' => 'الحجر والرخام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Clay and kaolin',
+                                    'ar' => 'الطين والكاولين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sand and gravel',
+                                    'ar' => 'الرمل والحصى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Limestone',
+                                    'ar' => 'الحجر الجيري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gypsum',
+                                    'ar' => 'الجبس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Salt',
+                                    'ar' => 'الملح'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sulfur',
+                                    'ar' => 'الكبريت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Phosphates',
+                                    'ar' => 'الفوسفات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Asbestos',
+                                    'ar' => 'الأسبستوس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mica',
+                                    'ar' => 'الميكا'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Talc',
+                                    'ar' => 'التلك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other non-metallic minerals',
+                                    'ar' => 'معادن لا فلزية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        [
+                            'en' => 'Non-ferrous metals and products',
+                            'ar' => 'معادن-ومنتجات-غير-حديدية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Antimony',
+                                    'ar' => 'أنتيمون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bismuth',
+                                    'ar' => 'بزموت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cadmium',
+                                    'ar' => 'كادميوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cobalt',
+                                    'ar' => 'كوبالت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gallium',
+                                    'ar' => 'جاليوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Germanium',
+                                    'ar' => 'جرمانيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Indium',
+                                    'ar' => 'إنديوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lead',
+                                    'ar' => 'رصاص'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Magnesium',
+                                    'ar' => 'مغنيسيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Molybdenum',
+                                    'ar' => 'موليبديوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nickel',
+                                    'ar' => 'نيكل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Niobium',
+                                    'ar' => 'نيوبيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rhenium',
+                                    'ar' => 'رينيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tantalum',
+                                    'ar' => 'تنتاليم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tin',
+                                    'ar' => 'قصدير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Titanium',
+                                    'ar' => 'تيتانيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tungsten',
+                                    'ar' => 'تنغستن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Zinc',
+                                    'ar' => 'زنك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Zirconium',
+                                    'ar' => 'زركونيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other non-ferrous metals and products',
+                                    'ar' => 'معادن ومنتجات غير حديدية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+
+                    [
+                        [
+                            'en' => 'Non-metallic materials',
+                            'ar' => 'مواد-غير-معدنية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Magnetic materials',
+                                    'ar' => 'مواد مغناطيسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Thermal materials',
+                                    'ar' => 'مواد حرارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Anti-corrosion and corrosion-resistant materials',
+                                    'ar' => 'مواد مضادة ومقاومة للتآكل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other non-metallic materials',
+                                    'ar' => 'مواد لا معدنية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        [
+                            'en' => 'Ceramic materials',
+                            'ar' => 'مواد-سيراميك'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Alumina ceramics',
+                                    'ar' => 'سيراميك ألومينا'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carbide ceramics',
+                                    'ar' => 'سيراميك كربيد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glass ceramics',
+                                    'ar' => 'سيراميك زجاجي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Metallic ceramics',
+                                    'ar' => 'سيراميك معدني'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nitride ceramics',
+                                    'ar' => 'سيراميك نتريد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silicate ceramics',
+                                    'ar' => 'سيراميك سيليكات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Zirconia ceramics',
+                                    'ar' => 'سيراميك زركونيا'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other ceramic materials',
+                                    'ar' => 'مواد سيراميكية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                ]
+            ],
+            [
+                [
+                    'en' => 'Clothing and Fashion',
+                    'ar' => 'الملابس والازياء'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Official uniform',
+                            'ar' => 'الزي الرسمي'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Healthcare sector',
+                                    'ar' => 'لقطاع الصحي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Educational sector',
+                                    'ar' => 'القطاع التعليمي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Industrial sector',
+                                    'ar' => 'القطاع الصناعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The military and police sector',
+                                    'ar' => 'القطاع العسكري والشرطة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The hotel and tourism sector',
+                                    'ar' => 'القطاع الفندقي والسياحي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The commercial sector',
+                                    'ar' => 'القطاع التجاري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The transport sector',
+                                    'ar' => 'قطاع النقل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cleaning and Maintenance Sector',
+                                    'ar' => 'قطاع التنظيف والصيانة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Telecommunications sector',
+                                    'ar' => 'قطاع الاتصالات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Security sector',
+                                    'ar' => 'قطاع الأمن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Another uniform',
+                                    'ar' => 'يونيفورم اخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Traditional clothes',
+                            'ar' => 'الملابس-التقليدية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s formal wear',
+                                    'ar' => 'الثوب والبدلة الرجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s traditional clothing',
+                                    'ar' => 'شماغ وعقال رجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s leather belts and straps',
+                                    'ar' => 'الكيك والاحزمة الجلدية الرجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Agricultural and women\'s clothing',
+                                    'ar' => 'الدراعة والافطة النسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s formal wear',
+                                    'ar' => 'الثوب والعباية النسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other traditional clothing',
+                                    'ar' => 'ازياء تقليدية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Children\'s clothes',
+                            'ar' => 'ملابس-الأطفال'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Baby bibs',
+                                    'ar' => 'مريول عنق للأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby towels with head covers',
+                                    'ar' => 'مناشف بغطاء رأس للأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby underwear',
+                                    'ar' => 'ملابس داخلية للأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby sleepwear',
+                                    'ar' => 'ملابس نوم للأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby sleeping bags',
+                                    'ar' => 'أكياس نوم للأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby sets',
+                                    'ar' => 'أطقم الأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby dresses',
+                                    'ar' => 'فساتين الأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby rompers',
+                                    'ar' => 'رومبير الأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby coats and jackets',
+                                    'ar' => 'كوت وجاكت الأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby hats and socks',
+                                    'ar' => 'قبعات وجوارب الأطفال الرضع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other baby clothes',
+                                    'ar' => 'ملابس أخرى للأطفال الرضع'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Boys\' clothes',
+                            'ar' => 'ملابس-الأولاد'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' towels',
+                                    'ar' => 'مناشف أولاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' underwear and socks',
+                                    'ar' => 'ملابس داخلية وجوارب ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' sleepwear',
+                                    'ar' => 'ملابس نوم ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' sets',
+                                    'ar' => 'أطقم ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' jeans',
+                                    'ar' => 'جينز ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' casual wear',
+                                    'ar' => 'ملابس كاجوال ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' coats and jackets',
+                                    'ar' => 'معاطف وجاكيتات ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boys\' sportswear',
+                                    'ar' => 'ملابس رياضية ولادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other boys\' clothes',
+                                    'ar' => 'ملابس أخرى للأولاد'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Girls\' clothes',
+                            'ar' => 'ملابس-البنات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' towels',
+                                    'ar' => 'مناشف بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' underwear and socks',
+                                    'ar' => 'ملابس داخلية وجوارب بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' sleepwear',
+                                    'ar' => 'ملابس نوم بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' sets and dresses',
+                                    'ar' => 'أطقم وفساتين بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' jeans',
+                                    'ar' => 'جينز بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' casual wear',
+                                    'ar' => 'ملابس كاجوال بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' coats and jackets',
+                                    'ar' => 'معاطف وجاكيتات بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Girls\' sportswear',
+                                    'ar' => 'ملابس رياضية بناتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other girls\' clothes',
+                                    'ar' => 'ملابس أخرى بناتي'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Men\'s clothes',
+                            'ar' => 'ملابس-الرجال'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s robes and bathroom towels',
+                                    'ar' => 'أرواب ومناشف حمام رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s underwear and socks',
+                                    'ar' => 'ملابس داخلية وجوارب رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s sleepwear',
+                                    'ar' => 'ملابس نوم رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s jackets and coats',
+                                    'ar' => 'جاكت ومعطف رجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s pants',
+                                    'ar' => 'بنطلون رجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s jeans',
+                                    'ar' => 'جينز رجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s shirts and t-shirts',
+                                    'ar' => 'قميص وتيشرت رجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s suits',
+                                    'ar' => 'بدل رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s sportswear',
+                                    'ar' => 'ملابس رياضية رجالية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other men\'s clothes',
+                                    'ar' => 'ملابس رجالية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Wedding clothes',
+                            'ar' => 'ملابس-الزفاف'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Traditional wedding dresses and veils',
+                                    'ar' => 'فساتين زفاف وطرح تقليدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Modern wedding dresses and veils',
+                                    'ar' => 'فساتين زفاف وطرح حديثة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Seasonal wedding dresses and veils',
+                                    'ar' => 'فساتين زفاف وطرح موسمية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Classic suit',
+                                    'ar' => 'البدلة الكلاسيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tuxedo suit',
+                                    'ar' => 'البدلة السموكينج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baroque suit',
+                                    'ar' => 'بدلة الباروك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other wedding clothes',
+                                    'ar' => 'ازياء زفاف أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Women\'s clothes',
+                            'ar' => 'ملابس-النساء'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s robes and bathroom towels',
+                                    'ar' => 'أرواب ومناشف حمام نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s underwear and socks',
+                                    'ar' => 'ملابس داخلية وجوارب نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s lingerie and sleepwear',
+                                    'ar' => 'لانجيريهات وملابس نوم نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s shorts and skirts',
+                                    'ar' => 'شورتات وتنانير نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s jackets and coats',
+                                    'ar' => 'جاكت ومعطف نسائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s pants',
+                                    'ar' => 'بنطلون نسائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s jeans',
+                                    'ar' => 'جينز نسائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s blouses and t-shirts',
+                                    'ar' => 'بلوزة وتيشرت نسائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s suits',
+                                    'ar' => 'بدل نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s work dresses',
+                                    'ar' => 'فساتين عمل نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s casual dresses',
+                                    'ar' => 'فساتين كاجوال نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s evening dresses',
+                                    'ar' => 'فساتين سهرة نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s shirts and blouses',
+                                    'ar' => 'قمصان وبلوزة نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s sportswear',
+                                    'ar' => 'ملابس رياضية نسائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other women\'s clothes',
+                                    'ar' => 'ملابس نسائية أخرى'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'name' => [
+                    'en' => 'Home and Garden',
+                    'ar' => 'المنزل والحديقة'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Garden tools',
+                            'ar' => 'أدوات الحديقة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Grills and BBQ tools',
+                                    'ar' => 'شوايات وأدوات الشواء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Garden buildings',
+                                    'ar' => 'مباني الحديقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hand garden tools',
+                                    'ar' => 'أدوات الحديقة اليدوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Garden decoration',
+                                    'ar' => 'زينة الحديقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The shadows of the garden',
+                                    'ar' => 'ظلال الحديقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electric garden tools',
+                                    'ar' => 'أدوات الحديقة الكهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insecticides',
+                                    'ar' => 'مبيدات الحشرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Garden irrigation and planting tools',
+                                    'ar' => 'ادوات ري وزراعة الحديقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Garden accessories',
+                                    'ar' => 'أكسسورات الحديقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other garden tools',
+                                    'ar' => 'أدوات الحديقة الاخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Bathroom tools',
+                            'ar' => 'أدوات-الحمام'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Bathroom rugs',
+                                    'ar' => 'سجاد الحمام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bath towels',
+                                    'ar' => 'وسائد الاستحمام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bathroom hats',
+                                    'ar' => 'قبعات الاستحمام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Towel holders and toilet paper',
+                                    'ar' => 'حاملات المناشف وورق التواليت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other bathroom tools',
+                                    'ar' => 'أدوات الحمام الأخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Drinking tools',
+                            'ar' => 'أدوات-الشرب'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Cups',
+                                    'ar' => 'الأكواب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glasses',
+                                    'ar' => 'الكؤوس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pitchers',
+                                    'ar' => 'الأباريق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Thermal pitchers and coolers',
+                                    'ar' => 'الأباريق وثلاجات الحرارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bottles',
+                                    'ar' => 'الزجاجات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mugs',
+                                    'ar' => 'الأقداح (الماج)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized drinking tools',
+                                    'ar' => 'أدوات الشرب المتخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hot beverage sets',
+                                    'ar' => 'أطقم المشروبات الساخنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cold beverage sets',
+                                    'ar' => 'أطقم المشروبات الباردة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Drinking tools accessories',
+                                    'ar' => 'اكسسوارات أدوات الشرب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other drinking tools',
+                                    'ar' => 'أدوات شرب أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Home kitchen tools',
+                            'ar' => 'أدوات-المطبخ-المنزلية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Baking tools set',
+                                    'ar' => 'طقم أدوات الخبز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baking and pastry tools',
+                                    'ar' => 'أدوات الخبز والمعجنات والفطائر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cake and cookie tools',
+                                    'ar' => 'أدوات الكعك الكعك والكوكيز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baking trays and cake molds',
+                                    'ar' => 'صواني الخبز وقوالب الكعك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rolling pins and dough boards',
+                                    'ar' => 'عجلات الفرد و ألواح العجين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cutting board tools',
+                                    'ar' => 'أدوات مناضد التقطيع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Knives and knife sets and accessories',
+                                    'ar' => 'سكاكين وأطقم السكاكين واكسسواراتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ice cream and dessert preparation tools',
+                                    'ar' => 'أدوات تحضير الايسكريم والحلويات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Kitchen timers and lighters',
+                                    'ar' => 'مؤقتات وولاعات المطبخ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cheese and egg tools',
+                                    'ar' => 'أدوات الاجبان والبيض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fruit and vegetable tools',
+                                    'ar' => 'أدوات الفاكهة والخضروات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Meat and poultry tools',
+                                    'ar' => 'أدوات اللحوم والدواجن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Kitchen mixing and measuring tools',
+                                    'ar' => 'أدوات الخلط القياس بالمطبخ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cooking tools and cookware',
+                                    'ar' => 'ادوات وأواني الطهي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pressure cookers and pans',
+                                    'ar' => 'طناجر الضغط والمقالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Thermal cooker',
+                                    'ar' => 'طباخ حراري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other home kitchen tools',
+                                    'ar' => 'أدوات مطبخ منزلية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Home cleaning tools',
+                            'ar' => 'أدوات-تنظيف-منزلية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Hand brooms',
+                                    'ar' => 'مكانس يدوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Buckets and mops',
+                                    'ar' => 'دلاء وممسح'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cleaning brushes and cloths',
+                                    'ar' => 'فرش وفوط تنظيف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sponges and cleaning wire',
+                                    'ar' => 'إسفنج وسلك التنظيف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wipers and dusters',
+                                    'ar' => 'مماسح ومنافض الغبار'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber squeegees',
+                                    'ar' => 'المماسح المطاطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Household bubbles',
+                                    'ar' => 'فقاعات منزلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lint remover',
+                                    'ar' => 'مزيل الوبر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Waste baskets',
+                                    'ar' => 'سلال مهملات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other home cleaning tools',
+                                    'ar' => 'أدوات تنظيف منزلية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Tableware and accessories',
+                            'ar' => 'أواني-المائدة-واكسسوراتها'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Tableware containers',
+                                    'ar' => 'أوعية المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plates',
+                                    'ar' => 'صحون المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tableware and trays',
+                                    'ar' => 'أواني وصواني المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tableware set',
+                                    'ar' => 'طقم أدوات المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table knives',
+                                    'ar' => 'سكاكين المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table spoons',
+                                    'ar' => 'ملاعق المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table forks',
+                                    'ar' => 'شوك المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table serving jugs',
+                                    'ar' => 'إباريق تقديم المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Large bowl (large salad)',
+                                    'ar' => 'وعاء كبير(سلطة كبيرة)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table decoration and tablecloths',
+                                    'ar' => 'ديكور ومفارش المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tableware accessories',
+                                    'ar' => 'اكسسوارات أدوات المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other tableware',
+                                    'ar' => 'أدوات المائدة الأخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Home washing tools',
+                            'ar' => 'ادوات-الغسيل-المنزلية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Laundry clips',
+                                    'ar' => 'مشابك الغسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Laundry drying rack',
+                                    'ar' => 'منشر غسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Laundry baskets',
+                                    'ar' => 'سلال الغسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ironing boards',
+                                    'ar' => 'اللواح الكي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Washing boards',
+                                    'ar' => 'مواج الغسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Washing balls and discs',
+                                    'ar' => 'كرات و أقراص الغسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Laundry soap',
+                                    'ar' => 'صابون الغسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other home washing tools',
+                                    'ar' => 'أدوات غسيل منزلية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Home textiles',
+                            'ar' => 'المنسوجات-المنزلية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Chair covers',
+                                    'ar' => 'غطاء كرسي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Back cushions and pillows',
+                                    'ar' => 'وسادة ظهر ووسادة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bed pillow',
+                                    'ar' => 'وسادة سرير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bed sheets',
+                                    'ar' => 'ملايات السرير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bed cover sets',
+                                    'ar' => 'طقم أغطية سرير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bed covers',
+                                    'ar' => 'غطاء سرير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Blankets',
+                                    'ar' => 'بطانية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tablecloths',
+                                    'ar' => 'مفارش'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mattress and mattress covers',
+                                    'ar' => 'مرتبة وغطاء مرتبة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Comforter and comforter covers',
+                                    'ar' => 'لحاف وغطاء لحاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other bed textiles',
+                                    'ar' => 'منسوجات سرير أخرى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Window curtains',
+                                    'ar' => 'ستارة النافذة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Transparent curtains',
+                                    'ar' => 'ستارة شفافة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Blackout curtains',
+                                    'ar' => 'ستارة تعتيم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electric curtains',
+                                    'ar' => 'ستارة كهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other curtain accessories',
+                                    'ar' => 'ملحقات الستائر الأخرى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Kitchen and dining textiles',
+                                    'ar' => 'منسوجات المطبخ والمائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rugs, mats and carpets',
+                                    'ar' => 'سجاد، بساط وحصيرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table covers',
+                                    'ar' => 'مفرش مائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Towels and handkerchiefs',
+                                    'ar' => 'منشفة ومنديل'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Home storage and organization',
+                            'ar' => 'تخزين-وتنظيم-المنزل'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Storage boxes',
+                                    'ar' => 'صناديق التخزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shelves',
+                                    'ar' => 'الأرفف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Drawers',
+                                    'ar' => 'الأدراج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baskets',
+                                    'ar' => 'السلال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hooks',
+                                    'ar' => 'الخطافات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Vacuum storage bags',
+                                    'ar' => 'أكياس التخزين المفرغة من الهواء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Clothing hangers',
+                                    'ar' => 'شماعات الملابس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shelf units',
+                                    'ar' => 'وحدات الرفوف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Storage cabinets',
+                                    'ar' => 'خزائن التخزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Drawer dividers',
+                                    'ar' => 'مقسّمات الأدراج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shoe organizers',
+                                    'ar' => 'منظمات الأحذية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Spice organizers',
+                                    'ar' => 'منظمات التوابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hanging organizers',
+                                    'ar' => 'منظمات معلقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foldable boxes',
+                                    'ar' => 'صناديق قابلة للطي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other home storage and organization',
+                                    'ar' => 'تخزين وتنظيم منزلي آخر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Home decorations',
+                            'ar' => 'ديكورات-المنزل'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Mirrors and wall mirrors',
+                                    'ar' => 'المرايا ومرايا الحائط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Art and calligraphy',
+                                    'ar' => 'فن الرسم والخطوط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Clocks and their accessories',
+                                    'ar' => 'ساعات واكسسوراتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crystal decorations (crystal beads)',
+                                    'ar' => 'تزيه كريستالية (حبيبات كريستالية)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flowers and decorative flower wreaths',
+                                    'ar' => 'زهور وكليل الزهور الزخرفية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Screens and room dividers',
+                                    'ar' => 'شاشات وفواصل الغرف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Vases',
+                                    'ar' => 'مزهرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Home decor accessories',
+                                    'ar' => 'اكسسوارات ديكور المنزل'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Pet products',
+                            'ar' => 'منتجات-الحيوانات-الأليفة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Pet cages and homes and their accessories',
+                                    'ar' => 'أقفاص ومنازل الحيوانات الأليفة وملحقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fish tanks and their accessories',
+                                    'ar' => 'أحواض سمكية وملحقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet clothing',
+                                    'ar' => 'ملابس الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet bowls and food',
+                                    'ar' => 'أوعية وأطعمات الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet cleaning and grooming tools',
+                                    'ar' => 'أدوات تنظيف وتجميل الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet collars and leashes',
+                                    'ar' => 'طوق وقيود الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet toys',
+                                    'ar' => 'ألعاب الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet training tools',
+                                    'ar' => 'أدوات تدريب الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pet travel tools',
+                                    'ar' => 'أدوات سفر الحيوانات الأليفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other pet products',
+                                    'ar' => 'منتجات حيوانات أليفة أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Household chemicals',
+                            'ar' => 'مواد-كيميائية-منزلية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Multi-purpose cleaner',
+                                    'ar' => 'منظف متعدد الأغراض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glass cleaner for home',
+                                    'ar' => 'منظف زجاج منزلي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bathroom cleaner',
+                                    'ar' => 'منظف الحمام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Kitchen and oven cleaner',
+                                    'ar' => 'منظف المطبخ والأفران'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Floor cleaner',
+                                    'ar' => 'منظف الأرضيات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Furniture and carpet cleaner',
+                                    'ar' => 'منظف الأثاث والسجاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bleach and disinfectant',
+                                    'ar' => 'مبيض ومطهر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Clothes cleaner and freshener',
+                                    'ar' => 'منظف ومعطر الملابس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Air freshener and odor remover',
+                                    'ar' => 'معطر ومزيل الروائح'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'name' => [
+                    'en' => 'Textiles and leather products',
+                    'ar' => 'المنسوجات والمنتجات الجلدية'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Fabrics',
+                            'ar' => 'أقمشة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Non-woven fabric',
+                                    'ar' => 'قماش غير منسوج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Chemical fabric',
+                                    'ar' => 'قماش كميائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carpet fabric',
+                                    'ar' => 'قماش مركب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dye fabric',
+                                    'ar' => 'قماش الدنيم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Embroidery and Handicrafts',
+                                    'ar' => 'تطريز ومشغولات يدوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glossy fabric',
+                                    'ar' => 'قماش لامع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gray fabric',
+                                    'ar' => 'قماش رمادي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Knitted and crocheted fabric',
+                                    'ar' => 'قماش تريكو وكروشيه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nylon fabric',
+                                    'ar' => 'قماش نايلون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silk fabric',
+                                    'ar' => 'قماش حرير'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Printed and colored woven fabrics',
+                            'ar' => 'الأقمشة-المطبوعة-والمُنسوجة-بالألوان'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Printed chiffon fabric',
+                                    'ar' => 'قماش شيفون مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed cotton fabric',
+                                    'ar' => 'قماش قطن مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed linen fabric',
+                                    'ar' => 'قماش كتان مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed polyester fabric',
+                                    'ar' => 'قماش بوليستر مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed rayon fabric',
+                                    'ar' => 'قماش رايون مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed silk fabric',
+                                    'ar' => 'قماش حرير مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed satin fabric',
+                                    'ar' => 'قماش ساتان مطبوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other printed fabrics',
+                                    'ar' => 'أقمشة مطبوعة أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Synthetic fibers',
+                            'ar' => 'الألياف-الصناعية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => '100% Acrylic fabric',
+                                    'ar' => '%قماش أكريليك 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '100% Aramid fabric',
+                                    'ar' => '%قماش أراميد 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '100% Nylon fabric',
+                                    'ar' => '%قماش نايلون 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '100% Polyester fabric',
+                                    'ar' => '%قماش بوليستر 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '100% Polypropylene fabric',
+                                    'ar' => '%قماش بولي بروبيلين 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '100% Spandex fabric',
+                                    'ar' => '%قماش سبانديكس 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Acrylic blend fabric',
+                                    'ar' => 'قماش خليط أكريليك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Aramid blend fabric',
+                                    'ar' => 'قماش خليط أراميد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mercerized fabric',
+                                    'ar' => 'قماش المورسيات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Satin fabric',
+                                    'ar' => 'قماش الساتان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Elastic fabric',
+                                    'ar' => 'قماش الايستك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Denim fabric',
+                                    'ar' => 'قماش دانيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Velvet fabric',
+                                    'ar' => 'قماش مرائب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nylon blend fabric',
+                                    'ar' => 'قماش خليط نايلون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polyester blend fabric',
+                                    'ar' => 'قماش خليط بوليستر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polypropylene 002F fabric close weave',
+                                    'ar' => 'بوليستر 002F قماش قريب صيف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nylon 002F fabric close weave',
+                                    'ar' => 'نايلون 002F قماش قريب صيف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jacquard polyester 002F fabric',
+                                    'ar' => 'جاكوار بوليستر 002F قماش'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Spandex 002F fabric',
+                                    'ar' => 'سبانديكس 002F قماش'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Viscose 002F fabric',
+                                    'ar' => 'فيسكوز 002F قماش'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Denim fabric',
+                                    'ar' => 'قماش أريكة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Spandex blend fabric',
+                                    'ar' => 'قماش خليط سبانديكس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other synthetic fiber fabrics',
+                                    'ar' => 'أقمشة أخرى من الألياف الصناعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other synthetic industrial fabrics',
+                                    'ar' => 'أقمشة الألياف الصناعية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Threads, Ropes, and Nets',
+                            'ar' => 'الخيوط-والحبال-والشباك'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Cotton knitting threads',
+                                    'ar' => 'خيوط حياكة القطن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polyester knitting threads',
+                                    'ar' => 'خيوط حياكة البوليستر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silk knitting threads',
+                                    'ar' => 'خيوط حياكة الحرير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wool knitting threads',
+                                    'ar' => 'خيوط حياكة الصوف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nylon knitting threads',
+                                    'ar' => 'خيوط حياكة نايلون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other knitting threads',
+                                    'ar' => 'خيوط حياكة أخرى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Various nets',
+                                    'ar' => 'شبك متنوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Threads and ropes',
+                                    'ar' => 'خيوط وحبال'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Lace and Trimmings',
+                            'ar' => 'الدانتيل-وحواشي'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Crochet lace',
+                                    'ar' => 'دانتيل كروشيه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Embroidered lace',
+                                    'ar' => 'دانتيل مطرز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Jacquard lace',
+                                    'ar' => 'دانتيل جاكارد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Knitted lace',
+                                    'ar' => 'دانتيل محبوك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other lace trimmings',
+                                    'ar' => 'دانتيل بحواشي أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Raw Cotton and Cotton Fabric',
+                            'ar' => 'القطن-الخام-وقماش-القطن'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => '100% Cotton Fabric',
+                                    'ar' => '%قماش قطن 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '100% Organic Cotton',
+                                    'ar' => '%قطن عضوي 100'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cotton Blend Fabric',
+                                    'ar' => 'قماش خليط قطن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Linen/Cotton Blend Fabric',
+                                    'ar' => 'كتان\u002Fقماش خليط قطن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polyester/Cotton Blend Fabric',
+                                    'ar' => 'بوليستر\u002Fقماش خليط قطن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silk/Cotton Blend Fabric',
+                                    'ar' => 'حرير\u002Fقماش خليط قطن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Spandex/Cotton Blend Fabric',
+                                    'ar' => 'سبانديكس\u002Fقماش خليط قطن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Raw Cotton',
+                                    'ar' => 'قطن خام'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Functional Textiles',
+                            'ar' => 'المنسوجات-الوظيفية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Friction-resistant fabric',
+                                    'ar' => 'قماش مقاوم للاحتكاك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Acid and alkali resistant fabric',
+                                    'ar' => 'قماش مقاوم للأحماض والقلويات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Anti-static fabric',
+                                    'ar' => 'قماش مضاد للكهرباء الساكنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Anti-microbial fabric',
+                                    'ar' => 'قماش مضاد للميكروبات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Breathable fabric',
+                                    'ar' => 'قماش قابل للتنفس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wrinkle-resistant fabric',
+                                    'ar' => 'قماش مقاوم للتجاعيد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fire-resistant fabric',
+                                    'ar' => 'قماش مقاوم للاشتعال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Oil and water resistant fabric',
+                                    'ar' => 'قماش مقاوم للزيت والماء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Quick-dry fabric',
+                                    'ar' => 'قماش سريع الجفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Radiation-resistant fabric',
+                                    'ar' => 'قماش مقاوم للإشعاع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Special textiles',
+                                    'ar' => 'منسوجات خاصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber fabric',
+                                    'ar' => 'قماش مطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tear-resistant fabric',
+                                    'ar' => 'قماش مقاوم للتمزق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Thermal insulation fabric',
+                                    'ar' => 'قماش عازل حراري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'UV protective fabric',
+                                    'ar' => 'قماش واقي من الأشعة فوق البنفسجية'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Fur, Leather, and Feathers',
+                            'ar' => 'فراء-وجلد-وريش'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Natural leather',
+                                    'ar' => 'جلد طبيعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Synthetic leather',
+                                    'ar' => 'جلد صناعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Feathers',
+                                    'ar' => 'ريش'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fur fabric',
+                                    'ar' => 'قماش فراء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wool fabric',
+                                    'ar' => 'قماش الصوف'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Fabric from Bark Fibers',
+                            'ar' => 'قماش-من-الياف-اللحاء'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Jute fabric',
+                                    'ar' => 'قماش الجوت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hemp fabric',
+                                    'ar' => 'قماش القنب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Linen fabric',
+                                    'ar' => 'قماش الكتان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other fabrics from bark fibers',
+                                    'ar' => 'أقمشة أخرى من الياف اللحاء'
+                                ],
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Chemical materials',
+                    'ar' => 'المواد-الكيميائية'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Painting and Coating',
+                            'ar' => 'الدهان والطلاء'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Device painting',
+                                    'ar' => 'طلاء الأجهزة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Boat paint',
+                                    'ar' => 'طلاء القوارب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Car paint',
+                                    'ar' => 'طلاء السيارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electrical insulating varnish',
+                                    'ar' => 'ورنيش العزل الكهربائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Furniture painting',
+                                    'ar' => 'طلاء الأثاث'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Road markings pain',
+                                    'ar' => 'طلاء علامات الطرق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other types of paint',
+                                    'ar' => 'أنواع أخرى من الطلاء'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Foam and Foam Inhibitors',
+                            'ar' => 'الرغوة-ومانعات-الرغوة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Foam',
+                                    'ar' => 'الرغوة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foam inhibitors',
+                                    'ar' => 'مانعات الرغوة'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Dyes and Colors',
+                            'ar' => 'الصبغة-والالوان'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Acid dyes',
+                                    'ar' => 'صبغة حمضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Basic dyes',
+                                    'ar' => 'صبغة قاعدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Direct dyes',
+                                    'ar' => 'صبغة مباشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dispersed dyes',
+                                    'ar' => 'صبغة متفرقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Inorganic dyes',
+                                    'ar' => 'اصباغ غير عضوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Organic dyes',
+                                    'ar' => 'أصباغ عضوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Reactive dyes',
+                                    'ar' => 'صبغة تفاعلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solvent dyes',
+                                    'ar' => 'صبغة مذيبة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sulfur dyes',
+                                    'ar' => 'صبغة الكبريت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tar dyes',
+                                    'ar' => 'صبغة القار'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other dyes and pigments',
+                                    'ar' => 'أصباغ وصبغات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Chemical Reagents and Auxiliaries',
+                            'ar' => 'الكواشف-الكيميائية-والمواد-المساعدة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Activated carbon',
+                                    'ar' => 'الكربون النشط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silent breaking agent',
+                                    'ar' => 'عامل تكسير صامت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Chemical assistant and catalyst',
+                                    'ar' => 'مساعد كيميائي ومحفز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Filler',
+                                    'ar' => 'حشوة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Chemical reagent',
+                                    'ar' => 'كاشف كيميائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Welding fluid and impregnation material',
+                                    'ar' => 'سائل لحام ومادة تشريب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Concrete and mortar additives',
+                                    'ar' => 'إضافات الخرسانة والملاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Feed additives',
+                                    'ar' => 'إضافات الأعلاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Food additives',
+                                    'ar' => 'إضافات غذائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fuel additives',
+                                    'ar' => 'إضافات الوقود'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Petroleum additives',
+                                    'ar' => 'إضافات البترول'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other additives',
+                                    'ar' => 'إضافات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Petrochemicals',
+                            'ar' => 'بتروكيميائيات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Lubricants',
+                                    'ar' => 'مواد التشحيم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wax and Fats',
+                                    'ar' => 'الشمع والدهون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Petrochemicals',
+                                    'ar' => 'بكر البترومكياوبات'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Polymer and Resin',
+                            'ar' => 'بوليمر-وراتنج'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Polymer',
+                                    'ar' => 'بوليمر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Resin',
+                                    'ar' => 'راتنج'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Printing Oils and Inks',
+                            'ar' => 'زيوت-وأحبار-الطباعة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Solvent-based inks',
+                                    'ar' => 'أحبار قائمة على المذيبات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Water-based inks',
+                                    'ar' => 'أحبار قائمة على الماء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'UV-curable inks',
+                                    'ar' => 'أحبار قابلة للعضيق بالأشعة فوق البنفسجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electron beam-curable inks',
+                                    'ar' => 'أحبار قابلة للعضيق بالأشعة الإلكترونية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Thermal transfer inks',
+                                    'ar' => 'أحبار النقل الحراري'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Other Chemicals',
+                            'ar' => 'كيميائيات-اخرى'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Chemical waste',
+                                    'ar' => 'نفايات كيميائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Photographic and sensitive products',
+                                    'ar' => 'منتجات فوتوغرافية وحساسة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Laboratory chemicals',
+                                    'ar' => 'كيميائيات مخبرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Detergents and disinfectants',
+                                    'ar' => 'منظفات ومطهرات'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Agricultural Chemicals',
+                            'ar' => 'كيميائيات-زراعية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Agricultural chemical materials',
+                                    'ar' => 'مواد كيميائية زراعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Chemical materials and resin',
+                                    'ar' => 'مواد كيميائية وراتنج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fertilizers',
+                                    'ar' => 'أسمدة'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Pharmaceutical Chemicals',
+                            'ar' => 'كيميائيات-صيدلانية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Pharmaceutical chemicals',
+                                    'ar' => 'كيميائيات دوائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Live chemicals',
+                                    'ar' => 'كيميائيات حية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pharmaceutical intermediates',
+                                    'ar' => 'مركبات وسيطة دوائية'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Organic Chemicals',
+                            'ar' => 'كيميائيات-عضوية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Alcohols and their derivatives',
+                                    'ar' => 'الكحول ومشتقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Amines',
+                                    'ar' => 'أمينات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Amino acids',
+                                    'ar' => 'الأحماض الأمينية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Benzene and its derivatives',
+                                    'ar' => 'البنزين ومشتقاته'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carbohydrates',
+                                    'ar' => 'الكربوهيدرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carboxylic acids and their derivatives',
+                                    'ar' => 'الأحماض الكربوكسيلية ومشتقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Esters and their derivatives',
+                                    'ar' => 'الإسترات ومشتقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hydrocarbons and their derivatives',
+                                    'ar' => 'الهيدروكربونات ومشتقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hydroxybenzene, ethers, aldehydes and ketones',
+                                    'ar' => 'هيدروكسي بنزين، إيثرات، الألدهيدات وكيتونات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Organic intermediates',
+                                    'ar' => 'مواد وسيطة عضوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Organic salts',
+                                    'ar' => 'أملاح عضوية'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Inorganic Chemicals',
+                            'ar' => 'كيميائيات-غير-عضوية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Acids',
+                                    'ar' => 'أحماض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Alkalis',
+                                    'ar' => 'قلويات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gas',
+                                    'ar' => 'غاز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Oxide',
+                                    'ar' => 'أكسيد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Acetates',
+                                    'ar' => 'أسيتات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carbonates',
+                                    'ar' => 'كربونات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Chloride',
+                                    'ar' => 'كلوريد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fluoride',
+                                    'ar' => 'فلوريد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hypochlorite',
+                                    'ar' => 'هيباكلوريت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nitrates',
+                                    'ar' => 'نترات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Phosphates',
+                                    'ar' => 'فوسفات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silicates',
+                                    'ar' => 'سيليكات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sulfates',
+                                    'ar' => 'كبريتات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sulfide',
+                                    'ar' => 'كبريتيد'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Adhesive Materials and Sealants',
+                            'ar' => 'مواد-لاصقة-ومواد-مانعة-للتسرب'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Adhesive glue',
+                                    'ar' => 'غراء لاصق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Adhesive materials',
+                                    'ar' => 'مواد لاصقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Automotive adhesive materials',
+                                    'ar' => 'مواد لاصقة للسيارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Adhesive materials for coatings',
+                                    'ar' => 'مواد لاصقة للطلاءات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Building adhesive materials',
+                                    'ar' => 'مواد لاصقة للبناء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized adhesive materials',
+                                    'ar' => 'مواد لاصقة مخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flooring adhesive materials',
+                                    'ar' => 'مواد لاصقة للأرضيات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foam adhesive materials',
+                                    'ar' => 'مواد لاصقة للرغوة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Leather adhesive materials',
+                                    'ar' => 'مواد لاصقة للجلود'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Packaging adhesive materials',
+                                    'ar' => 'مواد لاصقة للتعبئة والتغليف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fabric adhesive materials',
+                                    'ar' => 'مواد لاصقة للأقمشة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carpentry adhesive materials',
+                                    'ar' => 'مواد لاصقة للنجارة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Construction and industrial adhesives',
+                                    'ar' => 'لاصقات البناء والصناعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Marine adhesives',
+                                    'ar' => 'لاصقات البحرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electronic adhesives',
+                                    'ar' => 'لاصقات الإلكترونيات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Medical and dental adhesives',
+                                    'ar' => 'لاصقات الطبية والأسنان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silicone sealants',
+                                    'ar' => 'مانعات تسرب سيليكونية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Acrylic sealants',
+                                    'ar' => 'مانعات تسرب أكريليكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Butyl sealants',
+                                    'ar' => 'مانعات تسرب بوتيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polyurethane sealants',
+                                    'ar' => 'مانعات تسرب بولي يوريثان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber sealants',
+                                    'ar' => 'مانعات تسرب مطاطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hot melt sealants',
+                                    'ar' => 'مانعات تسرب ذوبان ساخن'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Flavors and Fragrances',
+                            'ar' => 'نكهات-وعطور'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Natural flavors',
+                                    'ar' => 'نكهات طبيعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Artificial flavors',
+                                    'ar' => 'نكهات اصطناعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Essential oils',
+                                    'ar' => 'زيوت عطرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fragrance concentrates',
+                                    'ar' => 'مركزات عطرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Balsam',
+                                    'ar' => 'البلسم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fine chemicals',
+                                    'ar' => 'الكيميائيات الدقيقة'
+                                ],
+                            ]
+                        ]
+                    ]
+                ]
+
+            ],
+            [
+                [
+                    'en' => 'Gifts and Handicrafts',
+                    'ar' => 'الهدايا والحرف اليدوية'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Frames',
+                            'ar' => 'الإطارات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'The Crystal Frame',
+                                    'ar' => 'الإطار الكريستالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The Glass Frame',
+                                    'ar' => 'الإطار الزجاجي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Metal frame',
+                                    'ar' => 'الإطار المعدني'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The Plastic Frame',
+                                    'ar' => 'الإطار البلاستيكي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'The Wooden Frame',
+                                    'ar' => 'الإطار الخشبي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Road markings pain',
+                                    'ar' => 'طلاء علامات الطرق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other types of paint',
+                                    'ar' => 'أنواع أخرى من الطلاء'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Ropes',
+                            'ar' => 'الحبل'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Nylon rope',
+                                    'ar' => 'حبل نايلون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Polyester rope',
+                                    'ar' => 'حبل بوليستر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'PVC rope',
+                                    'ar' => 'PVC الحبل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Satin rope',
+                                    'ar' => 'حبل الساتان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silicone rope',
+                                    'ar' => 'حبل سيليكون'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Crafts',
+                            'ar' => 'الحرف'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Industrial handicrafts',
+                                    'ar' => 'حرف يدوية صناعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bamboo handicrafts',
+                                    'ar' => 'حرف يدوية من الخيزران'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Clay handicrafts',
+                                    'ar' => 'حرف يدوية من الطين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crystal handicrafts',
+                                    'ar' => 'حرف يدوية من الكريستال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Embroidery crafts',
+                                    'ar' => 'حرف التطريز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Traditional/Folk handicrafts',
+                                    'ar' => 'تراثية\u002Fحرف يدوية شعبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glass handicrafts',
+                                    'ar' => 'حرف يدوية من الزجاج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Leather handicrafts',
+                                    'ar' => 'حرف يدوية من الجلد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Metal handicrafts',
+                                    'ar' => 'حرف يدوية من المعدن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Natural materials handicrafts',
+                                    'ar' => 'حرف يدوية من المواد الطبيعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Marine handicrafts',
+                                    'ar' => 'حرف يدوية بحرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Paper handicrafts',
+                                    'ar' => 'حرف يدوية من الورق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic handicrafts',
+                                    'ar' => 'حرف يدوية من البلاستيك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Religious handicrafts',
+                                    'ar' => 'حرف يدوية دينية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Resin handicrafts',
+                                    'ar' => 'حرف يدوية من الراتنج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Semi-precious stones handicrafts',
+                                    'ar' => 'حرف يدوية من الأحجار شبه الكريمة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stone handicrafts',
+                                    'ar' => 'حرف يدوية من الحجر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Textile and fabric handicrafts',
+                                    'ar' => 'حرف يدوية من النسيج والأقمشة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wicker handicrafts',
+                                    'ar' => 'حرف يدوية من الخوص'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wood handicrafts',
+                                    'ar' => 'حرف يدوية من الخشب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Handicraft gifts',
+                                    'ar' => 'هدايا حرف يدوية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pottery crafts',
+                                    'ar' => 'حرف من الفخار'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Candles',
+                            'ar' => 'الشموع'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => '6 cylindrical candles',
+                                    'ar' => 'شموع 6 اسطوانية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Conical candles',
+                                    'ar' => 'شموع مخروطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Scented candles',
+                                    'ar' => 'شموع معطرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Decorative candles',
+                                    'ar' => 'شموع مزخرفة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Floating candles',
+                                    'ar' => 'شموع عائمة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => '3D candles',
+                                    'ar' => 'شموع ثلاثية الأبعاد'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Incense and Incense Burners',
+                            'ar' => 'بخور-ومباخر'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Incense',
+                                    'ar' => 'بخور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Incense burners',
+                                    'ar' => 'مباخر'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Wedding Decorations and Gifts',
+                            'ar' => 'ديكورات-وهدايا-الزفاف'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Wedding flowers',
+                                    'ar' => 'أزهار الزفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wedding lighting',
+                                    'ar' => 'أضاءات الزفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wedding furnishings',
+                                    'ar' => 'مفروشات الزفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wedding table tools',
+                                    'ar' => 'أدوات مائدة الزفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Venue-specific decorations',
+                                    'ar' => 'زينة خاصة بالمكان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wedding gifts',
+                                    'ar' => 'هدايا الزفاف'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Artificial Flowers',
+                            'ar' => 'زهور-اصطناعية'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Natural flowers',
+                                    'ar' => 'أزهار طبيعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dried flowers',
+                                    'ar' => 'أزهار مجففة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Artificial flowers',
+                                    'ar' => 'أزهار صناعية'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Key chains',
+                            'ar' => 'سلاسل-المفاتيح'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Crystal key chains',
+                                    'ar' => 'سلاسل المفاتيح الكريستال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glass key chains',
+                                    'ar' => 'سلسلة مفاتيح زجاجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Leather key chains',
+                                    'ar' => 'سلسلة مفاتيح جلدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Metal key chains',
+                                    'ar' => 'سلسلة مفاتيح معدنية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic key chains',
+                                    'ar' => 'سلسلة مفاتيح بلاستيكية'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Festival and Party Supplies',
+                            'ar' => 'لوازم-المهرجانات-والحفلات'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Party decorations',
+                                    'ar' => 'زينة الحفلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tableware',
+                                    'ar' => 'أدوات المائدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Party costumes',
+                                    'ar' => 'ازياء الحفلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lighting equipment',
+                                    'ar' => 'أدوات الاضاءة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Party gifts',
+                                    'ar' => 'هدايا الحفلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Occasion-specific decorations',
+                                    'ar' => 'زينة خاصة بالمناسبات'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Christmas Decoration Supplies',
+                            'ar' => 'لوازم-زينة-عيد-الميلاد'
+                        ],
+                        'subcategories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Christmas tree',
+                                    'ar' => 'شجرة عيد الميلاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Christmas lights',
+                                    'ar' => 'اضواء عيد الميلاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Christmas wreaths',
+                                    'ar' => 'اكاليل عيد الميلاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Window decorations',
+                                    'ar' => 'زينة الشباك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Christmas stars',
+                                    'ar' => 'نجوم عيد الميلاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Christmas stockings',
+                                    'ar' => 'جوارب عيد الميلاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Christmas gifts',
+                                    'ar' => 'هدايا عيد الميلاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table decoration tools',
+                                    'ar' => 'ادوات تزيين الطاولة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Outdoor decorations',
+                                    'ar' => 'زينة خارجية'
+                                ],
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Electrical, Electronics, and Communications Supplies',
+                    'ar' => 'لوازم الكهرباء والإلكترونيات والإتصالات'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Cable parts',
+                            'ar' => 'أجزاء الكابلات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Cable clamps',
+                                    'ar' => 'مشابك الكابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable protectors',
+                                    'ar' => 'أنابيب حماية الكابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable end covers',
+                                    'ar' => 'أغطية نهايات الكابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable gland',
+                                    'ar' => 'سدادة الكابل( جلاند كابل)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable marker',
+                                    'ar' => 'علامة كابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable ties',
+                                    'ar' => 'كم كابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable ties',
+                                    'ar' => 'رابطات كابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable supports',
+                                    'ar' => 'حوامل كابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Connection pane"',
+                                    'ar' => 'لوحة التوصيلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Strap holder',
+                                    'ar' => 'حامل رباط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable conduits',
+                                    'ar' => 'قنوات الأسلاك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other cables and cable spare parts',
+                                    'ar' => 'كابلات اخرى وقطع غيار الكابلات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Remote Control Devices',
+                            'ar' => 'أجهزة-التحكم-عن-بعد'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Bluetooth remote control device',
+                                    'ar' => 'جهاز تحكم عن بعد بلوتوث'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Radar remote control device',
+                                    'ar' => 'جهاز تحكم عن بعد بالرادار'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wi-Fi remote control device',
+                                    'ar' => 'جهاز تحكم عن بعد واي فاي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Remote control device accessories',
+                                    'ar' => 'ملحقات أجهزة التحكم عن بعد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other remote control devices',
+                                    'ar' => 'أجهزة تحكم عن بعد أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Semiconductors',
+                            'ar' => 'أشباه-الموصلات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Pure semiconductors',
+                                    'ar' => 'أشباه الموصلات النقية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'N-type semiconductors',
+                                    'ar' => 'N أشباه الموصلات من النوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'P-type semiconductors',
+                                    'ar' => 'P أشباه الموصلات من النوع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other semiconductors',
+                                    'ar' => 'أشباه الموصلات الأخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Optical Fibers, Cables and Wires',
+                            'ar' => 'الألياف البصرية الكابل والسلك'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Copper and aluminum foils',
+                                    'ar' => 'رقائق النحاس والألمنيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wire bundle',
+                                    'ar' => 'حزمة أسلاك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable assembly',
+                                    'ar' => 'تجميعة كابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cable tools',
+                                    'ar' => 'أدوات كابل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Communication cable',
+                                    'ar' => 'كابل الاتصالات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Computer cable',
+                                    'ar' => 'كابل الكمبيوتر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electrical wires and cables',
+                                    'ar' => 'أسلاك وكابلات كهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Beta coated wire',
+                                    'ar' => 'سلك مغلف بالبيتا'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Optical fibers',
+                                    'ar' => 'الألياف الضوئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Photoelectric power cable',
+                                    'ar' => 'كابل الطاقة الكهروضوئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power cable',
+                                    'ar' => 'كابل الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power wire and extension wire',
+                                    'ar' => 'سلك الطاقة وسلك التمديد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other wires and cables',
+                                    'ar' => 'أسلاك وكابلات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Communications',
+                            'ar' => 'الاتصالات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Communication center equipment',
+                                    'ar' => 'معدات مركز الاتصال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Communication unit',
+                                    'ar' => 'وحدة الاتصال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Signal transmission equipment',
+                                    'ar' => 'معدات إرسال الإشارات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Optical fiber equipment',
+                                    'ar' => 'معدات الألياف الضوئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fixed wireless electrical terminals',
+                                    'ar' => 'أطراف كهربائية لاسلكية ثابتة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Front-end equipment',
+                                    'ar' => 'معدات الواجهة الأمامية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Global positioning system',
+                                    'ar' => 'نظام تحديد المواقع العالمي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Network cabinet',
+                                    'ar' => 'خزانة الشبكة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Internal business phone systems (PBX)',
+                                    'ar' => 'أنظمة هواتف الأعمال الداخلية (PBX)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Signal collector',
+                                    'ar' => 'جامع إشارة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Signal repeater',
+                                    'ar' => 'مكرر إشارة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Satellite',
+                                    'ar' => 'قمر صناعي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Communication tower',
+                                    'ar' => 'برج اتصالات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'WiFi products',
+                                    'ar' => 'WiFi منتجات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'VoIP products',
+                                    'ar' => '(VoIP) منتجات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other communication equipment and spare parts',
+                                    'ar' => 'معدات اتصالات وقطع غيار أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Electronic Tubes and Transistors',
+                            'ar' => 'الانابيب الالكترونية وترانزستور'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Laser diode',
+                                    'ar' => 'صمام ليزر ثنائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Light-emitting diode',
+                                    'ar' => 'صمام ثنائي باعث الضوء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rectifier diode',
+                                    'ar' => 'صمام ثنائي المقوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Switching diode',
+                                    'ar' => 'صمام ثنائي للتبديل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Triode',
+                                    'ar' => 'ترايود'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Zener diode',
+                                    'ar' => 'صمام زينر ثنائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other electronic tubes and transistors',
+                                    'ar' => 'أنابيب إلكترونية وترانزستورات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Batteries',
+                            'ar' => 'البطاريات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Battery holder',
+                                    'ar' => 'حامل البطارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Battery management system',
+                                    'ar' => 'نظام إدارة البطارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Battery materials',
+                                    'ar' => 'مواد البطارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Battery set',
+                                    'ar' => 'مجموعة بطاريات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lithium battery',
+                                    'ar' => 'بطارية ليثيوم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power bank',
+                                    'ar' => 'بنك الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other batteries',
+                                    'ar' => 'بطاريات أخرى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Storage battery',
+                                    'ar' => 'بطارية تخزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Storage battery charger',
+                                    'ar' => 'شاحن بطارية تخزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other energy storage batteries and chargers',
+                                    'ar' => 'بطاريات تخزين الطاقة وشواحن أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Sensors',
+                            'ar' => 'الحساسات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Current sensor',
+                                    'ar' => 'حساس التيار الكهربائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Differential pressure sensor',
+                                    'ar' => 'حساس الضغط التفاضلي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Optical fiber sensor',
+                                    'ar' => 'حساس الألياف الضوئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flow sensor',
+                                    'ar' => 'حساس التدفق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gas sensor',
+                                    'ar' => 'حساس الغاز'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Image sensor',
+                                    'ar' => 'حساس الصورة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Light sensor',
+                                    'ar' => 'حساس الضوء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Liquid level sensor',
+                                    'ar' => 'حساس مستوى السائل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Voltage sensor',
+                                    'ar' => 'حساس الجهد الكهربائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pressure sensor',
+                                    'ar' => 'حساس الضغط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Temperature sensor',
+                                    'ar' => 'حساس الحرارة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Torque sensor',
+                                    'ar' => 'حساس العزم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ultrasonic sensor',
+                                    'ar' => 'حساس فوق صوتي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other sensors',
+                                    'ar' => 'حساسات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Switches',
+                            'ar' => 'المفاتيح'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'DIP switch',
+                                    'ar' => 'DIP مفتاح'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flow switch',
+                                    'ar' => 'مفتاح تدفق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Touch switch',
+                                    'ar' => 'مفتاح لمسي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pressure switch',
+                                    'ar' => 'مفتاح ضغط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Remote control switch',
+                                    'ar' => 'مفتاح تحكم عن بعد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Graduated switch',
+                                    'ar' => 'مفتاح متدرج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rotary switch',
+                                    'ar' => 'مفتاح دوار'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sensor switch',
+                                    'ar' => 'مفتاح حساس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sliding switch',
+                                    'ar' => 'مفتاح انزلاقي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Smart switch',
+                                    'ar' => 'مفتاح ذكي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Timer switch',
+                                    'ar' => 'مفتاح زمني'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Toggle switch',
+                                    'ar' => 'مفتاح تبديل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wall switch',
+                                    'ar' => 'مفتاح حائط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other switches',
+                                    'ar' => 'مفاتيح أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Power Supply and Distribution',
+                            'ar' => 'تزويد الطاقة وتوزيعها'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Connection bars (busbar)',
+                                    'ar' => 'قضبان التوصيل (بسبار)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electrical power equipment',
+                                    'ar' => 'تجهيزات الطاقة الكهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electrical connection box',
+                                    'ar' => 'صندوق التوصيل الكهربائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'LED lamp conversion kit',
+                                    'ar' => 'LED مجموعة تحويل مصابيح'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'LED converter and driver',
+                                    'ar' => 'LED محول ومشغل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power converter',
+                                    'ar' => 'محول طاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power distribution cabinet and box',
+                                    'ar' => 'خزانة وصندوق توزيع الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power factor control unit',
+                                    'ar' => 'وحدة تحكم في عامل القدرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Switching equipment',
+                                    'ar' => 'معدات التبديل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Switching power supply unit',
+                                    'ar' => 'وحدة تغذية تبديلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Uninterruptible power supply systems',
+                                    'ar' => 'أنظمة إمداد الطاقة اللانقطعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Voltage regulator',
+                                    'ar' => 'منظم الجهد'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Integrated Circuits',
+                            'ar' => 'دوائر متكاملة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Analog-to-digital converter',
+                                    'ar' => 'محول تناظري إلى رقمي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Data acquisition circuits',
+                                    'ar' => 'دوائر الاستحواذ على البيانات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'General-purpose integrated circuits',
+                                    'ar' => 'الدوائر المتكاملة ذات أغراض عامة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Linear circuits (amplifiers and comparators)',
+                                    'ar' => 'الدوائر الخطية (مضخمات ومقارنات)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Microprocessor chips',
+                                    'ar' => 'شرائح المعالج الدقيقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Multimedia and audio',
+                                    'ar' => 'الوسائط المتعددة والصوت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Network and interface circuits',
+                                    'ar' => 'دوائر الشبكات والواجهات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power management integrated circuits',
+                                    'ar' => 'الدوائر المتكاملة لإدارة الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Standard logic circuits',
+                                    'ar' => 'الدوائر المنطقية القياسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized integrated circuits',
+                                    'ar' => 'الدوائر المتكاملة المتخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other integrated circuits',
+                                    'ar' => 'دوائر متكاملة أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Insulator',
+                            'ar' => 'عازل'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Insulator film',
+                                    'ar' => 'فيلم عازل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insulator paper',
+                                    'ar' => 'ورق عازل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insulator rod',
+                                    'ar' => 'قضيب عازل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insulator sheets',
+                                    'ar' => 'صفائح عازلة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insulator sleeves and tubes',
+                                    'ar' => 'كم وأنبوب عازل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insulator tape',
+                                    'ar' => 'شريط عازل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other insulation materials',
+                                    'ar' => 'مواد عزل أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Circuit Breaker and Electrical Circuit Protector',
+                            'ar' => 'قاطع وحامي الدائرة الكهربائية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Lightning protector',
+                                    'ar' => 'مانع صواعق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Circuit breaker',
+                                    'ar' => 'قاطع دائرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Grounding system',
+                                    'ar' => 'نظام تأريض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fuses',
+                                    'ar' => 'فيوزات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fuse bases and holders',
+                                    'ar' => 'قواعد الفيوزات وحواملها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other circuit breakers and protectors',
+                                    'ar' => 'قواطع وحمايات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Printed Circuit Board',
+                            'ar' => 'لوح دوائر مطبوعة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Single-sided printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة ذات وجه واحد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Double-sided printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة ذات وجهين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Multi-layer printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة متعددة الطبقات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Assembled printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة مجمعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flexible printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة مرنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rigid printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة صلبة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rigid-flexible printed circuit board',
+                                    'ar' => 'لوحة دائرة مطبوعة صلبة ومرنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other circuit boards',
+                                    'ar' => 'لوحات دوائر أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Electric Motor',
+                            'ar' => 'محرك كهربائي'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'AC Motor',
+                                    'ar' => 'محرك تيار متردد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Induction Motor',
+                                    'ar' => 'محرك حثي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'DC Motor',
+                                    'ar' => 'محرك تيار مستمر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Small Motor',
+                                    'ar' => 'محرك صغير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stepper Motor',
+                                    'ar' => 'محرك خطوي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Synchronous Motor',
+                                    'ar' => 'محرك متزامن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electric Motor Spare Parts',
+                                    'ar' => 'قطع غيار المحرك الكهربائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Motors',
+                                    'ar' => 'محركات أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Other Electrical Equipment',
+                            'ar' => 'معدات كهربائية اخرى'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Electrical Control Systems',
+                                    'ar' => 'أنظمة التحكم الكهربائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized Electrical Equipment',
+                                    'ar' => 'المعدات الكهربائية المتخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Variable Frequency Motor',
+                                    'ar' => 'محرك التردد المتغير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Signal Transmitter',
+                                    'ar' => 'مرسل الإشارة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Inverter',
+                                    'ar' => 'مقوم عكسي'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Sockets and Outlets',
+                            'ar' => 'مقابس ومخارج'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Audio and video sockets',
+                                    'ar' => 'مقابس صوت وصورة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Floor sockets',
+                                    'ar' => 'مقابس أرضية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Television sockets',
+                                    'ar' => 'مقابس تلفزيونية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Phone sockets',
+                                    'ar' => 'مقابس هاتف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'USB port',
+                                    'ar' => 'USB منفذ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wall sockets',
+                                    'ar' => 'مقابس حائط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other sockets, ports and accessories',
+                                    'ar' => 'مقابس ومنافذ وملحقاتها أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Speaker, Horn, and Buzzer',
+                            'ar' => 'مكبر صوت وبوق وطنان'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Speaker',
+                                    'ar' => 'مكبر صوت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Buzzer',
+                                    'ar' => 'طنان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Horn',
+                                    'ar' => 'بوق'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Other Electronic Components',
+                            'ar' => 'مكونات الكترونية اخرى'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Electrical Electrodes',
+                                    'ar' => 'الأقطاب الكهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electrical Connection and Materials',
+                                    'ar' => 'التوصيل الكهربائي والمواد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Silicon Semiconductors',
+                                    'ar' => 'السيليكون أشباه الموصلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Relays and Connectors',
+                                    'ar' => 'المرحلات والموصلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rectifiers and Converters',
+                                    'ar' => 'المعدل ومقومات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Oscillator',
+                                    'ar' => 'مذبذب'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Passive Components',
+                            'ar' => 'مكونات سلبية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Capacitors',
+                                    'ar' => 'المكثفات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Inductors',
+                                    'ar' => 'المحثات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Resistors and Voltage Meters',
+                                    'ar' => 'المقاومات ومقياس الجهد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Balance',
+                                    'ar' => 'الميزان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Signal Filter',
+                                    'ar' => 'مرشح الإشارة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Passive Components',
+                                    'ar' => 'مكونات سلبية أخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Electrical Connectors and Terminals',
+                            'ar' => 'موصلات-واطراف-كهربائية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Crocodile clip',
+                                    'ar' => 'مشبك تسماح'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Audio and video connectors',
+                                    'ar' => 'موصلات صوت وفيديو'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Board-to-board connector',
+                                    'ar' => 'موصل لوحة إلى لوحة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Circular connector',
+                                    'ar' => 'موصل دائري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Multi-axis connector',
+                                    'ar' => 'موصل متعدد المحور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fiber optic connector',
+                                    'ar' => 'موصل ألياف ضوئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printed circuit board connector',
+                                    'ar' => 'موصل لوحة دائرة مطبوعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rectangular connector',
+                                    'ar' => 'موصل مستطيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Terminal blocks',
+                                    'ar' => 'كتل طرفية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Terminals',
+                                    'ar' => 'أطراف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wire-to-board connector',
+                                    'ar' => 'موصل سلك إلى لوحة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wire-to-wire connector',
+                                    'ar' => 'موصل سلك إلى سلك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other connectors',
+                                    'ar' => 'الموصلات الأخرى'
+                                ],
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Power Transmission and Transformers',
+                            'ar' => 'نقل-الطاقة-والمحولات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Electrical towers',
+                                    'ar' => 'أبراج كهربائية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Measuring transformer',
+                                    'ar' => 'محول قياس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Transformer',
+                                    'ar' => 'محول'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Insulators',
+                                    'ar' => 'العوازل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Isolation switch',
+                                    'ar' => 'مفتاح عزل'
+                                ],
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Office and School Supplies',
+                    'ar' => 'لوازم مكتبية ومدرسية'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Writing tools',
+                            'ar' => 'أدوات الكتابة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Promotional pen',
+                                    'ar' => 'قلم ترويجي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ballpoint pen',
+                                    'ar' => 'قلم حبر جاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Fountain pen',
+                                    'ar' => 'قلم تلوين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ink pen',
+                                    'ar' => 'قلم حبر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Quill pen',
+                                    'ar' => 'قلم جل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Light pen',
+                                    'ar' => 'قلم ضوئي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Highlighter pen and markers',
+                                    'ar' => 'قلم تمييز وعلامات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Paintbrush',
+                                    'ar' => 'فرشاة رسم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pen packaging"',
+                                    'ar' => 'عبوة قلم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pencil',
+                                    'ar' => 'قلم رصاص'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rollerball pen',
+                                    'ar' => 'قلم حبر رولر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Striped items',
+                                    'ar' => 'مقلميات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other pens',
+                                    'ar' => 'أقلام أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Drawing tools and supplies',
+                            'ar' => 'أدوات ولوازم الرسم'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Drawing tools',
+                                    'ar' => 'أدوات الرسم الهندسي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Art drawing materials',
+                                    'ar' => 'مواد الرسم الفني'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Engineering drawing materials',
+                                    'ar' => 'مواد الرسم الهندسي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other art and engineering supplies',
+                                    'ar' => 'لوازم رسم فني وهندسي اخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Stationery',
+                            'ar' => 'القرطاسية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'File organization products and their supplies',
+                                    'ar' => 'منتجات تنظيم الملفات ولوازمها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Report cover products and their supplies',
+                                    'ar' => 'منتجات أغطية التقارير ولوازمها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Calendar and compass',
+                                    'ar' => 'تقويم وبوصلة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Clips and erasers',
+                                    'ar' => 'مشاريك وبراسة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Paper and pen holders',
+                                    'ar' => 'حمل أوراق وأقلام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dividers and indexing supplies',
+                                    'ar' => 'فواصل ومستلزمات الفهرسة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Transaction basket and its supplies',
+                                    'ar' => 'سلة معاملات ولوازمها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Paper punch',
+                                    'ar' => 'خرامة أوراق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Eraser and ruler',
+                                    'ar' => 'محاة وميزة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Glue and adhesive tapes',
+                                    'ar' => 'غراء وأشرطة لاصقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Knife, scissors and ruler',
+                                    'ar' => 'سكين، مقص ومسطرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stationery set',
+                                    'ar' => 'طقم قرطاسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other stationery',
+                                    'ar' => 'قرطاسية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Office Equipment and Devices',
+                            'ar' => 'المعدات والأجهزة المكتبية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Multi-function device (copy, print, fax)',
+                                    'ar' => 'جهاز متعدد الوظائف (نسخ، طباعة، فاكس)'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Binding machine and its supplies',
+                                    'ar' => 'آلة التجليد ومستلزماتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Computing machines and their supplies',
+                                    'ar' => 'الآلات الحاسبية ومستلزماتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cash safes',
+                                    'ar' => 'خزائن النقود'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Scanners',
+                                    'ar' => 'ماسحات ضوئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office gifts and decorations',
+                                    'ar' => 'هدايا وزينة مكتبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Copy machine and its supplies',
+                                    'ar' => 'آلة نسخ ومستلزماتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Handheld computer, pocket computer, and personal digital assistant',
+                                    'ar' => 'كمبيوتر كفي، كمبيوتر جيبي، ومساعد رقمي شخصي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Attendance and departure system',
+                                    'ar' => 'نظام الحضور والانصراف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Folding machines',
+                                    'ar' => 'آلات الطي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office electronics',
+                                    'ar' => 'إلكترونيات مكتبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office packaging and its accessories',
+                                    'ar' => 'تغليف مكتبي وملحقاته'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Stamps and their accessories',
+                                    'ar' => 'لأختام و ملحقاتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Paper shredding machine and its supplies',
+                                    'ar' => 'آلة تمزيق الورق ومستلزماتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Paper cutting machine and its supplies',
+                                    'ar' => 'آلة قطع الورق ومستلزماتها'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other office equipment and devices',
+                                    'ar' => 'أجهزة ومعدات مكتبية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Office Printer and its Supplies',
+                            'ar' => 'طابعة المكتب ومستلزماتها'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => '3D printing material',
+                                    'ar' => 'مادة طباعة ثلاثية الأبعاد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Continuous ink supply system',
+                                    'ar' => 'نظام التزويد المستمر بالحبر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office 3D printer',
+                                    'ar' => 'طابعة ثلاثية الأبعاد مكتبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dot matrix printer',
+                                    'ar' => 'طابعة مصفوفة نقطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ink cartridge and cylinder',
+                                    'ar' => 'خرطوشة وأسطوانة حبر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Image unit collector',
+                                    'ar' => 'مُجمِّع وحدة الصور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Photo film cover',
+                                    'ar' => 'غلاف فيلم الصور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Image cylinder',
+                                    'ar' => 'أسطوانة الصور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ink cartridge',
+                                    'ar' => 'خرطوشة حبر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Inkjet printer',
+                                    'ar' => 'طابعة حبر نافث'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Pickup roller',
+                                    'ar' => 'أسطوانة الالتقاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Power board',
+                                    'ar' => 'لوحة الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Print head',
+                                    'ar' => 'رأس الطباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Print knife',
+                                    'ar' => 'سكين الطباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Print chip',
+                                    'ar' => 'شريحة الطباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printer ink',
+                                    'ar' => 'حبر الطباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printer smell',
+                                    'ar' => 'رائحة الطباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Print ribbon',
+                                    'ar' => 'شريط طباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Thermal printer',
+                                    'ar' => 'طابعة حرارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ink powder',
+                                    'ar' => 'بودرة الحبر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Transfer roller',
+                                    'ar' => 'أسطوانة النقل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other office printers',
+                                    'ar' => 'طابعات مكتبية أخرى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office printer spare parts',
+                                    'ar' => 'قطع غيار الطابعات المكتبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office printer accessories',
+                                    'ar' => 'ملحقات الطابعات المكتبية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Teaching Equipment',
+                            'ar' => 'معدات التدريس'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Display and Teaching Tools',
+                                    'ar' => 'أدوات العرض والتدريس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Display Board and School Publications',
+                                    'ar' => 'لوحة عرض ونشرات مدرسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'School Display Equipment and Devices',
+                                    'ar' => 'معدات وأجهزة عرض مدرسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Color Cards and Color Comparator',
+                                    'ar' => 'بطاقة ألوان ومقارن ألوان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'School Laboratory Tools',
+                                    'ar' => 'أدوات معملية مدرسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lenses and Optical Tools',
+                                    'ar' => 'عدسات وأدوات بصرية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Timer and Counter',
+                                    'ar' => 'مؤقت وعداد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'School Audio Equipment',
+                                    'ar' => 'معدات الصوت المدرسية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Printed Materials',
+                            'ar' => 'مواد مطبوعة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Greeting Cards',
+                                    'ar' => 'بطاقات تهنئة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dictionaries, Encyclopedias and Maps',
+                                    'ar' => 'قواميس وموسوعات وخرائط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Catalogs',
+                                    'ar' => 'كتالوجات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Books and Booklets',
+                                    'ar' => 'كتب وكتيبات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cultural and Literary Books',
+                                    'ar' => 'كتب ثقافية وأدبية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Scientific Books',
+                                    'ar' => 'كتب علمية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'School and University Books',
+                                    'ar' => 'كتب مدرسية وجامعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Children\'s Books',
+                                    'ar' => 'كتب للأطفال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Magazines and Newspapers',
+                                    'ar' => 'مجلات وصحف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized Advertising Magazine',
+                                    'ar' => 'مجلة إعلانية متخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Prints',
+                                    'ar' => 'مطبوعات تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Brochures',
+                                    'ar' => 'بروشورات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Printed Materials',
+                                    'ar' => 'مطبوعات أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Conference System',
+                            'ar' => 'نظام المؤتمرات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Audio Conference System',
+                                    'ar' => 'نظام المؤتمرات الصوتية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Conference Accessories',
+                                    'ar' => 'ملحقات المؤتمرات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Video Conference System',
+                                    'ar' => 'نظام المؤتمرات المرئية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wireless Conference System',
+                                    'ar' => 'نظام المؤتمرات اللاسلكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Conference Systems',
+                                    'ar' => 'أنظمة المؤتمرات الأخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Paper and Paper Products',
+                            'ar' => 'ورق ومنتجات ورقية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Photo Paper',
+                                    'ar' => 'ورق تصوير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Printing Paper',
+                                    'ar' => 'ورق طباعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Writing Paper',
+                                    'ar' => 'ورق كتابة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Colored Paper',
+                                    'ar' => 'ورق ملون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Notebooks and Notepads',
+                                    'ar' => 'دفاتر ملاحظات ومكراسات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sticky Note Papers',
+                                    'ar' => 'أوراق ملاحظات لاصقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Adhesive Paper',
+                                    'ar' => 'ورق لاصق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Draft Papers',
+                                    'ar' => 'أوراق مسودة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Image Paper',
+                                    'ar' => 'ورق الصور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Art Paper',
+                                    'ar' => 'ورق فني'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Transparent Paper',
+                                    'ar' => 'ورق شفاف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Drawing Cardboard',
+                                    'ar' => 'ورق مقوى للرسم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Office Paper',
+                                    'ar' => 'ورق مكتبي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Envelopes',
+                                    'ar' => 'أظرف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized Paper Products',
+                                    'ar' => 'منتجات الأوراق المتخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Paper Products',
+                                    'ar' => 'منتجات أوراق أخرى'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Cosmetics and personal care products',
+                    'ar' => 'مستحضرات التجميل والعناية الشخصية'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Tools and devices for foot, hand, and nail care',
+                            'ar' => 'ادوات واجهزة العناية باقدم واليد والاظافر'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Hand care devices and tools',
+                                    'ar' => 'أجهزة وادوات العناية باليدين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foot care devices and tools',
+                                    'ar' => 'أجهزة وادوات العناية باالقدم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nail care tools and devices',
+                                    'ar' => 'أجهزة وادوات العناية بالاظافر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Perfumes and Deodorants',
+                            'ar' => 'العطور ومزيل العرق'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Deodorant',
+                                    'ar' => 'مزيل العرق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cologne',
+                                    'ar' => 'كولونيا'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Perfumes',
+                                    'ar' => 'عطور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Men\'s Perfumes',
+                                    'ar' => 'عطور رجالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Women\'s Perfumes',
+                                    'ar' => 'عطور نسائي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Children\'s Perfumes',
+                                    'ar' => 'عطور أطفال'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Bathing Supplies',
+                            'ar' => 'مستلزمات الاستحمام'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Bathing Sets',
+                                    'ar' => 'أطقم الاستحمام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shampoo and Conditioner Sets',
+                                    'ar' => 'أطقم الشامبو والبلسم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shower Gel',
+                                    'ar' => 'جل الاستحمام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair Shampoo',
+                                    'ar' => 'شامبو الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Body Soap',
+                                    'ar' => 'صابون الجسم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bathing Tools',
+                                    'ar' => 'أدوات الاستحمام'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Beauty Equipment',
+                            'ar' => 'معدات التجميل'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Hair Care Devices and Tools',
+                                    'ar' => 'أجهزة وأدوات العناية بالشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Skin Care Devices and Tools',
+                                    'ar' => 'أجهزة وأدوات العناية بالبشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Beauty Devices and Tools',
+                                    'ar' => 'أجهزة وأدوات تجميل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Massage Devices and Tools',
+                                    'ar' => 'أجهزة وأدوات تدليك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Makeup Devices and Tools',
+                                    'ar' => 'أجهزة وأدوات مكياج'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Body Tattoo Equipment',
+                            'ar' => 'معدات وشم الجسم'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Tattoo Machines',
+                                    'ar' => 'الآلات الوشم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tattoo Tools',
+                                    'ar' => 'أدوات الوشم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tattoo Inks',
+                                    'ar' => 'أحبار الوشم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tattoo Removal Machines',
+                                    'ar' => 'الآلات إزالة الوشم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Temporary Tattoo Products',
+                                    'ar' => 'منتجات الوشم المؤقت'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Weight Loss Products',
+                            'ar' => 'منتجات إنقاص الوزن'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Slimming Cream',
+                                    'ar' => 'كريم التخسيس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Slimming Device',
+                                    'ar' => 'جهاز التخسيس'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Weight Loss Drinks',
+                                    'ar' => 'مشروبات إنقاص الوزن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Weight Loss Pills',
+                                    'ar' => 'حبوب إنقاص الوزن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Weight Loss Programs',
+                                    'ar' => 'برامج إنقاص الوزن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Weight Loss Powders',
+                                    'ar' => 'مساحيق إنقاص الوزن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Weight Loss Supplements',
+                                    'ar' => 'مكملات إنقاص الوزن'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Shaving and Hair Removal Products',
+                            'ar' => 'منتجات الحلاقة وإزالة الشعر'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Shaving Machines',
+                                    'ar' => 'ماكينات حلاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shaving Blades',
+                                    'ar' => 'شفرات حلاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shaving Brushes',
+                                    'ar' => 'فرش حلاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shaving Products',
+                                    'ar' => 'منتجات الحلاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wax Hair Removal',
+                                    'ar' => 'إزالة الشعر بالشمع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electric Hair Removal',
+                                    'ar' => 'إزالة الشعر بالكهرباء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair Removal Products',
+                                    'ar' => 'منتجات إزالة الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nose and Ear Trimmers',
+                                    'ar' => 'جزازات الأنف والأذن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Beard Oil',
+                                    'ar' => 'زيوت اللحية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Beard Activator',
+                                    'ar' => 'منشط اللحية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Skin Care Products',
+                            'ar' => 'منتجات العناية بالبشرة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Skin Cleansing Products',
+                                    'ar' => 'منتجات تنظيف البشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Skin Moisturizing Products',
+                                    'ar' => 'منتجات ترطيب البشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Skin Protection Products',
+                                    'ar' => 'منتجات حماية البشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Skin Exfoliating Products',
+                                    'ar' => 'منتجات تقشير البشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Natural Skin Products',
+                                    'ar' => 'منتجات طبيعية للبشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Eye Care Products',
+                                    'ar' => 'منتجات العناية بالعيون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lip Care Products',
+                                    'ar' => 'منتجات العناية بالشفاه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Skin Care Tools',
+                                    'ar' => 'أدوات العناية بالبشرة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Face and Body Masks',
+                                    'ar' => 'قناع الوجه والجسم'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Breast Care and Feminine Hygiene Products',
+                            'ar' => 'منتجات العناية بالثدي والنظافة النسائية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Breast Care Products',
+                                    'ar' => 'منتجات العناية بالثدي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Feminine Hygiene Products',
+                                    'ar' => 'منتجات النظافة النسائية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Baby Care Products',
+                            'ar' => 'منتجات العناية بالطفل'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Baby Bathing Supplies',
+                                    'ar' => 'مستلزمات استحمام الطفل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby Hair Care',
+                                    'ar' => 'العناية بشعر الطفل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby Oral Hygiene',
+                                    'ar' => 'نظافة الفم للطفل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby Skin Care',
+                                    'ar' => 'العناية بالبشرة للطفل'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Hand, Foot, and Nail Care Products',
+                            'ar' => 'منتجات العناية بالقدم واليد الاظافر'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Hand Care Products',
+                                    'ar' => 'منتجات العناية باليدين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foot Care Products',
+                                    'ar' => 'منتجات العناية بالقدم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Nail Care Products',
+                                    'ar' => 'منتجات العناية بالاظافر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Makeup Products',
+                            'ar' => 'منتجات المكياج'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Makeup Basics',
+                                    'ar' => 'أساسيات المكياج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Eye Makeup',
+                                    'ar' => 'مكياج العيون'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lip Makeup',
+                                    'ar' => 'مكياج الشفاه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Makeup Colors',
+                                    'ar' => 'ألوان المكياج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Makeup Sets',
+                                    'ar' => 'أطقم المكياج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Makeup Remover',
+                                    'ar' => 'مزيل المكياج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Makeup Primer',
+                                    'ar' => 'برايمر مكياج'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Toilet Paper Products',
+                            'ar' => 'منتجات الورق الصحي'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Wet Wipes',
+                                    'ar' => 'مناديل مبللة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Face Tissues',
+                                    'ar' => 'مناديل وجه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sanitary Pads',
+                                    'ar' => 'فوط صحية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Baby Diapers',
+                                    'ar' => 'حفاضات أطفال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Adult Diapers',
+                                    'ar' => 'حفاضات للبالغين'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Hair Dye Products',
+                            'ar' => 'منتجات صبغ الشعر'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Hair Dye Products',
+                                    'ar' => 'منتجات صبغ الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hair Straightening and Curling Products',
+                                    'ar' => 'منتجات فرد وتجعيد الشعر'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Hair Products',
+                                    'ar' => 'منتجات الشعر الأخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Oral Hygiene Products',
+                            'ar' => 'منتجات نظافة الفم'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Dental Floss',
+                                    'ar' => 'خيط تنظيف الأسنان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Interdental Brush',
+                                    'ar' => 'فرشاة بين الأسنان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mouthwash',
+                                    'ar' => 'غسول الفم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Teeth Whitening',
+                                    'ar' => 'تبييض الأسنان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Toothbrush',
+                                    'ar' => 'فرشاة الأسنان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Toothpaste',
+                                    'ar' => 'معجون الأسنان'
+                                ],
+                            ],
+                        ]
+                    ],
+                ]
+            ],
+            [
+                [
+                    'en' => 'Sources and Products of Energy',
+                    'ar' => 'مصادر ومنتجات الطاقة'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Generators',
+                            'ar' => 'المولدات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Alternative energy generators',
+                                    'ar' => 'مولدات طاقة بديلة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Diesel Generators',
+                                    'ar' => 'مولدات ديزل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gas Turbine Generators',
+                                    'ar' => 'مولدات توربينات غازية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Petrol generators',
+                                    'ar' => 'مولدات بنزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Industrial Generators',
+                                    'ar' => 'مولدات صناعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Portable Generators',
+                                    'ar' => 'مولدات محمولة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Water Generators',
+                                    'ar' => 'مولدات ماء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Wind Generators',
+                                    'ar' => 'مولدات رياح'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Fossil Fuel',
+                            'ar' => 'الوقود الأحفوري'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Coal',
+                                    'ar' => 'الفحم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Crude Oil',
+                                    'ar' => 'النفط الخام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Natural Gas',
+                                    'ar' => 'غاز طبيعي'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Solar Energy Applications',
+                            'ar' => 'تطبيقات الطاقة الشمسية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Solar Water Heaters',
+                                    'ar' => 'سخانات المياه الشمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Lighting',
+                                    'ar' => 'الإضاءة الشمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Chargers',
+                                    'ar' => 'الشواحن الشمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Pumps',
+                                    'ar' => 'المضخات الشمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Air Conditioning',
+                                    'ar' => 'التكييف الشمسي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Agriculture',
+                                    'ar' => 'الزراعة الشمسية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Generator Spare Parts and Accessories',
+                            'ar' => 'قطع غيار المولدات وملحقاتها'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Generator Spare Parts',
+                                    'ar' => 'قطع غيار مولدات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Generator Accessories',
+                                    'ar' => 'ملحقات المولدات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Fossil Fuel Derivatives',
+                            'ar' => 'مشتقات الوقود الاحفوري'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Diesel',
+                                    'ar' => 'الديزل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Gasoline',
+                                    'ar' => 'بنزين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Liquefied Natural Gas',
+                                    'ar' => 'غاز طبيعي مسال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Kerosene',
+                                    'ar' => 'كيروسين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Liquefied Petroleum Gas',
+                                    'ar' => 'غاز البترول المسال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Asphalt',
+                                    'ar' => 'الاسفلت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Coal Coke',
+                                    'ar' => 'فحم الكوك'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Bitumen',
+                                    'ar' => 'بيتومين'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Base and Mineral Oils',
+                                    'ar' => 'زيوت الاساس والمعدنية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Solar Energy Products',
+                            'ar' => 'منتجات طاقة شمسية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Solar Cells',
+                                    'ar' => 'خلايا شمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Energy Tracking',
+                                    'ar' => 'تعقب الطاقة الشمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Collectors',
+                                    'ar' => 'جامعات شمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Control Units',
+                                    'ar' => 'وحدات تحكم شمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Energy Systems',
+                                    'ar' => 'أنظمة الطاقة الشمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Panel Cleaning Equipment',
+                                    'ar' => 'آلة تنظيف الألواح'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Solar Panels',
+                                    'ar' => 'ألواح شمسية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Service Equipment Accessories',
+                                    'ar' => 'ملحقات معدات الخدمات التجارية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Energy Storage System',
+                            'ar' => 'نظام تخزين الطاقة'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Energy Storage Battery',
+                                    'ar' => 'بطارية تخزين الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Energy Storage Container',
+                                    'ar' => 'حاوية تخزين الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Portable Power Station',
+                                    'ar' => 'محطة كهرباء محمولة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Home Energy Storage System',
+                                    'ar' => 'نظام تخزين الطاقة المنزلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Energy Storage System Components',
+                                    'ar' => 'مكونات أنظمة تخزين الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Energy Sources and Products Accessories',
+                                    'ar' => 'ملحقات مصادر ومنتجات الطاقة'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Rubber, plastic, and sponge',
+                    'ar' => 'مطاط وبلاستيك والاسفنج'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Sponge and sponge products',
+                            'ar' => 'الأسفنج ومنتجات الأسفنج'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Sponge',
+                                    'ar' => 'الأسفنج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sponge Products',
+                                    'ar' => 'منتجات الاسفنج'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Plastic Products',
+                            'ar' => 'منتجات بلاستيكية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Injection Molded Parts',
+                                    'ar' => 'قطع صب بالحقن'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Card',
+                                    'ar' => 'بطاقة بلاستيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Mold',
+                                    'ar' => 'قالب بلاستيكي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Pipes and Hoses',
+                                    'ar' => 'أنابيب وخراطيم بلاستيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Section',
+                                    'ar' => 'مقطع بلاستيكي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Rod',
+                                    'ar' => 'قضيب بلاستيكي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Sheets, Boards and Panels',
+                                    'ar' => 'صفائح وألواح ولوحات بلاستيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Belts and Straps',
+                                    'ar' => 'أحزمة وأشرطة بلاستيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Plastic Products',
+                                    'ar' => 'منتجات بلاستيكية أخرى'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Materials',
+                                    'ar' => 'مواد بلاستيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Plastic Tanks and Drums',
+                                    'ar' => 'خزانات وجولاين بلاستيكية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Plastic Master Batch',
+                            'ar' => 'بلاستيك ماستر باتش'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Color Master Batch',
+                                    'ar' => 'ماستر باتش الألوان'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'UV Resistant Master Batch',
+                                    'ar' => 'ماستر باتش مقاوم للأشعة فوق البنفسجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Anti-oxidant Master Batch',
+                                    'ar' => 'ماستر باتش مضاد للأكسدة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Conductive Master Batch',
+                                    'ar' => 'ماستر باتش موصل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flame Retardant Master Batch',
+                                    'ar' => 'ماستر باتش مقاوم للاشتعال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flexibility Enhancer Master Batch',
+                                    'ar' => 'ماستر باتش محسن للمرونة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Flow Enhancer Master Batch',
+                                    'ar' => 'ماستر باتش محسن للتدفق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Antimicrobial Master Batch',
+                                    'ar' => 'ماستر باتش مضاد للميكروبات'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Rubber Master Batch',
+                            'ar' => 'مطاط ماستر باتش'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Color Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش الألوان للمطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Anti-aging Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش مقاوم للشيخوخة للمطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Heat Resistant Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش مقاوم للحرارة للمطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ozone Resistant Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش مضاد للأوزون للمطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Reinforcement Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش معزز للمطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Conductive Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش موصل للمطاط'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Antimicrobial Master Batch for Rubber',
+                                    'ar' => 'ماستر باتش مضاد للميكروبات للمطاط'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Rubber Products',
+                            'ar' => 'منتجات مطاطية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Vulcanized Rubber Products',
+                                    'ar' => 'منتجات مطاط مبذلة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Strips',
+                                    'ar' => 'حرام مطاطي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Materials',
+                                    'ar' => 'مواد مطاطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Mold',
+                                    'ar' => 'قالب مطاطي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Cylinder',
+                                    'ar' => 'أسطوانة مطاطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Leak Parts',
+                                    'ar' => 'قطع تسريب مطاطي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Sheets and Mats',
+                                    'ar' => 'صفائح ومحاصير مطاطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Rubber Pipes and Squares',
+                                    'ar' => 'أنابيب ومربعات مطاطية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Liquid Rubber and Sealants',
+                                    'ar' => 'مطاط سائل وسايل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Other Rubber Products',
+                                    'ar' => 'منتجات مطاطية أخرى'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Recycled Plastic and Rubber',
+                            'ar' => 'بلاستيك ومطاط معاد تدويره'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Recycled Plastic',
+                                    'ar' => 'بلاستيك معاد تدويره'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Recycled Rubber',
+                                    'ar' => 'مطاط معاد تدويره'
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                [
+                    'en' => 'Commercial Service Equipment',
+                    'ar' => 'معدات الخدمات التجارية'
+                ],
+                'categories' => [
+                    [
+                        'name' => [
+                            'en' => 'Digital signage',
+                            'ar' => 'اللافتات الرقمية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'LCD Screens',
+                                    'ar' => 'شاشات LCD'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'LED Screens',
+                                    'ar' => 'شاشات LED'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'OLED Screens',
+                                    'ar' => 'شاشات OLED'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Blasma Screens',
+                                    'ar' => 'شاشات البلازما'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Interactive display boards',
+                                    'ar' => 'لوحات العرض التفاعلية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Financial Equipment',
+                            'ar' => 'المعدات المالية'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'ATM Machines',
+                                    'ar' => 'أجهزة الصراف الآلي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Currency Counters',
+                                    'ar' => 'عدادات الأوراق النقدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Calculators',
+                                    'ar' => 'الآلات الحاسبة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cash Registers',
+                                    'ar' => 'سجلات النقدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Coin Counters and Sorters',
+                                    'ar' => 'عدادات وفرز العملات المعدنية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Currency Analyzers and Safes',
+                                    'ar' => 'محلات ومحافظات الأوراق النقدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Currency Detectors',
+                                    'ar' => 'كاشفات العملة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Currency Sorting, Checking and Counting Machines',
+                                    'ar' => 'أجهزة فرز وفحص وعد الأوراق النقدية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Portable POS Points',
+                                    'ar' => 'نقاط بيع محمولة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Payment Kiosks',
+                                    'ar' => 'أكشاك الدفع'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tablet POS Points',
+                                    'ar' => 'نقاط بيع باستخدام الأجهزة اللوحية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Warehouse and Supermarket Supplies',
+                            'ar' => 'مستلزمات المستودعات والسوبر ماركت'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Barcode Scanning Devices',
+                                    'ar' => 'أجهزة مسح الباركود'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Exit Counters',
+                                    'ar' => 'عدادات الخروج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Display Hangers',
+                                    'ar' => 'شماعات العرض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Classification or Labeling Machines',
+                                    'ar' => 'آلات التصنيف أو وضع الملصقات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Material Handling Equipment',
+                                    'ar' => 'معدات التعامل مع المواد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Promotional Display Tables',
+                                    'ar' => 'طاولات العرض الترويجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shopping Baskets',
+                                    'ar' => 'سلال التسوق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shopping Carts',
+                                    'ar' => 'عربات التسوق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Display Stands or Showcases',
+                                    'ar' => 'عارضات أو واجهات عرض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Supermarket Shelves',
+                                    'ar' => 'رفوف السوبر ماركت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Weighing and Measuring Equipment',
+                                    'ar' => 'معدات الوزن والقياس'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Restaurant and Hotel Supplies',
+                            'ar' => 'مستلزمات المطاعم والفنادق'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Ovens',
+                                    'ar' => 'الأفران التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Refrigerators',
+                                    'ar' => 'الثلاجات التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Fryers',
+                                    'ar' => 'القلايات التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Mixer',
+                                    'ar' => 'الخلاط التجاري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Grain Equipment',
+                                    'ar' => 'أجهزة الحبوب التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Smoking Coffee Equipment',
+                                    'ar' => 'أجهزة المقهى بالدخان التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Meat Equipment',
+                                    'ar' => 'أجهزة الكلب التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Milk Cleaning Equipment',
+                                    'ar' => 'جهاز تنظيف الحليب التجاري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Confectionery Equipment',
+                                    'ar' => 'أجهزة صنع الحلويات التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Grain Juicing Equipment',
+                                    'ar' => 'أجهزة عصان الحبوب التجاري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Grain Sorting Equipment',
+                                    'ar' => 'أجهزة فرز الحبوب التجاري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Grain Cutting Equipment',
+                                    'ar' => 'أجهزة قطع الحبوب التجاري'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Cooking Tools',
+                                    'ar' => 'أدوات الطبخ التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Disposable Food Service Tools',
+                                    'ar' => 'أدوات خدمة الطعام القابلة للتصرف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cold Beverage Serving Vessels',
+                                    'ar' => 'أواني تقديم المشروبات الباردة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hot Beverage Serving Vessels',
+                                    'ar' => 'أواني تقديم المشروبات الساخنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Reception Robots',
+                                    'ar' => 'ربوتات استقبال'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Security Robots',
+                                    'ar' => 'ربوتات أمنية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Food Delivery Robots',
+                                    'ar' => 'ربوتات توصيل الطعام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Logistics Robots',
+                                    'ar' => 'ربوتات لوجستية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Work Tables',
+                                    'ar' => 'طاولات العمل التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Food Carts',
+                                    'ar' => 'عربات الطعام'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Audio Equipment',
+                                    'ar' => 'معدات الصوتيا'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Ice Cream Making Equipment',
+                                    'ar' => 'معدات صنع الأيس كريم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Saudi Making Equipment',
+                                    'ar' => 'معدات صنع السعودي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Tea Making Equipment',
+                                    'ar' => 'معدات صنع الشاي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Hot Beverage Making Equipment',
+                                    'ar' => 'معدات صنع المشروبات الساخنة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Coffee Making Equipment',
+                                    'ar' => 'معدات صنع القهوة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Juice Making Equipment',
+                                    'ar' => 'معدات صنع العصير'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Energy Making Equipment',
+                                    'ar' => 'معدات صنع الطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Cooking Accessories Equipment',
+                                    'ar' => 'معدات بالأكسسوارات الطباخات التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Beverage Dispensers',
+                                    'ar' => 'موزعات المشروبات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Ice Cream Making Machine',
+                                    'ar' => 'آلة صنع الآيس كريم التجارية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Advertising Equipment',
+                            'ar' => 'معدات الإعلان'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Advertising Boards',
+                                    'ar' => 'لوحات إعلانية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Inflatable Advertising Banners',
+                                    'ar' => 'يافطات إعلانية قابلة للنفخ'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Advertising Light Boxes',
+                                    'ar' => 'صناديق الإضاءة الإعلانية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Advertising Screens',
+                                    'ar' => 'شاشات إعلانية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Outdoor Advertising Boards',
+                                    'ar' => 'لوحات الإعلانات الخارجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Display Shelves',
+                                    'ar' => 'رفوف العرض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Electronic Signs',
+                                    'ar' => 'اللافتات الإلكترونية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Mobile Visual Displays',
+                                    'ar' => 'العروض المرئية المتحركة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Sticker Materials',
+                                    'ar' => 'مواد الملصقات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Foldable Banner Displays',
+                                    'ar' => 'عروض لافتات قابلة للطي'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Refrigeration and Freezing Equipment',
+                            'ar' => 'معدات التجميد والتبريد'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Refrigeration Fryers',
+                                    'ar' => 'مقالي تبريد تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Display Refrigerators',
+                                    'ar' => 'ثلاجات عرض تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Freezers',
+                                    'ar' => 'مجمدات تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Glass Freezers',
+                                    'ar' => 'مجمدات الزجاج التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Ice Making Machines',
+                                    'ar' => 'آلات صنع الثلج التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Refrigerators',
+                                    'ar' => 'ثلاجات تجارية'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Cleaning Equipment',
+                            'ar' => 'معدات التنظيف'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Air Cleaning Equipment',
+                                    'ar' => 'معدات تنظيف الهواء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Carpet and Upholstery Cleaning Equipment',
+                                    'ar' => 'معدات تنظيف السجاد والمفروشات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Cleaning Supplies',
+                                    'ar' => 'إمدادات التنظيف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Dishwashing Equipment',
+                                    'ar' => 'معدات غسل الأطباق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Disinfection and Sterilization Equipment',
+                                    'ar' => 'معدات التطهير والتعقيم'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Floor Cleaning Equipment',
+                                    'ar' => 'معدات تنظيف الأرضيات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'High Pressure Cleaning Equipment',
+                                    'ar' => 'معدات تنظيف الضغط العالي'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Air Humidification Equipment',
+                                    'ar' => 'معدات ترطيب الهواء'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Industrial Cleaning Equipment',
+                                    'ar' => 'معدات التنظيف الصناعية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Shredders',
+                                    'ar' => 'قصاصات المشب'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Leaf Blowers',
+                                    'ar' => 'منفاخات الأوراق'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Oil Filter Equipment',
+                                    'ar' => 'معدات فلتر الزيت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'External Cleaning Equipment',
+                                    'ar' => 'معدات التنظيف الخارجية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Snow Removal Equipment',
+                                    'ar' => 'معدات إزالة الثلج'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Specialized Cleaning Equipment',
+                                    'ar' => 'معدات التنظيف المتخصصة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Surface and Wall Cleaning Equipment',
+                                    'ar' => 'معدات تنظيف الأسطح والجدران'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Water Purification Equipment',
+                                    'ar' => 'معدات تنقية المياه'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Window Cleaning Equipment',
+                                    'ar' => 'معدات تنظيف النوافذ'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Commercial Washing Equipment',
+                            'ar' => 'معدات الغسيل التجاري'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Coin-operated Washers and Dryers',
+                                    'ar' => 'غسالات ومجففات تعمل بقطع النقود'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Integrated Washers and Dryers',
+                                    'ar' => 'غسالات ومجففات متكاملة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Dryers',
+                                    'ar' => 'مجففات تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Automatic Clothing Folding Machines',
+                                    'ar' => 'أجهزة طي ملابس آلية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Iron',
+                                    'ar' => 'مكواة تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Commercial Washing Machines',
+                                    'ar' => 'غسالات تجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Automatic Detergent Dispensers',
+                                    'ar' => 'موزعات منظفات أوتوماتيكية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Energy-efficient Washers and Dryers',
+                                    'ar' => 'غسالات ومجففات موفرة للطاقة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'High-capacity Washers and Dryers',
+                                    'ar' => 'غسالات ومجففات عالية السعة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Laundry Transport Carts',
+                                    'ar' => 'عربات نقل الغسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Laundry Baskets',
+                                    'ar' => 'سلال غسيل'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lint Traps',
+                                    'ar' => 'مصائد وبر'
+                                ],
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => [
+                            'en' => 'Exhibition and Event Equipment',
+                            'ar' => 'معدات المعارض والحفلات'
+                        ],
+                        'categories' => [
+                            [
+                                'name' => [
+                                    'en' => 'Display Curtains',
+                                    'ar' => 'ستائر العرض'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Display Stands and Shelves',
+                                    'ar' => 'حوامل العرض والرفوف'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Furniture and Seating',
+                                    'ar' => 'الأثاث والمقاعد'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Lighting and Sound Equipment',
+                                    'ar' => 'معدات الإضاءة والصوت'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Party Supplies',
+                                    'ar' => 'مستلزمات الحفلات'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Photo Booth',
+                                    'ar' => 'كشك الصور'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Table Top Displays',
+                                    'ar' => 'عروض سطح الطاولة'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Trade Show Supplies',
+                                    'ar' => 'مستلزمات المعارض التجارية'
+                                ],
+                            ],
+                            [
+                                'name' => [
+                                    'en' => 'Teaching Displays',
+                                    'ar' => 'عروض التدريس'
+                                ],
+                            ],
+                        ]
                     ]
                 ]
             ]
-
         ];
 
+
+        $this->createCategoriesRecursively($categories, null);
     }
 
+    /**
+     * Create categories recursively with parent-child relationships
+     */
+    private function createCategoriesRecursively(array $categories, ?string $parentId, int $order = 0): void
+    {
+        foreach ($categories as $index => $categoryData) {
+            // Skip if name isn't properly structured
+            if (!isset($categoryData['name']) || !is_array($categoryData['name'])) {
+                continue;
+            }
 
+            // Check if category already exists to avoid duplicates
+            $existingCategory = ProductCategory::where('name->en', $categoryData['name']['en'])
+                ->where('parent_id', $parentId)
+                ->first();
+
+            if ($existingCategory) {
+                // If category exists, use it for subcategories
+                $category = $existingCategory;
+            } else {
+                // Create new category
+                $category = ProductCategory::create([
+                    'id' => Str::uuid()->toString(),
+                    'name' => $categoryData['name'], // Should be ['en' => '', 'ar' => '']
+                    'description' => $categoryData['description'] ?? null,
+                    'order' => $order + $index,
+                    'parent_id' => $parentId,
+                ]);
+            }
+
+            // Recursively create subcategories
+            if (isset($categoryData['categories']) && is_array($categoryData['categories'])) {
+                $this->createCategoriesRecursively($categoryData['categories'], $category->id, 0);
+            }
+        }
+    }
+
+    /**
+     * Clean up duplicate categories from the database
+     */
+    private function cleanupDuplicates(): void
+    {
+        // Get all categories grouped by name and parent_id
+        $categories = ProductCategory::all()->groupBy(function ($category) {
+            return $category->name['en'] . '_' . ($category->parent_id ?? 'null');
+        });
+
+        foreach ($categories as $group) {
+            if ($group->count() > 1) {
+                // Keep the first one (usually the oldest) and delete the rest
+                $group->skip(1)->each(function ($duplicate) {
+                    $duplicate->delete();
+                });
+            }
+        }
+    }
 }

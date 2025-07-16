@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->jsonb('name');
             $table->text('description')->nullable();
             $table->integer('order')->default(0);
             $table->foreignUuid('parent_id')->nullable()->constrained('product_categories')->onDelete('SET NULL');
-            $table->foreignUuid('company_id')->constrained('companies')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -429,6 +429,9 @@
     "Product Category" : "فئة المنتج",
     "Product Categories" : "فئات المنتج",
     "Product Category Information" : "معلومات فئة المنتج",
+    "Filter by Category" : "تصفية حسب الفئة",
+    "Filter" : "تصفية",
+    "Select Category" : "اختر الفئة",
     "Service Categories" : "فئات الخدمات",
     "Product Variant" : "متغير المنتج",
     "Product Variants" : "متغيرات المنتج",
@@ -456,5 +459,14 @@
     "Stock" : "المخزون",
     "Is Available" : "متاح",
     "Short Description" : "وصف قصير",
-    "The key is used to identify the field in the metadata array. It must be unique and cannot be changed later." : "المفتاح يستخدم لتحديد الحقل في مصفوفة البيانات الوصفية. يجب أن يكون فريدًا ولا يمكن تغييره لاحقًا."
+    "The key is used to identify the field in the metadata array. It must be unique and cannot be changed later." : "المفتاح يستخدم لتحديد الحقل في مصفوفة البيانات الوصفية. يجب أن يكون فريدًا ولا يمكن تغييره لاحقًا.",
+    "Sub Category" : "الفئة الفرعية",
+    "Sub Categories" : "الفئات الفرعية",
+    "Main Category" : "الفئة الرئيسية",
+    "Category Type" : "نوع الفئة",
+    "Main Categories" : "الفئات الرئيسية",
+    "Cannot delete category" : "لا يمكن حذف الفئة",
+    "This category has subcategories. Please delete subcategories first." : "هذه الفئة تحتوي على فئات فرعية. يرجى حذف الفئات الفرعية أولاً.",
+    "Cannot delete categories" : "لا يمكن حذف الفئات",
+    "Some categories have subcategories. Please delete subcategories first." : "بعض الفئات تحتوي على فئات فرعية. يرجى حذف الفئات الفرعية أولاً."
 }
