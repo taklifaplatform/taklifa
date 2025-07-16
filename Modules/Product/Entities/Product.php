@@ -2,10 +2,10 @@
 
 namespace Modules\Product\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Company\Entities\Company;
 use Modules\Core\Entities\BaseModel;
 use Modules\Cart\Entities\CartItem;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends BaseModel
 {
@@ -16,6 +16,7 @@ class Product extends BaseModel
         'description',
         'company_id',
         'category_id',
+        'batch_product_id',
         'is_available',
         'created_with_ai',
     ];
@@ -43,6 +44,11 @@ class Product extends BaseModel
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
+    }
+
+    public function batchProduct()
+    {
+        return $this->belongsTo(BatchProduct::class);
     }
 
     public function cartItems()
