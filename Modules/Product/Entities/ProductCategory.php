@@ -3,7 +3,6 @@
 namespace Modules\Product\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Company\Entities\Company;
 use Modules\Core\Entities\BaseModel;
 
 class ProductCategory extends BaseModel
@@ -15,25 +14,38 @@ class ProductCategory extends BaseModel
         'description',
         'order',
         'parent_id',
-        'company_id',
     ];
 
     protected $attributes = [
         'order' => 0,
     ];
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
+    protected $casts = [
+        'name' => 'array',
+    ];
+
+    public $translatable = [
+        'name',
+        'parent_id',
+    ];
 
     public function parent()
     {
         return $this->belongsTo(ProductCategory::class, 'parent_id');
     }
 
-    public function children()
+    public function subCategories()
     {
         return $this->hasMany(ProductCategory::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(ProductCategory::class, 'parent_id')->orderBy('order');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
     }
 }

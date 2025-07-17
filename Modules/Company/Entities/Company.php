@@ -11,7 +11,6 @@ use Modules\Product\Entities\Product;
 use Modules\Services\Entities\Service;
 use Modules\Geography\Entities\Location;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Modules\Product\Entities\ProductCategory;
 use Modules\Rating\Entities\Traits\HasRating;
 use Modules\Support\Entities\Traits\HasReport;
 use Modules\Geography\Entities\Traits\HasLocation;
@@ -182,11 +181,6 @@ class Company extends BaseModel implements HasMedia
     public function products()
     {
         return $this->hasMany(Product::class, 'company_id');
-    }
-
-    public function productCategories()
-    {
-        return $this->hasMany(ProductCategory::class, 'company_id');
     }
 
     public function carts()

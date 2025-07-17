@@ -2,9 +2,9 @@
 
 namespace Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
 
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Product\Filament\Admin\Resources\ProductCategoryResource;
 
 class EditProductCategory extends EditRecord
 {
@@ -13,8 +13,8 @@ class EditProductCategory extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
             Actions\ViewAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 }
