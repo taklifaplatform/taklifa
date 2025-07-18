@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Product\Http\Controllers\ProductController;
 use Modules\Product\Http\Controllers\ManageProductController;
+use Modules\Product\Http\Controllers\AiProductBatchController;
 use Modules\Product\Http\Controllers\ProductCategoryController;
 
 /*
@@ -35,4 +36,10 @@ Route::middleware('auth:sanctum')->prefix('/products')->group(static function ()
     Route::post('/', [ManageProductController::class, 'storeProduct']);
     Route::put('/{product}', [ManageProductController::class, 'updateProduct']);
     Route::delete('/{product}', [ManageProductController::class, 'deleteProduct']);
+
+    // AI Batch Create endpoints
+    Route::post('/ai/batch-create', [AiProductBatchController::class, 'batchCreate']);
+    Route::post('/ai/batch-create/{batchProduct}/products', [AiProductBatchController::class, 'generateProducts']);
 });
+
+

@@ -28,6 +28,7 @@ class ProductTransformer extends JsonTransformer
             'company' => SimpleCompanyTransformer::make($this->company),
             'category' => ProductCategoryTransformer::make($this->category),
             'category_id' => $this->category_id,
+            'batch_product_id' => $this->batch_product_id,
 
             'created_with_ai' => $this->created_with_ai,
             'image' => MediaTransformer::make($this->getFirstMedia('images')),
@@ -47,6 +48,7 @@ class ProductTransformer extends JsonTransformer
                 Schema::string('id')->required(),
                 Schema::string('name')->required(),
                 Schema::string('description')->nullable(),
+                Schema::string('batch_product_id')->nullable(),
                 Schema::boolean('created_with_ai')->default(false),
                 Schema::ref('#/components/schemas/SimpleCompanyTransformer', 'company'),
                 Schema::ref('#/components/schemas/MediaTransformer', 'image'),
