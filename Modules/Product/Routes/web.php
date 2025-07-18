@@ -10,15 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use OpenAI;
-use App\Models\User;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
-use Modules\Company\Entities\Company;
-use Modules\Product\Entities\Product;
-use Modules\Product\Entities\BatchProduct;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
 
 // Test route for AI product generation
 // Route::get('/test-generate-product', function () {
