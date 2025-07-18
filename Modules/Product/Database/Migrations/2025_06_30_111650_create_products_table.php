@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignUuid('company_id')->constrained('companies')->onDelete('cascade');
 
             $table->foreignUuid('category_id')->nullable()->constrained('product_categories')->nullOnDelete();
-            $table->foreignUuid('batch_product_id')->nullable()->constrained('batch_products')->onDelete('set null');
+
+            $table->foreignUuid('batch_product_id')->nullable()->constrained('batch_products')->onDelete('SET NULL');
 
             $table->boolean('is_available')->default(true);
             $table->boolean('created_with_ai')->default(false);
