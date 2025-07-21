@@ -19,7 +19,7 @@ class UpdateServiceRequest extends FormRequest
 
             'price' => ['nullable'],
 
-            'category_id' => ['required', 'exists:Service_categories,id'],
+            'category_id' => ['nullable', 'exists:Service_categories,id'],
             'sub_category_id' => ['nullable', 'exists:Service_categories,id'],
 
             'metadata' => ['nullable', 'array'],
