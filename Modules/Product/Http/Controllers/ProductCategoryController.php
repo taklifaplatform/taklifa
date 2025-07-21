@@ -21,8 +21,8 @@ class ProductCategoryController extends Controller
     public function listParents(ListProductCategoriesRequest $request)
     {
         $query = ProductCategory::query()
-            ->whereNull('parent_id') // Level 1 categories
-            ->withCount('children') // Count of Level 2 categories
+            ->whereNull('parent_id')
+            ->withCount('children')
             ->orderBy('order')
             ->when($request->search, static function ($query, $search): void {
                 $query->where('name', 'like', sprintf('%%%s%%', $search));
@@ -60,7 +60,7 @@ class ProductCategoryController extends Controller
     public function retrieveSubCategories(string $mainCategoryId, ListProductCategoriesRequest $request)
     {
         $query = ProductCategory::query()
-            ->where('parent_id', $mainCategoryId) // Level 3 categories
+            ->where('parent_id', $mainCategoryId)
             ->orderBy('order')
             ->when($request->search, static function ($query, $search): void {
                 $query->where('name', 'like', sprintf('%%%s%%', $search));

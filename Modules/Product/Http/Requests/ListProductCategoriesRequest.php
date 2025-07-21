@@ -16,8 +16,6 @@ class ListProductCategoriesRequest extends QueryRequest
     {
         return [
             'search' => ['string', 'max:255', 'nullable'],
-            'category_id' => ['string', 'max:255', 'nullable'],
-            'parent_id' => ['string', 'max:255', 'nullable'],
         ];
     }
 
