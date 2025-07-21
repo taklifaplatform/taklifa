@@ -2,22 +2,26 @@
 
 // use App\Models\User;
 // use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Log;
+// use OpenAI;
 // use Modules\Company\Entities\Company;
 // use Modules\Product\Entities\Product;
 // use Modules\Product\Entities\BatchProduct;
+// use Modules\Product\Transformers\ProductTransformer;
+// use Modules\Product\Transformers\BatchProductTransformer;
 
-// /*
-// |--------------------------------------------------------------------------
-// | Web Routes
-// |--------------------------------------------------------------------------
-// |
-// | Here is where you can register web routes for your application. These
-// | routes are loaded by the RouteServiceProvider within a group which
-// | contains the "web" middleware group. Now create something great!
-// |
-// */
+// // /*
+// // |--------------------------------------------------------------------------
+// // | Web Routes
+// // |--------------------------------------------------------------------------
+// // |
+// // | Here is where you can register web routes for your application. These
+// // | routes are loaded by the RouteServiceProvider within a group which
+// // | contains the "web" middleware group. Now create something great!
+// // |
+// // */
 
-// // Test route for AI product generation
+// // // Test route for AI product generation
 // Route::get('/test-generate-product', function () {
 //     try {
 //         $imageUrl = [
@@ -46,7 +50,8 @@
 //         foreach ($imageUrl as $index => $singleImageUrl) {
 //             $product = generateProductFromImage($singleImageUrl, $company, $batchProduct);
 //             if ($product) {
-//                 $product->load(['variants', 'batchProduct']);
+//                 // Load all necessary relationships including media
+//                 $product->load(['variants', 'batchProduct', 'media', 'company']);
 //                 $createdProducts[] = $product;
 //                 $successCount++;
 //                 $batchProduct->increment('published_count');
@@ -57,11 +62,14 @@
 //             return response()->json(['error' => 'Failed to create any products'], 500);
 //         }
 
+//         // Load batch product with relationships
+//         $batchProduct->load(['products.media', 'products.variants', 'products.company']);
+
 //         return response()->json([
 //             'success' => true,
 //             'message' => "Successfully generated {$successCount} out of " . count($imageUrl) . " products",
-//             'products' => $createdProducts,
-//             'batch_product' => $batchProduct->fresh(),
+//             'products' => ProductTransformer::collection(collect($createdProducts)),
+//             'batch_product' => new BatchProductTransformer($batchProduct->fresh()),
 //             'created_count' => $successCount,
 //             'total_attempted' => count($imageUrl)
 //         ]);
@@ -93,7 +101,13 @@
 //         ]);
 
 //         // Add the image to the product
-//         addImageToProduct($product, $imageUrl);
+//         $imageAdded = addImageToProduct($product, $imageUrl);
+//         if (!$imageAdded) {
+//             Log::warning('Image could not be added to product, but continuing with product creation', [
+//                 'product_id' => $product->id,
+//                 'image_url' => $imageUrl
+//             ]);
+//         }
 
 //         // Create a default product variant
 //         $product->variants()->create([
@@ -104,8 +118,8 @@
 //             'stock' => 0,
 //         ]);
 
-//         // Return the product with refreshed data
-//         return $product->refresh();
+//         // Return the product with refreshed data and media loaded
+//         return $product->fresh(['variants', 'media', 'company']);
 //     } catch (\Exception $e) {
 //         Log::error('Product creation error: ' . $e->getMessage(), [
 //             'image_url' => $imageUrl,
@@ -116,21 +130,42 @@
 //     }
 // }
 
-// function addImageToProduct(Product $product, string $imageUrl): void
+// function addImageToProduct(Product $product, string $imageUrl): bool
 // {
 //     try {
+//         // Get image content
 //         $imageContent = file_get_contents($imageUrl);
-//         if (!$imageContent)
-//             return;
+//         if (!$imageContent) {
+//             Log::warning('Failed to download image content', ['url' => $imageUrl]);
+//             return false;
+//         }
 
+//         // Create temporary file
 //         $tempPath = sys_get_temp_dir() . '/' . uniqid() . '.jpg';
 //         file_put_contents($tempPath, $imageContent);
 
+//         // Add media to product
 //         $product->addMedia($tempPath)->toMediaCollection('images');
-//         unlink($tempPath);
+
+//         // Clean up temporary file
+//         if (file_exists($tempPath)) {
+//             unlink($tempPath);
+//         }
+
+//         Log::info('Successfully added image to product', [
+//             'product_id' => $product->id,
+//             'image_url' => $imageUrl
+//         ]);
+
+//         return true;
 
 //     } catch (\Exception $e) {
-//         Log::warning('Failed to add image: ' . $e->getMessage());
+//         Log::error('Failed to add image to product: ' . $e->getMessage(), [
+//             'product_id' => $product->id ?? null,
+//             'image_url' => $imageUrl,
+//             'error' => $e->getMessage()
+//         ]);
+//         return false;
 //     }
 // }
 

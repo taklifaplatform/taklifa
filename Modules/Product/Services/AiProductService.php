@@ -35,7 +35,13 @@ class AiProductService
             ]);
 
             // Copy the image to the product (instead of move)
-            $this->copyImageToProduct($product, $image);
+            $imageAdded = $this->addImageToProduct($product, $imageUrl);
+            if (!$imageAdded) {
+                Log::warning('Image could not be added to product, but continuing with product creation', [
+                    'product_id' => $product->id,
+                    'image_url' => $imageUrl
+                ]);
+            }
 
             // Create a default product variant
             $product->variants()->create([
@@ -61,20 +67,42 @@ class AiProductService
     /**
      * Copy image from batch to product
      */
-    private function copyImageToProduct(Product $product, Media $image): void
+    private function addImageToProduct(Product $product, string $imageUrl): bool
     {
         try {
-            // Get the image file path
-            $imagePath = $image->getPath();
-
-            if (file_exists($imagePath)) {
-                // Add the image to the product using Spatie Media Library
-                $product->addMedia($imagePath)
-                    ->preservingOriginal()
-                    ->toMediaCollection('images');
+            // Get image content
+            $imageContent = file_get_contents($imageUrl);
+            if (!$imageContent) {
+                Log::warning('Failed to download image content', ['url' => $imageUrl]);
+                return false;
             }
+
+            // Create temporary file
+            $tempPath = sys_get_temp_dir() . '/' . uniqid() . '.jpg';
+            file_put_contents($tempPath, $imageContent);
+
+            // Add media to product
+            $product->addMedia($tempPath)->toMediaCollection('images');
+
+            // Clean up temporary file
+            if (file_exists($tempPath)) {
+                unlink($tempPath);
+            }
+
+            Log::info('Successfully added image to product', [
+                'product_id' => $product->id,
+                'image_url' => $imageUrl
+            ]);
+
+            return true;
+
         } catch (\Exception $e) {
-            Log::warning('Failed to copy image to product: ' . $e->getMessage());
+            Log::error('Failed to add image to product: ' . $e->getMessage(), [
+                'product_id' => $product->id ?? null,
+                'image_url' => $imageUrl,
+                'error' => $e->getMessage()
+            ]);
+            return false;
         }
     }
 
@@ -110,12 +138,14 @@ class AiProductService
             // Extract JSON from response
             if (preg_match('/```json\s*\n(.*?)\n```/s', $content, $matches)) {
                 $json = json_decode($matches[1], true);
-                if (json_last_error() === JSON_ERROR_NONE) return $json;
+                if (json_last_error() === JSON_ERROR_NONE)
+                    return $json;
             }
 
             if (preg_match('/\{.*\}/s', $content, $matches)) {
                 $json = json_decode($matches[0], true);
-                if (json_last_error() === JSON_ERROR_NONE) return $json;
+                if (json_last_error() === JSON_ERROR_NONE)
+                    return $json;
             }
 
             // Fallback response with Arabic
