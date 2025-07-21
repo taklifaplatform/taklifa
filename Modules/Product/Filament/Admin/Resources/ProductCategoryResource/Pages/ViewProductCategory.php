@@ -50,15 +50,6 @@ class ViewProductCategory extends ViewRecord
                         ])->from('lg'),
                     ]),
 
-                Components\Section::make(__('Description'))
-                    ->schema([
-                        Components\TextEntry::make('description')
-                            ->label(__('Description'))
-                            ->placeholder(__('No description provided'))
-                            ->columnSpanFull(),
-                    ])
-                    ->visible(fn ($record) => !empty($record->description)),
-
                 Components\Section::make(__('Sub Categories'))
                     ->schema([
                         Components\RepeatableEntry::make('children')
@@ -76,7 +67,15 @@ class ViewProductCategory extends ViewRecord
                             ->contained(false)
                             ->grid(1)
                     ])
-                    ->visible(fn ($record) => $record->children->isNotEmpty())
+                    ->visible(fn($record) => $record->children->isNotEmpty())
+                    ->collapsible(),
+
+                Components\Section::make(__('Description'))
+                    ->schema([
+                        Components\TextEntry::make('description')
+                            ->label(__(''))
+                            ->columnSpanFull(),
+                    ])
                     ->collapsible(),
             ]);
     }

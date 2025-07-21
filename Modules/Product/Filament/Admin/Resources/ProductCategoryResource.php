@@ -9,9 +9,8 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Product\Entities\ProductCategory;
-use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Modules\Product\Filament\Admin\Resources\ProductCategoryResource\Pages;
 
 class ProductCategoryResource extends Resource
 {
@@ -50,7 +49,6 @@ class ProductCategoryResource extends Resource
                             })
                             ->searchable()
                             ->preload()
-                            ->placeholder(__('Select a main category (e.g., Industrial Machines)'))
                             ->nullable(),
 
                         Forms\Components\Textarea::make('description')
@@ -75,7 +73,7 @@ class ProductCategoryResource extends Resource
                             ])
                             ->columns(2)
                             ->collapsed()
-                            ->addActionLabel(__('Add  Sub Category'))
+                            ->addActionLabel(__('Add Sub Category'))
                             ->orderColumn('order')
                             ->itemLabel(function (array $state): ?string {
                                 return $state['name'][app()->getLocale()] ?? $state['name']['en'] ?? null;
