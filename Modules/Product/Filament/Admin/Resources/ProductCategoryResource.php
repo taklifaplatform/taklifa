@@ -39,6 +39,7 @@ class ProductCategoryResource extends Resource
                         Forms\Components\Select::make('parent_id')
                             ->label(__('Parent Category'))
                             ->options(function () {
+                                // Show main categories (Level 1) as parent options for Level 2 categories
                                 return ProductCategory::whereNull('parent_id')
                                     ->orderBy('order')
                                     ->get()
@@ -49,7 +50,7 @@ class ProductCategoryResource extends Resource
                             })
                             ->searchable()
                             ->preload()
-                            ->placeholder(__('Select a parent category'))
+                            ->placeholder(__('Select a main category (e.g., Industrial Machines)'))
                             ->nullable(),
 
                         Forms\Components\Textarea::make('description')
@@ -74,16 +75,14 @@ class ProductCategoryResource extends Resource
                             ])
                             ->columns(2)
                             ->collapsed()
-                            ->addActionLabel(__('Add Sub Category'))
-                            ->reorderable('order')
+                            ->addActionLabel(__('Add  Sub Category'))
                             ->orderColumn('order')
                             ->itemLabel(function (array $state): ?string {
                                 return $state['name'][app()->getLocale()] ?? $state['name']['en'] ?? null;
                             })
                     ])
                     ->collapsible()
-                    ->collapsed(fn($record) => $record === null)
-                    ->visible(fn($record) => $record === null || $record->parent_id === null),
+                    ->collapsed(fn($record) => $record === null),
             ]);
     }
 
@@ -91,7 +90,6 @@ class ProductCategoryResource extends Resource
     {
         return $table
             ->defaultSort('order', 'asc')
-            ->reorderable('order')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name'))
@@ -100,14 +98,14 @@ class ProductCategoryResource extends Resource
                     })
                     ->searchable()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('parent.name')
-                //     ->label(__('Parent Category'))
-                //     ->formatStateUsing(function ($record) {
-                //         if ($record->parent_id === null) {
-                //             return __('Main Category');
-                //         }
-                //         return $record->parent?->name[app()->getLocale()] ?? $record->parent?->name['en'] ?? __('No parent category');
-                //     }),
+                Tables\Columns\TextColumn::make('parent.name')
+                    ->label(__('Parent Category'))
+                    ->formatStateUsing(function ($record) {
+                        if ($record->parent_id === null) {
+                            return __('Main Category');
+                        }
+                        return $record->parent?->name[app()->getLocale()] ?? $record->parent?->name['en'] ?? __('No parent category');
+                    }),
                 Tables\Columns\TextColumn::make('children_count')
                     ->label(__('Sub Categories'))
                     ->counts('children')
@@ -118,7 +116,19 @@ class ProductCategoryResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-
+                SelectFilter::make('parent_id')
+                    ->label(__('Parent Category'))
+                    ->options(function () {
+                        // Show main categories (Level 1) as parent options for Level 2 categories
+                        return ProductCategory::whereNull('parent_id')
+                            ->orderBy('order')
+                            ->get()
+                            ->mapWithKeys(function ($category) {
+                                $name = $category->name[app()->getLocale()] ?? $category->name['en'] ?? '';
+                                return [$category->id => $name];
+                            });
+                    })
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
@@ -133,8 +143,11 @@ class ProductCategoryResource extends Resource
                 ]),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                // By default, only show main categories (those without parent)
-                return $query->withCount('children')->whereNull('parent_id');
+                // Show subcategories of main categories (Level 2 categories like "Plastic Machines", "Packaging Machines" etc.)
+                return $query->withCount('children')
+                    ->whereHas('parent', function ($q) {
+                        $q->whereNull('parent_id'); // Parent has no parent (main category)
+                    });
             })
             ->headerActions([
                 //
