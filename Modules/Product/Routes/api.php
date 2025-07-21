@@ -21,8 +21,9 @@ use Modules\Product\Http\Controllers\ProductCategoryController;
 
 // Product Categories API Routes
 Route::prefix('product-categories')->group(function () {
-    Route::get('/', [ProductCategoryController::class, 'list']);
-    Route::get('/{parentId}', [ProductCategoryController::class, 'retrieve']);
+    Route::get('/parents', [ProductCategoryController::class, 'listParents']); // List all parent categories (Level 1)
+    Route::get('/{categoryId}', [ProductCategoryController::class, 'retrieveMainCategory']); // Retrieve specific category with its sub-categories
+    Route::get('/{mainCategoryId}/sub-categories', [ProductCategoryController::class, 'retrieveSubCategories']); // List sub-categories for a main category (Level 3)
 });
 
 // Products API RoutesA
