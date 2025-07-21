@@ -9,8 +9,6 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Product\Entities\Product;
-use Modules\Product\Entities\ProductCategory;
-use Modules\Company\Entities\Company;
 use Modules\Product\Filament\Company\Resources\ProductResource\Pages;
 use Modules\Product\Filament\Company\Resources\ProductResource\RelationManagers;
 

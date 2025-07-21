@@ -3,7 +3,6 @@
 namespace Modules\Product\Filament\Company\Widgets;
 
 use Modules\Product\Entities\Product;
-use Modules\Product\Entities\ProductCategory;
 use Modules\Product\Entities\ProductVariant;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -17,13 +16,8 @@ class ProductStatsOverview extends BaseWidget
     protected function getStats(): array
     {
         $companyId = auth()->user()->ownedCompany?->id;
-        
-        return [
-            Stat::make(__('Product Categories'), ProductCategory::query()->count())
-                ->icon('heroicon-s-archive-box')
-                ->color('primary')
-                ->description(__('Total number of product categories')),
 
+        return [
             Stat::make(__('Products'), Product::query()->where('company_id', $companyId)->count())
                 ->icon('heroicon-s-cube')
                 ->color('success')
