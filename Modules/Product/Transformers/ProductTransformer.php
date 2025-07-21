@@ -24,17 +24,17 @@ class ProductTransformer extends JsonTransformer
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            
+
             'image' => MediaTransformer::make($this->getFirstMedia('images')),
             'images' => MediaTransformer::collection($this->getMedia('images')),
 
-            'company' => SimpleCompanyTransformer::make($this->company),
+            'company' => CompanyTransformer::make($this->company),
             'category' => ProductCategoryTransformer::make($this->category),
             'category_id' => $this->category_id,
             'batch_product_id' => $this->batch_product_id,
 
             'created_with_ai' => $this->created_with_ai,
-            
+
             'variant' => ProductVariantTransformer::make($this->variant),
             'is_available' => $this->is_available,
 
