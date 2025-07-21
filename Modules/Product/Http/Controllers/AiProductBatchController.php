@@ -62,6 +62,8 @@ class AiProductBatchController extends Controller
                 );
 
                 if ($product) {
+                    // Load relationships for the response
+                    $product->load(['variants', 'media', 'batchProduct']);
                     $generatedProducts[] = $product;
                 }
             }
@@ -71,7 +73,10 @@ class AiProductBatchController extends Controller
                 'published_count' => count($generatedProducts)
             ]);
 
-            return new BatchProductTransformer($batchProduct->load('products'));
+            // Load the batch product with its relationships
+            $batchProduct->load(['products.variants', 'products.media', 'media']);
+
+            return new BatchProductTransformer($batchProduct);
         });
     }
 

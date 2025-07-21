@@ -1,20 +1,31 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// use App\Models\User;
+// use Illuminate\Support\Facades\Route;
+// use Modules\Company\Entities\Company;
+// use Modules\Product\Entities\Product;
+// use Modules\Product\Entities\BatchProduct;
 
-// Test route for AI product generation
+// /*
+// |--------------------------------------------------------------------------
+// | Web Routes
+// |--------------------------------------------------------------------------
+// |
+// | Here is where you can register web routes for your application. These
+// | routes are loaded by the RouteServiceProvider within a group which
+// | contains the "web" middleware group. Now create something great!
+// |
+// */
+
+// // Test route for AI product generation
 // Route::get('/test-generate-product', function () {
 //     try {
-//         $imageUrl = 'https://m.media-amazon.com/images/I/51VIL37W1xL._AC_SX679_.jpg';
+//         $imageUrl = [
+//             'https://m.media-amazon.com/images/I/51VIL37W1xL._AC_SX679_.jpg',
+//             'https://m.media-amazon.com/images/I/61KIPhGBxxL.__AC_SX300_SY300_QL70_ML2_.jpg',
+//             'https://m.media-amazon.com/images/I/61UK-ufKOSL.__AC_SX300_SY300_QL70_ML2_.jpg',
+//             'https://m.media-amazon.com/images/I/51FLQk427sL.__AC_SX300_SY300_QL70_ML2_.jpg',
+//         ];
 
 //         $company = Company::first();
 //         if (!$company) {
@@ -24,25 +35,35 @@
 //         $user = auth()->user() ?? User::first();
 //         $batchProduct = BatchProduct::create([
 //             'user_id' => $user->id,
-//             'count' => 1,
+//             'count' => count($imageUrl),
 //             'published_count' => 0,
 //         ]);
 
 
-//         $product = generateProductFromImage($imageUrl, $company, $batchProduct);
+//         $createdProducts = [];
+//         $successCount = 0;
 
-//         if (!$product) {
-//             return response()->json(['error' => 'Failed to create product'], 500);
+//         foreach ($imageUrl as $index => $singleImageUrl) {
+//             $product = generateProductFromImage($singleImageUrl, $company, $batchProduct);
+//             if ($product) {
+//                 $product->load(['variants', 'batchProduct']);
+//                 $createdProducts[] = $product;
+//                 $successCount++;
+//                 $batchProduct->increment('published_count');
+//             }
 //         }
 
-//         $batchProduct->update(['published_count' => 1]);
-//         $product->load(['variants', 'batchProduct']);
+//         if (empty($createdProducts)) {
+//             return response()->json(['error' => 'Failed to create any products'], 500);
+//         }
 
 //         return response()->json([
 //             'success' => true,
-//             'message' => 'Product successfully generated',
-//             'product' => $product,
-//             'batch_product' => $batchProduct
+//             'message' => "Successfully generated {$successCount} out of " . count($imageUrl) . " products",
+//             'products' => $createdProducts,
+//             'batch_product' => $batchProduct->fresh(),
+//             'created_count' => $successCount,
+//             'total_attempted' => count($imageUrl)
 //         ]);
 
 //     } catch (\Exception $e) {
