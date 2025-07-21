@@ -22,10 +22,10 @@ use Modules\Product\Http\Controllers\ProductCategoryController;
 // Product Categories API Routes
 Route::prefix('product-categories')->group(function () {
     Route::get('/', [ProductCategoryController::class, 'list']);
-    Route::get('/{productCategory}', [ProductCategoryController::class, 'retrieve']);
+    Route::get('/{parentId}', [ProductCategoryController::class, 'retrieve']);
 });
 
-// Products API Routes
+// Products API RoutesA
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'fetchAllProduct']);
     Route::get('/{product}', [ProductController::class, 'retrieveProduct']);

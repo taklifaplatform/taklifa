@@ -4,6 +4,7 @@ namespace Modules\Product\Http\Requests;
 
 use Modules\Core\Support\PaginatedQueryRequest;
 use Modules\Core\Http\Requests\QueryRequest;
+
 class ListProductCategoriesRequest extends QueryRequest
 {
     use PaginatedQueryRequest;
@@ -14,8 +15,10 @@ class ListProductCategoriesRequest extends QueryRequest
     public function rules(): array
     {
         return [
-            'search' => ['string', 'max:255'],
-            'category_id' => ['string', 'exists:product_categories,id', 'nullable'],
+            'search' => ['string', 'max:255', 'nullable'],
+            'category_id' => ['string', 'max:255', 'nullable'],
+            'parent_id' => ['string', 'max:255', 'nullable'],
+            'per_page' => ['integer', 'min:1', 'max:100', 'nullable'],
         ];
     }
 

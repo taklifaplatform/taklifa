@@ -32,12 +32,17 @@ class ProductCategoryController extends Controller
     }
 
     /**
-     * Display the specified product category.
+     * Get all sub-categories for a specific parent category
      */
-    #[OpenApi\Operation('retrieveProductCategory', tags: ['Product Categories'])]
-    #[OpenApi\Response(factory: ProductCategoryTransformer::class)]
-    public function retrieve(ProductCategory $productCategory)
+    #[OpenApi\Operation('retrieveSubCategories', tags: ['Product Categories'])]
+    #[OpenApi\Response(factory: ProductCategoryTransformer::class, isPagination: true)]
+    public function retrieve(string $parentId, ListProductCategoriesRequest $request)
     {
-        return new ProductCategoryTransformer($productCategory);
+        // Verify parent category exists
+        ProductCategory::findOrFail($parentId);
+
+        $subCategories = ProductCategory::where('parent_id', $parentId)->get();
+
+        return ProductCategoryTransformer::collection($subCategories);
     }
 }
