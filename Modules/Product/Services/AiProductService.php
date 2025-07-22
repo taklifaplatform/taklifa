@@ -33,6 +33,7 @@ class AiProductService
                 'created_with_ai' => true,
                 'is_available' => false,
                 'is_published' => false,
+                
             ]);
 
             // Copy the image to the product (instead of move)

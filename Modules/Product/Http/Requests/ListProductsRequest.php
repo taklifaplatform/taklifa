@@ -22,7 +22,7 @@ class ListProductsRequest extends QueryRequest
             'order_direction' => ['string', 'nullable', Rule::in(['asc', 'desc'])],
             'min_price' => ['numeric', 'nullable'],
             'max_price' => ['numeric', 'nullable'],
-            'include_unpublished' => ['boolean', 'nullable'],
+            'include_unpublished' => ['nullable'],
         ];
     }
 
