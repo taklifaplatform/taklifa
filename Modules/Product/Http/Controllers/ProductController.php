@@ -22,6 +22,7 @@ class ProductController extends Controller
         return ProductTransformer::collection(
             Product::query()
                 ->latest()
+                ->with('variant')
                 // ->when($request->include_unpublished !== 'true', static function ($query): void {
                 //     $query->where('is_published', true);
                 // })
@@ -32,13 +33,23 @@ class ProductController extends Controller
                     $query->where('company_id', $companyId);
                 })
                 ->when($request->min_price, static function ($query, $minPrice): void {
-                    $query->where('price', '>=', $minPrice);
+                    $query->whereHas('variant', function($q) use ($minPrice) {
+                        $q->where('price', '>=', $minPrice);
+                    });
                 })
                 ->when($request->max_price, static function ($query, $maxPrice): void {
-                    $query->where('price', '<=', $maxPrice);
+                    $query->whereHas('variant', function($q) use ($maxPrice) {
+                        $q->where('price', '<=', $maxPrice);
+                    });
                 })
-                ->when($request->order_by, static function ($query, $orderBy): void {
-                    $query->orderBy($orderBy, $request->order_direction ?? 'desc');
+                ->when($request->order_by, static function ($query, $orderBy) use ($request): void { 
+                    if ($orderBy === 'price') {
+                        $query->join('product_variants', 'products.id', '=', 'product_variants.product_id')
+                              ->orderBy('product_variants.price', $request->order_direction ?? 'desc')
+                              ->select('products.*');
+                    } else {
+                        $query->orderBy($orderBy, $request->order_direction ?? 'desc');
+                    }
                 })
                 ->paginate($request->per_page ?? 10)
         );
