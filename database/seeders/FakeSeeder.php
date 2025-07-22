@@ -26,9 +26,11 @@ class FakeSeeder extends Seeder
 
     public function createCompanies()
     {
-        User::inRandomOrder()->take(50)->each(function ($user) {
+        User::factory()->count(10)->create()->each(function ($user) {
             $this->createComapny($user);
         });
+        $companyOwner = User::where('username', 'company_owner')->first();
+        $this->createComapny($companyOwner);
     }
 
     public function createComapny(User $owner)
