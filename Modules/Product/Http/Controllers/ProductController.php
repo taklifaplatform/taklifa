@@ -21,11 +21,22 @@ class ProductController extends Controller
     {
         return ProductTransformer::collection(
             Product::query()
+                ->where('is_published', true)
+                ->latest()
                 ->when($request->search, static function ($query, $search): void {
                     $query->where('name', 'like', sprintf('%%%s%%', $search));
                 })
                 ->when($request->company_id, static function ($query, $companyId): void {
                     $query->where('company_id', $companyId);
+                })
+                ->when($request->min_price, static function ($query, $minPrice): void {
+                    $query->where('price', '>=', $minPrice);
+                })
+                ->when($request->max_price, static function ($query, $maxPrice): void {
+                    $query->where('price', '<=', $maxPrice);
+                })
+                ->when($request->order_by, static function ($query, $orderBy): void {
+                    $query->orderBy($orderBy, $request->order_direction ?? 'desc');
                 })
                 ->paginate($request->per_page ?? 10)
         );
