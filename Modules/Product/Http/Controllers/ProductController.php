@@ -22,9 +22,9 @@ class ProductController extends Controller
         return ProductTransformer::collection(
             Product::query()
                 ->latest()
-                ->when($request->include_unpublished !== 'true', static function ($query): void {
-                    $query->where('is_published', true);
-                })
+                // ->when($request->include_unpublished !== 'true', static function ($query): void {
+                //     $query->where('is_published', true);
+                // })
                 ->when($request->search, static function ($query, $search): void {
                     $query->where('name', 'like', sprintf('%%%s%%', $search));
                 })

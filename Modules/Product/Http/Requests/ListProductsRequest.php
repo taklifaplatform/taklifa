@@ -19,7 +19,7 @@ class ListProductsRequest extends QueryRequest
             'search' => ['string', 'max:255'],
             'company_id' => ['string', 'exists:companies,id', 'nullable'],
             'order_by' => ['string', 'nullable'],
-            'order_direction' => ['string', 'nullable', Rule::in(['asc', 'desc'])],
+            'order_direction' => ['string', 'nullable'],
             'min_price' => ['numeric', 'nullable'],
             'max_price' => ['numeric', 'nullable'],
             'include_unpublished' => ['nullable'],
