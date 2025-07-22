@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Cart\Http\Controllers\CartController;
+use Modules\Cart\Http\Controllers\PdfCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ Route::middleware('auth:sanctum')->prefix('/cart')->group(function () {
     Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
     Route::get('{company_id}/{identifier}/items', [CartController::class, 'getCartItems']);
     Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
+    
+    // API for download PDF invoice
+    Route::get('{cart_id}/invoice/download', [PdfCartController::class, 'downloadInvoice']);
 });
 
 
