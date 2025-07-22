@@ -39,13 +39,10 @@ class ProductVariantTransformer extends JsonTransformer
                  * weight: [g, kg, lb, oz]
                  * size: [cm, m, in, ft]
                  */
-                Schema::string('type')->enum('type', ['count', 'weight', 'size']),
+                // Schema::string('type')->enum('type', ['count', 'weight', 'size']),
                 // unit size is 1 (count)
-                Schema::string('type_unit')->enum('type', [
-                    'g', 'kg', 'lb', 'oz',
-                    'cm', 'm', 'in', 'ft',
-                ]),
-                Schema::number('type_value')->nullable(),
+                Schema::string('type_unit'),
+                // Schema::number('type_value')->nullable(),
 
                 Schema::number('stock')->nullable(),
 
