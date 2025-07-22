@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->prefix('/products')->group(static function ()
     Route::post('/', [ManageProductController::class, 'storeProduct']);
     Route::put('/{product}', [ManageProductController::class, 'updateProduct']);
     Route::delete('/{product}', [ManageProductController::class, 'deleteProduct']);
+    Route::post('/{product}/publish', [ManageProductController::class, 'publishProduct']);
 
     // AI Batch Create endpoints
     Route::post('/ai/batch-create', [AiProductBatchController::class, 'batchCreate']);
