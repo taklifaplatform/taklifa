@@ -31,7 +31,8 @@ class AiProductService
                 'description' => $productDetails['description'],
                 'batch_product_id' => $batchProduct?->id,
                 'created_with_ai' => true,
-                'is_available' => true,
+                'is_available' => false,
+                'is_published' => false,
             ]);
 
             // Copy the image to the product (instead of move)
@@ -95,7 +96,6 @@ class AiProductService
             ]);
 
             return true;
-
         } catch (\Exception $e) {
             Log::error('Failed to add image to product: ' . $e->getMessage(), [
                 'product_id' => $product->id ?? null,
@@ -155,7 +155,6 @@ class AiProductService
                 'suggested_price' => 0,
                 'category' => 'عام',
             ];
-
         } catch (\Exception $e) {
             Log::error('Image analysis error: ' . $e->getMessage());
             return null;

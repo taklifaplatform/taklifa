@@ -83,9 +83,9 @@ class AiProductBatchController extends Controller
     /**
      * Get or generate products from a batch using AI.
      */
-    #[OpenApi\Operation('generateProductsFromBatch', tags: ['Products'], security: BearerTokenSecurityScheme::class)]
-    #[OpenApi\Response(factory: ProductTransformer::class, isArray: true)]
-    public function generateProducts(BatchProduct $batchProduct)
+    #[OpenApi\Operation('retrieveBatchProducts', tags: ['Products'], security: BearerTokenSecurityScheme::class)]
+    #[OpenApi\Response(factory: BatchProductTransformer::class, isArray: true)]
+    public function retrieveBatchProducts(BatchProduct $batchProduct)
     {
         $user = request()->user();
 
@@ -99,37 +99,42 @@ class AiProductBatchController extends Controller
             abort(403, 'User must have a company to create products.');
         }
 
-        return DB::transaction(function () use ($batchProduct, $user) {
-            // Check if products already exist for this batch
-            $existingProducts = $batchProduct->products()->get();
+        return BatchProductTransformer::collection($batchProduct);
+    }
 
-            if ($existingProducts->count() > 0) {
-                // Return existing products
-                return ProductTransformer::collection($existingProducts);
-            }
+    /**
+     * Publish a batch of products.
+     */
+    #[OpenApi\Operation('publishBatchProducts', tags: ['Products'], security: BearerTokenSecurityScheme::class)]
+    #[OpenApi\Response(factory: BatchProductTransformer::class)]
+    public function publishBatchProducts(BatchProduct $batchProduct)
+    {
+        $user = request()->user();
 
-            // If no products exist, generate new ones
-            $images = $batchProduct->getMedia('images');
-            $generatedProducts = [];
+        // Ensure user owns the batch
+        if ($batchProduct->user_id !== $user->id) {
+            abort(403, 'You do not have permission to access this batch.');
+        }
 
-            foreach ($images as $image) {
-                $product = $this->aiProductService->generateProductFromImage(
-                    $image,
-                    $user->company,
-                    $batchProduct
-                );
+        // Ensure user has a company
+        if (!$user->company) {
+            abort(403, 'User must have a company to create products.');
+        }
 
-                if ($product) {
-                    $generatedProducts[] = $product;
-                }
-            }
+        if ($batchProduct->published_count > 0) {
+            abort(400, 'All products in this batch have already been published.');
+        }
 
-            // Update published count
-            $batchProduct->update([
-                'published_count' => count($generatedProducts)
-            ]);
+        $publichedCount = 0;
+        foreach ($batchProduct->products as $product) {
+            $product->publish();
+            $publichedCount++;
+        }
 
-            return ProductTransformer::collection($generatedProducts);
-        });
+        $batchProduct->update([
+            'published_count' => $publichedCount
+        ]);
+
+        return BatchProductTransformer::collection($batchProduct->refresh());
     }
 }

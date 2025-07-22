@@ -40,7 +40,8 @@ Route::middleware('auth:sanctum')->prefix('/products')->group(static function ()
 
     // AI Batch Create endpoints
     Route::post('/ai/batch-create', [AiProductBatchController::class, 'batchCreate']);
-    Route::post('/ai/batch-create/{batchProduct}/products', [AiProductBatchController::class, 'generateProducts']);
+    Route::get('/ai/batch-create/{batchProduct}/products', [AiProductBatchController::class, 'retrieveBatchProducts']);
+    Route::post('/ai/batch-create/{batchProduct}/publish', [AiProductBatchController::class, 'publishBatchProducts']);
 });
 
 
