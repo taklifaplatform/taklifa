@@ -14,7 +14,7 @@ use Modules\Cart\Http\Controllers\CartController;
 
 
 // Cart Routes
-Route::middleware('auth:sanctum')->prefix('/cart')->group(function () {
+Route::prefix('/cart')->group(function () {
     Route::get('/{code}', [CartController::class, 'getCart']);
     Route::post('/{code}/items', [CartController::class, 'addItem']);
 });
