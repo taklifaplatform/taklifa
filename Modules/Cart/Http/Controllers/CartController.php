@@ -54,7 +54,7 @@ class CartController extends Controller
                 ->first();
 
             if ($existingItem) {
-                $newQty = $existingItem->quantity + $validated['quantity'];
+                $newQty = $validated['quantity'];
 
                 if ($newQty <= 0) {
                     $existingItem->delete();
