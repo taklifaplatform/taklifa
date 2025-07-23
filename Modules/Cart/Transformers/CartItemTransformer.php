@@ -20,6 +20,7 @@ class CartItemTransformer extends JsonTransformer
         return [
             'id' => $this->id,
             'cart_id' => $this->cart_id,
+            'company_id' => $this->company_id,
             'product_id' => $this->product_id,
             'variant_id' => $this->variant_id,
             'unit_price' => $this->unit_price,

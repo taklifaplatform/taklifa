@@ -2,14 +2,16 @@
 
 namespace Modules\Cart\Entities;
 
+use Modules\Core\Entities\BaseModel;
+use Modules\Company\Entities\Company;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\ProductVariant;
-use Modules\Core\Entities\BaseModel;
 
 class CartItem extends BaseModel
 {
     protected $fillable = [
         'cart_id',
+        'company_id',
         'product_id',
         'variant_id',
         'unit_price',
@@ -30,5 +32,10 @@ class CartItem extends BaseModel
     public function variant()
     {
         return $this->belongsTo(ProductVariant::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

@@ -15,9 +15,6 @@ use Modules\Cart\Http\Controllers\CartController;
 
 // Cart Routes
 Route::middleware('auth:sanctum')->prefix('/cart')->group(function () {
-    Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
-    Route::get('{company_id}/{identifier}/items', [CartController::class, 'getCartItems']);
-    Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
+    Route::get('/{code}', [CartController::class, 'getCart']);
+    Route::post('/{code}/items', [CartController::class, 'addItem']);
 });
-
-

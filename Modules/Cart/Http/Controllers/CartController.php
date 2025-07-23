@@ -11,7 +11,6 @@ use Modules\Api\Attributes as OpenApi;
 use Modules\Product\Entities\ProductVariant;
 use Modules\Cart\Transformers\CartTransformer;
 use Modules\Cart\Http\Requests\AddCartItemRequest;
-use Modules\Cart\Transformers\CartItemTransformer;
 use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 
 #[OpenApi\PathItem]
@@ -20,75 +19,31 @@ class CartController extends Controller
     /**
      * Get or create cart by company_id and identifier.
      */
-    #[OpenApi\Operation('getOrCreateCart', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
+    #[OpenApi\Operation('getCart', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\Response(factory: CartTransformer::class)]
-    public function getOrCreateCart(string $company_id, string $identifier, Request $request)
+    public function getCart(string $code, Request $request)
     {
         $user = $request->user();
+        $cart = $this->getOrCreateCart($code, $user);
 
-        // Get or create cart
-        $cart = Cart::firstOrCreate(
-            [
-                'company_id' => $company_id,
-                'device_identifier' => $identifier,
-            ],
-            [
-                'user_id' => $user?->id,
-                'total_items' => 0,
-                'total_cost' => 0.00,
-            ]
-        );
-
-        // Update user_id if user is now authenticated and cart doesn't have a user_id
-        if ($user && !$cart->user_id) {
-            $cart->update(['user_id' => $user->id]);
-        }
-
-        return new CartTransformer($cart->load('items.product', 'items.variant'));
+        return CartTransformer::make($cart->load('items.product', 'items.variant'));
     }
 
-    /**
-     * Get cart items.
-     */
-    #[OpenApi\Operation('getCartItems', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
-    #[OpenApi\Response(factory: CartItemTransformer::class, isPagination: false)]
-    public function getCartItems(string $company_id, string $identifier)
-    {
-        $cart = Cart::with(['items.product', 'items.variant'])
-            ->where('company_id', $company_id)
-            ->where('device_identifier', $identifier)
-            ->firstOrFail();
-
-        return CartItemTransformer::collection($cart->items);
-    }
 
     /**
      * Add item to cart.
      */
-    #[OpenApi\Operation('addCartItem', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
+    #[OpenApi\Operation('addItem', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\RequestBody(factory: AddCartItemRequest::class)]
     #[OpenApi\Response(factory: CartTransformer::class)]
-    public function addCartItem(AddCartItemRequest $request, string $company_id, string $identifier)
+    public function addItem(AddCartItemRequest $request, string $code)
     {
         $user = $request->user();
         $validated = $request->validated();
 
-        return DB::transaction(function () use ($validated, $company_id, $identifier, $user) {
-            $cart = Cart::firstOrCreate(
-                [
-                    'company_id' => $company_id,
-                    'device_identifier' => $identifier,
-                ],
-                [
-                    'user_id' => $user?->id,
-                    'total_items' => 0,
-                    'total_cost' => 0.00,
-                ]
-            );
+        $cart = $this->getOrCreateCart($code, $user);
 
-            if ($user && !$cart->user_id) {
-                $cart->update(['user_id' => $user->id]);
-            }
+        return DB::transaction(function () use ($validated, $cart) {
 
             $variant = ProductVariant::findOrFail($validated['variant_id']);
             $unitPrice = $variant->price;
@@ -114,6 +69,7 @@ class CartController extends Controller
                     $cart->items()->create([
                         'product_id' => $validated['product_id'],
                         'variant_id' => $validated['variant_id'],
+                        'company_id' => $variant->product->company_id,
                         'unit_price' => $unitPrice,
                         'quantity' => $validated['quantity'],
                         'total_price' => $unitPrice * $validated['quantity'],
@@ -125,6 +81,31 @@ class CartController extends Controller
 
             return new CartTransformer($cart->load(['items.product', 'items.variant']));
         });
+    }
+
+    /**
+     * Get or create cart by code and associate with user if provided.
+     */
+    private function getOrCreateCart(string $code, $user = null): Cart
+    {
+        // Get or create cart
+        $cart = Cart::firstOrCreate(
+            [
+                'code' => $code,
+            ],
+            [
+                'user_id' => $user?->id,
+                'total_items' => 0,
+                'total_cost' => 0.00,
+            ]
+        );
+
+        // Update user_id if user is now authenticated and cart doesn't have a user_id
+        if ($user && !$cart->user_id) {
+            $cart->update(['user_id' => $user->id]);
+        }
+
+        return $cart;
     }
 
     private function updateCartTotals(Cart $cart): void
