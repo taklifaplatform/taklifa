@@ -62,11 +62,13 @@
             font-size: 32px;
             color: #12583c;
             line-height: 0.5;
+            font-weight: bold;
         }
 
         .title {
             color: #14532d;
             font-size: 18px;
+            font-weight: bold;
         }
 
         .value {
@@ -121,6 +123,36 @@
             border: 1px solid #e5e7eb;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             margin-bottom: 50px;
+            page-break-inside: avoid;
+        }
+
+        .company-section:not(:first-child) {
+            page-break-before: always;
+        }
+
+        /* Ensure tables don't break across pages */
+        .table-style {
+            page-break-inside: avoid;
+        }
+
+        /* Prevent orphaned rows */
+        tr {
+            page-break-inside: avoid;
+        }
+
+        /* Ensure header stays at top of first page only */
+        .header {
+            page-break-after: avoid;
+        }
+
+        /* Add proper spacing for new pages */
+        .company-section:not(:first-child) .company-info {
+            margin-top: 0;
+        }
+
+        /* Ensure company sections have proper spacing */
+        .companies-container {
+            width: 100%;
         }
 
         .company-info {
@@ -153,7 +185,7 @@
         .whatsapp-button {
             background: #73c8a6;
             color: #246c46;
-            padding: 4px 12px;
+            padding: 4px 18px;
             border-radius: 4px;
             font-size: 15px;
             display: inline-block;
@@ -165,7 +197,7 @@
         .info-button {
             background: #010e1f;
             color: #939fa1;
-            padding: 4px 12px;
+            padding: 4px 22px;
             border-radius: 4px;
             font-size: 15px;
             display: inline-block;
@@ -180,12 +212,13 @@
             margin-bottom: 3px;
             line-height: 0.5;
             text-align: right;
+            font-weight: bold;
         }
 
         .company-address {
-            font-size: 14px;
+            font-size: 13px;
             color: #08080b;
-            line-height: 0.7;
+            line-height: 0.9;
             text-align: right;
         }
 
@@ -260,11 +293,42 @@
         td:nth-child(5) {
             width: 35%;
         }
+
+        .img-product {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .icon-style {
+            font-size: 18px;
+            color: white;
+            line-height: 0.1;
+        }
+
+        .icon-marker {
+            font-size: 16px;
+            line-height: 0.1;
+        }
+
+        .table-product {
+            width: 100%;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            font-weight: bold
+        }
+
+        .product-name-img {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <div class="header">
         <div class="header-content">
@@ -323,19 +387,20 @@
         </div>
     </div>
 
-    @foreach ($companies as $companyData)
-        <!-- Company Section -->
-        <div class="company-section">
+    <div class="companies-container">
+        @foreach ($companies as $companyData)
+            <!-- Company Section -->
+            <div class="company-section">
             <div class="company-info">
                 <div class="company-left">
                     <div class="company-buttons-container">
                         <a href="https://taklifa.com/page/contact-us" class="whatsapp-button" target="_blank">
                             <span>تواصل بنا مباشر</span>
-                            <i class="fa fa-whatsapp" style="font-size: 18px; color: white; line-height: 0.1;"></i>
+                            <i class="fa fa-whatsapp icon-style"></i>
                         </a>
                         <a href="https://taklifa.com/page/about-us" class="info-button">
                             <span>معلومات عنا</span>
-                            <i class="fa fa-commenting-o" style="font-size: 18px; color: white; line-height: 0.1;"></i>
+                            <i class="fa fa-commenting-o icon-style"></i>
                         </a>
                     </div>
                 </div>
@@ -343,7 +408,10 @@
                 <div class="company-name">
                     {{ $companyData->company->name }}
                 </div>
-                <div class="company-address">{{ $companyData->company->location->address ?? 'لا يوجد عنوان' }}</div>
+                <div class="company-address">
+                    <span> {{ $companyData->company->location->address ?? 'لا يوجد عنوان' }}</span>
+                    <i class="fa fa-map-marker icon-marker"></i>
+                </div>
 
                 <div class="company-right">
                     <div class="company-avatar-circle">
@@ -356,7 +424,8 @@
                     </div>
                 </div>
             </div>
-            <table style="width: 100%; margin-bottom: 10px; margin-top: 20px; font-weight: bold" class="table-style">
+
+            <table class="table-style table-product">
                 <thead style="background-color: #06593a;">
                     <tr style="color: #FFFFFF;">
                         <th class="th-style">المجموع</th>
@@ -396,14 +465,14 @@
                                 @endif
                             </td>
                             <td class="td-style">
-                                <table style="width: 100%; border-collapse: collapse; text-align: center; ">
+                                <table class="product-name-img">
                                     <tr>
                                         @php
                                             $productName = strip_tags(html_entity_decode($item->product->name ?? ''));
                                         @endphp
                                         @if ($productName)
                                             @foreach (splitParagraphIntoChunks($productName, 3) as $nameChunk)
-                                                <div style="margin-bottom: 2px;">{{ $nameChunk }}</div>
+                                                <div style="margin-bottom: 2px; line-height: 1.5;">{{ $nameChunk }}</div>
                                             @endforeach
                                         @else
                                             -
@@ -432,8 +501,7 @@
                                         <td style="border: none">
                                             @if ($productImage)
                                                 <div style="flex-shrink: 0;">
-                                                    <img src="{{ $productImage }}" alt="صورة المنتج"
-                                                        style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd;">
+                                                    <img src="{{ $productImage }}" alt="صورة المنتج" class="img-product">
                                                 </div>
                                             @endif
                                         </td>
@@ -458,6 +526,7 @@
             </table>
         </div>
     @endforeach
+    </div>
 </body>
 
 </html>

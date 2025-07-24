@@ -4,7 +4,6 @@ namespace Modules\Cart\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\Cart\Entities\Cart;
-use Modules\Cart\Entities\CartItem;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Modules\Api\Attributes as OpenApi;
@@ -17,7 +16,7 @@ use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 class CartController extends Controller
 {
     /**
-     * Get or create cart by company_id and identifier.
+     * Get cart by code.
      */
     #[OpenApi\Operation('getCart', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
     #[OpenApi\Response(factory: CartTransformer::class)]
@@ -39,40 +38,36 @@ class CartController extends Controller
     public function addItem(AddCartItemRequest $request, string $code)
     {
         $user = $request->user();
-        $validated = $request->validated();
 
         $cart = $this->getOrCreateCart($code, $user);
 
-        return DB::transaction(function () use ($validated, $cart) {
-
-            $variant = ProductVariant::findOrFail($validated['variant_id']);
+        return DB::transaction(function () use ($request, $cart) {
+            $variant = ProductVariant::findOrFail($request->variant_id);
             $unitPrice = $variant->price;
 
             $existingItem = $cart->items()
-                ->where('product_id', $validated['product_id'])
-                ->where('variant_id', $validated['variant_id'])
+                ->where('product_id', $request->product_id)
+                ->where('variant_id', $request->variant_id)
                 ->first();
 
             if ($existingItem) {
-                $newQty = $validated['quantity'];
-
-                if ($newQty <= 0) {
+                if ($request->quantity <= 0) {
                     $existingItem->delete();
                 } else {
                     $existingItem->update([
-                        'quantity' => $newQty,
-                        'total_price' => $unitPrice * $newQty,
+                        'quantity' => $request->quantity,
+                        'total_price' => $unitPrice * $request->quantity,
                     ]);
                 }
             } else {
-                if ($validated['quantity'] > 0) {
+                if ($request->quantity > 0) {
                     $cart->items()->create([
-                        'product_id' => $validated['product_id'],
-                        'variant_id' => $validated['variant_id'],
+                        'product_id' => $request->product_id,
+                        'variant_id' => $request->variant_id,
                         'company_id' => $variant->product->company_id,
                         'unit_price' => $unitPrice,
-                        'quantity' => $validated['quantity'],
-                        'total_price' => $unitPrice * $validated['quantity'],
+                        'quantity' => $request->quantity,
+                        'total_price' => $unitPrice * $request->quantity,
                     ]);
                 }
             }
@@ -82,6 +77,7 @@ class CartController extends Controller
             return new CartTransformer($cart->load(['items.product', 'items.variant']));
         });
     }
+
 
     /**
      * Clean Cart Items

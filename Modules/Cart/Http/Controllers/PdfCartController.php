@@ -22,7 +22,6 @@ class PdfCartController extends Controller
 
         $grouppedItemsByCompany = $cart->items->groupBy('company_id');
 
-
         $companies = [];
 
         foreach ($grouppedItemsByCompany as $companyId => $items) {
@@ -32,7 +31,6 @@ class PdfCartController extends Controller
                 'total_cost' => $items->sum('total_price'),
             ];
         }
-
 
         $html = view('cart::pdf.invoice', compact('companies', 'cart'))->render();
 

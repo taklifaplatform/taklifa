@@ -49,8 +49,7 @@ class ProductResource extends Resource
 
                         Forms\Components\Textarea::make('description')
                             ->label(__('Description'))
-                            ->rows(5)
-                            ->required(),
+                            ->rows(5),
                     ])->columns(2)
             ]);
     }
