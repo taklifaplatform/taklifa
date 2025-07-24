@@ -77,7 +77,7 @@ class CartController extends Controller
                 }
             }
 
-            $this->updateCartTotals($cart);
+            $cart->updateTotals();
 
             return new CartTransformer($cart->load(['items.product', 'items.variant']));
         });
@@ -93,7 +93,7 @@ class CartController extends Controller
         $user = $request->user();
         $cart = $this->getOrCreateCart($code, $user);
         $cart->items()->delete();
-        $this->updateCartTotals($cart);
+        $cart->updateTotals();
         return new CartTransformer($cart->load(['items.product', 'items.variant']));
     }
 
@@ -122,12 +122,5 @@ class CartController extends Controller
         return $cart;
     }
 
-    private function updateCartTotals(Cart $cart): void
-    {
-        $cart->load('items'); // ensure fresh data
-        $cart->update([
-            'total_items' => $cart->items->sum('quantity'),
-            'total_cost' => $cart->items->sum('total_price'),
-        ]);
-    }
+
 }

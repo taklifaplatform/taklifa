@@ -15,6 +15,50 @@ use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 class PdfCartController extends Controller
 {
     use PDFHandler;
+
+    public function downloadCartInvoice(string $code, Request $request)
+    {
+        $cart = Cart::where('code', $code)->first();
+
+        $cart->load(['items.product', 'items.variant']);
+
+        $grouppedItemsByCompany = $cart->items->groupBy('company_id');
+
+        $companies = [];
+
+        foreach ($grouppedItemsByCompany as $companyId => $items) {
+            $companies[] = (object) [
+                'company' => $items->first()->company,
+                'items' => $items,
+                'total_cost' => $items->sum('total_price'),
+            ];
+        }
+
+        // $company = Company::find($grouppedItemsByCompany->keys()->first());
+
+
+        $html = view('cart::pdf.v2-invoice', compact('companies', 'cart'))->render();
+
+        // Apply Arabic shaping for better PDF rendering
+        $html = $this->adjustArabicAndPersianContent($html);
+
+        // Convert encoding for better Arabic support
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        $pdf = app(PDF::class)
+            ->loadHTML($html)
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isPhpEnabled' => true,
+                'isFontSubsettingEnabled' => true,
+                'isRemoteEnabled' => true,
+                'defaultFont' => 'DejaVu Sans',
+            ])->setWarnings(false);
+
+        return $pdf->stream();
+    }
+
     /**
 
     /**
@@ -52,10 +96,10 @@ class PdfCartController extends Controller
             'items.product',
             'items.variant'
         ])
-        ->whereHas('items') // Ensure cart has items
-        ->withCount('items') // Add items count
-        ->orderBy('items_count', 'desc') // Order by most items first
-        ->first();
+            ->whereHas('items') // Ensure cart has items
+            ->withCount('items') // Add items count
+            ->orderBy('items_count', 'desc') // Order by most items first
+            ->first();
 
         // If no cart with items found, get any cart
         if (!$cart) {
@@ -89,9 +133,9 @@ class PdfCartController extends Controller
             'items.product',
             'items.variant'
         ])
-        ->where('company_id', $company_id)
-        ->whereHas('items')
-        ->get();
+            ->where('company_id', $company_id)
+            ->whereHas('items')
+            ->get();
 
         if ($carts->isEmpty()) {
             return response()->json(['message' => 'No carts found for this company'], 404);
@@ -122,7 +166,7 @@ class PdfCartController extends Controller
     private function generateInvoiceView($cart)
     {
         $invoiceData = $this->prepareInvoiceData($cart);
-       $html = view('cart::pdf.invoice', $invoiceData)->render();
+        $html = view('cart::pdf.invoice', $invoiceData)->render();
 
         // Apply Arabic shaping for better PDF rendering
         $html = $this->adjustArabicAndPersianContent($html);
@@ -131,17 +175,17 @@ class PdfCartController extends Controller
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
         $pdf = app(PDF::class)
-        ->loadHTML($html)
-        ->setPaper('a4', 'portrait')
-        ->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isPhpEnabled' => true,
-            'isFontSubsettingEnabled' => true,
-            'isRemoteEnabled' => true,
-            'defaultFont' => 'DejaVu Sans',
-        ])->setWarnings(false);
+            ->loadHTML($html)
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isPhpEnabled' => true,
+                'isFontSubsettingEnabled' => true,
+                'isRemoteEnabled' => true,
+                'defaultFont' => 'DejaVu Sans',
+            ])->setWarnings(false);
 
-    return $pdf->stream();
+        return $pdf->stream();
     }
 
     private function generateInvoicePDF(Cart $cart)
@@ -158,17 +202,17 @@ class PdfCartController extends Controller
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
         $pdf = app(PDF::class)
-        ->loadHTML($html)
-        ->setPaper('a4', 'portrait')
-        ->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isPhpEnabled' => true,
-            'isFontSubsettingEnabled' => true,
-            'isRemoteEnabled' => true,
-            'defaultFont' => 'DejaVu Sans',
-        ])->setWarnings(false);
+            ->loadHTML($html)
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isPhpEnabled' => true,
+                'isFontSubsettingEnabled' => true,
+                'isRemoteEnabled' => true,
+                'defaultFont' => 'DejaVu Sans',
+            ])->setWarnings(false);
 
-    return $pdf->stream();
+        return $pdf->stream();
     }
 
 

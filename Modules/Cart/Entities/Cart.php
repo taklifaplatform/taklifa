@@ -28,4 +28,14 @@ class Cart extends BaseModel
     {
         return $this->hasMany(CartItem::class);
     }
+
+
+    public function updateTotals(): void
+    {
+        $this->load('items'); // ensure fresh data
+        $this->update([
+            'total_items' => $this->items->sum('quantity'),
+            'total_cost' => $this->items->sum('total_price'),
+        ]);
+    }
 }

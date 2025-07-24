@@ -17,7 +17,7 @@ use Modules\Cart\Http\Controllers\PdfCartController;
 // Invoice System Routes
 
 // Test index page with all available links
-Route::get('/test-invoice-index', function() {
+Route::get('/test-invoice-index', function () {
     return view('cart::pdf.test-index');
 })->name('cart.test-index');
 
@@ -35,3 +35,6 @@ Route::get('/test-company-pdf/{company_id?}', [PdfCartController::class, 'testIn
     ->name('cart.test-company-pdf');
 
 // Test PDF download with sample data
+
+
+Route::get('/download/cart/invoice/{code}', [PdfCartController::class, 'downloadCartInvoice']);

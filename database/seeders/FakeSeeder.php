@@ -17,6 +17,10 @@ class FakeSeeder extends Seeder
     {
         $this->createUsers();
         $this->createCompanies();
+
+
+        // create 2 cart
+        $this->createCarts();
     }
 
     public function createUsers()
@@ -133,6 +137,31 @@ class FakeSeeder extends Seeder
                 'type_value' => $typeValue,
                 'stock' => fake()->numberBetween(1, 1000),
             ]);
+        }
+    }
+
+    public function createCarts()
+    {
+        $users = User::query()->inRandomOrder()->limit(2)->get();
+        foreach ($users as $user) {
+            $cart = \Modules\Cart\Entities\Cart::create([
+                'user_id' => $user->id,
+                'code' => Str::random(10),
+            ]);
+
+            $products = Product::query()->inRandomOrder()->limit(2)->get();
+            foreach ($products as $product) {
+                $quantity = fake()->numberBetween(1, 10);
+                $cart->items()->create([
+                    'product_id' => $product->id,
+                    'variant_id' => $product->variant->id,
+                    'company_id' => $product->company_id,
+                    'unit_price' => $product->variant->price,
+                    'quantity' => $quantity,
+                    'total_price' => $product->variant->price * $quantity,
+                ]);
+            }
+            $cart->updateTotals();
         }
     }
 }
