@@ -107,6 +107,31 @@ class ManageProductController extends Controller
     }
 
     /**
+     * Publish the specified product.
+     */
+    #[OpenApi\Operation('publishProduct', tags: ['Products'], security: BearerTokenSecurityScheme::class)]
+    #[OpenApi\Response(factory: ProductTransformer::class)]
+    public function publishProduct(Product $product, Request $request)
+    {
+        $user = $request->user();
+
+        // Ensure user has a company
+        if (!$user->company) {
+            abort(403, 'User must have a company to publish products.');
+        }
+
+        // Check if the product belongs to the user's company
+        if ($product->company_id !== $user->company->id) {
+            abort(403, 'You can only publish products that belong to your company.');
+        }
+
+        // Publish the product
+        $product->publish();
+
+        return new ProductTransformer($product->refresh());
+    }
+
+    /**
      * Remove the specified product.
      */
     #[OpenApi\Operation('deleteProduct', tags: ['Products'], security: BearerTokenSecurityScheme::class)]

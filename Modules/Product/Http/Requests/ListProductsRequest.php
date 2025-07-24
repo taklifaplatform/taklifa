@@ -4,6 +4,7 @@ namespace Modules\Product\Http\Requests;
 
 use Modules\Core\Http\Requests\QueryRequest;
 use Modules\Core\Support\PaginatedQueryRequest;
+use Illuminate\Validation\Rule;
 
 class ListProductsRequest extends QueryRequest
 {
@@ -17,6 +18,11 @@ class ListProductsRequest extends QueryRequest
         return [
             'search' => ['string', 'max:255'],
             'company_id' => ['string', 'exists:companies,id', 'nullable'],
+            'order_by' => ['string', 'nullable'],
+            'order_direction' => ['string', 'nullable'],
+            'min_price' => ['numeric', 'nullable'],
+            'max_price' => ['numeric', 'nullable'],
+            'include_unpublished' => ['nullable'],
         ];
     }
 

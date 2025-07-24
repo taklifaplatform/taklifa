@@ -18,6 +18,7 @@ class Product extends BaseModel
         'category_id',
         'batch_product_id',
         'is_available',
+        'is_published',
         'created_with_ai',
     ];
 
@@ -54,5 +55,12 @@ class Product extends BaseModel
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function publish()
+    {
+        $this->is_published = true;
+        $this->is_available = true;
+        $this->save();
     }
 }

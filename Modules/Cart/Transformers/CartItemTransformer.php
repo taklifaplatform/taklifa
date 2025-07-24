@@ -5,6 +5,7 @@ namespace Modules\Cart\Transformers;
 use Modules\Core\Transformers\JsonTransformer;
 use Modules\Product\Transformers\ProductTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use Modules\Company\Transformers\SimpleCompanyTransformer;
 use Modules\Product\Transformers\ProductVariantTransformer;
 
 class CartItemTransformer extends JsonTransformer
@@ -20,11 +21,13 @@ class CartItemTransformer extends JsonTransformer
         return [
             'id' => $this->id,
             'cart_id' => $this->cart_id,
+            'company_id' => $this->company_id,
             'product_id' => $this->product_id,
             'variant_id' => $this->variant_id,
             'unit_price' => $this->unit_price,
             'quantity' => $this->quantity,
             'total_price' => $this->total_price,
+            'company' => SimpleCompanyTransformer::make($this->company),
             'product' => ProductTransformer::make($this->product),
             'variant' => ProductVariantTransformer::make($this->variant),
         ];
@@ -43,6 +46,7 @@ class CartItemTransformer extends JsonTransformer
                 Schema::number('total_price')->required(),
                 Schema::ref('#/components/schemas/ProductTransformer', 'product')->nullable(),
                 Schema::ref('#/components/schemas/ProductVariantTransformer', 'variant')->nullable(),
+                Schema::ref('#/components/schemas/SimpleCompanyTransformer', 'company')->nullable(),
             );
     }
 }

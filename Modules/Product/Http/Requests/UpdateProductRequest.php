@@ -19,9 +19,9 @@ class UpdateProductRequest extends FormRequest
             'variant' => ['array'],
             'variant.price' => ['numeric', 'min:0.01'],
             'variant.price_currency' => ['string', 'max:3'],
-            'variant.type' => ['string', 'in:count,weight,size'],
-            'variant.type_unit' => ['string', 'in:g,kg,lb,oz,cm,m,in,ft'],
-            'variant.type_value' => ['numeric'],
+            // 'variant.type' => ['string', 'in:count,weight,size'],
+            'variant.type_unit' => ['string'],
+            // 'variant.type_value' => ['numeric'],
             'variant.stock' => ['numeric'],
 
             'is_available' => ['boolean'],

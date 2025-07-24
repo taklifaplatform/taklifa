@@ -20,8 +20,7 @@ class CartTransformer extends JsonTransformer
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'device_identifier' => $this->device_identifier,
-            'company_id' => $this->company_id,
+            'code' => $this->code,
             'total_items' => $this->total_items,
             'total_cost' => $this->total_cost,
             'items' => CartItemTransformer::collection($this->items),

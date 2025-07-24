@@ -15,13 +15,8 @@ use Modules\Cart\Http\Controllers\PdfCartController;
 
 
 // Cart Routes
-Route::middleware('auth:sanctum')->prefix('/cart')->group(function () {
-    Route::get('{company_id}/{identifier}', [CartController::class, 'getOrCreateCart']);
-    Route::get('{company_id}/{identifier}/items', [CartController::class, 'getCartItems']);
-    Route::post('{company_id}/{identifier}/items', [CartController::class, 'addCartItem']);
 
-    // API for download PDF invoice
-    // Route::get('{company_id}/invoice/download', [PdfCartController::class, 'downloadInvoice']);
+Route::prefix('/cart')->group(function () {
+    Route::get('/{code}', [CartController::class, 'getCart']);
+    Route::post('/{code}/items', [CartController::class, 'addItem']);
 });
-
-

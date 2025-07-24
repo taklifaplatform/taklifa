@@ -26,7 +26,10 @@ return new class extends Migration
             $table->foreignUuid('batch_product_id')->nullable()->constrained('batch_products')->onDelete('SET NULL');
 
             $table->boolean('is_available')->default(true);
+            $table->boolean('is_published')->default(true);
+
             $table->boolean('created_with_ai')->default(false);
+
 
             $table->timestamps();
         });

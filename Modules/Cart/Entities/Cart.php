@@ -13,8 +13,7 @@ class Cart extends BaseModel
 
     protected $fillable = [
         'user_id',
-        'device_identifier',
-        'company_id',
+        'code',
         'total_items',
         'total_cost',
     ];
@@ -24,14 +23,9 @@ class Cart extends BaseModel
         return $this->belongsTo(User::class);
     }
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
 
     public function items()
     {
         return $this->hasMany(CartItem::class);
     }
-
 }
