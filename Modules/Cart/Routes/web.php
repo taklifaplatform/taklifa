@@ -14,14 +14,24 @@ use Modules\Cart\Http\Controllers\PdfCartController;
 |
 */
 
-// Test interface for invoice system
-Route::get('/invoice-test', function () {
-    return view('cart::test-invoice');
-})->name('cart.test-interface');
+// Invoice System Routes
 
-// Test page for PDF invoice
-Route::get('/test-pdf', [PdfCartController::class, 'testInvoice'])->name('cart.test-page');
+// Test index page with all available links
+Route::get('/test-invoice-index', function() {
+    return view('cart::pdf.test-index');
+})->name('cart.test-index');
 
-// Test route for PDF invoice download with cart ID
-Route::get('/cart/{cart_id}/download-pdf', [PdfCartController::class, 'testDownloadInvoice']);
+// Test page for PDF invoice development (HTML preview)
+Route::get('/test-pdf', [PdfCartController::class, 'testInvoice'])->name('cart.test-invoice');
 
+// Test PDF download with specific cart ID
+Route::get('/test-cart-pdf/{cart_id}', [PdfCartController::class, 'testDownloadInvoice'])
+    ->where('cart_id', '[0-9a-f\-]{36}')
+    ->name('cart.test-cart-pdf');
+
+// Test PDF with all cart items for a company
+Route::get('/test-company-pdf/{company_id?}', [PdfCartController::class, 'testInvoiceForCompany'])
+    ->where('company_id', '[0-9]+')
+    ->name('cart.test-company-pdf');
+
+// Test PDF download with sample data
