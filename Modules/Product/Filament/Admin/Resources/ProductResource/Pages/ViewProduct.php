@@ -33,8 +33,14 @@ class ViewProduct extends ViewRecord
                 Components\Section::make(__('Product Details'))
                     ->schema([
                         Components\Split::make([
-                            Components\Grid::make(2)
+                            Components\Grid::make(3)
                                 ->schema([
+                                    Components\Group::make([
+                                        Components\SpatieMediaLibraryImageEntry::make('images')
+                                            ->label(__('Image'))
+                                            ->collection('images')
+                                            ->size(80),
+                                    ]),
                                     Components\Group::make([
                                         Components\TextEntry::make('name')
                                             ->label(__('Name')),

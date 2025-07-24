@@ -8,6 +8,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Modules\Product\Entities\Product;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Modules\Product\Filament\Admin\Resources\ProductResource\Pages;
 use Modules\Product\Filament\Admin\Resources\ProductResource\RelationManagers\VariantsRelationManager;
 
@@ -23,6 +25,12 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\Section::make(__('Product Information'))
                     ->schema([
+                        SpatieMediaLibraryFileUpload::make('images')
+                            ->collection('images')
+                            ->label(__('Image'))
+                            ->conversion('preview')
+                            ->image()
+                            ->columnSpanFull(),
                         Forms\Components\TextInput::make('name')
                             ->label(__('Name'))
                             ->required(),
@@ -43,7 +51,6 @@ class ProductResource extends Resource
                             ->label(__('Description'))
                             ->rows(5)
                             ->required(),
-
                     ])->columns(2)
             ]);
     }

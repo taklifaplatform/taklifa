@@ -469,5 +469,6 @@
     "This category has subcategories. Please delete subcategories first." : "هذه الفئة تحتوي على فئات فرعية. يرجى حذف الفئات الفرعية أولاً.",
     "Cannot delete categories" : "لا يمكن حذف الفئات",
     "Some categories have subcategories. Please delete subcategories first." : "بعض الفئات تحتوي على فئات فرعية. يرجى حذف الفئات الفرعية أولاً.",
-    "Add Sub Category" : "إضافة فئة فرعية"
+    "Add Sub Category" : "إضافة فئة فرعية",
+    "Image" : "الصورة"
 }
