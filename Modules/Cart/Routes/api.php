@@ -19,4 +19,5 @@ use Modules\Cart\Http\Controllers\PdfCartController;
 Route::prefix('/cart')->group(function () {
     Route::get('/{code}', [CartController::class, 'getCart']);
     Route::post('/{code}/items', [CartController::class, 'addItem']);
+    Route::delete('/{code}/items', [CartController::class, 'cleanCart']);
 });

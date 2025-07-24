@@ -84,6 +84,20 @@ class CartController extends Controller
     }
 
     /**
+     * Clean Cart Items
+     */
+    #[OpenApi\Operation('cleanCart', tags: ['Cart'], security: BearerTokenSecurityScheme::class)]
+    #[OpenApi\Response(factory: CartTransformer::class)]
+    public function cleanCart(Request $request, string $code)
+    {
+        $user = $request->user();
+        $cart = $this->getOrCreateCart($code, $user);
+        $cart->items()->delete();
+        $this->updateCartTotals($cart);
+        return new CartTransformer($cart->load(['items.product', 'items.variant']));
+    }
+
+    /**
      * Get or create cart by code and associate with user if provided.
      */
     private function getOrCreateCart(string $code, $user = null): Cart
