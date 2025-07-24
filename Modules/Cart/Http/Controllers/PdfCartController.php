@@ -59,6 +59,7 @@ class PdfCartController extends Controller
         return $pdf->stream();
     }
 
+    //////////////////
     /**
 
     /**
@@ -297,4 +298,6 @@ class PdfCartController extends Controller
             'userAvatar' => $cart->user->name ? mb_substr($cart->user->name, 0, 2) : 'وح',
         ];
     }
+
+    //////////////////
 }
