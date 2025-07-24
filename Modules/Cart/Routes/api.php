@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Cart\Http\Controllers\CartController;
+use Modules\Cart\Http\Controllers\PdfCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use Modules\Cart\Http\Controllers\CartController;
 
 
 // Cart Routes
+
 Route::prefix('/cart')->group(function () {
     Route::get('/{code}', [CartController::class, 'getCart']);
     Route::post('/{code}/items', [CartController::class, 'addItem']);

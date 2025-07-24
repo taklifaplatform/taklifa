@@ -8,8 +8,6 @@ use Modules\Company\Transformers\CompanyTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Modules\Product\Transformers\ProductVariantTransformer;
 use Modules\Product\Transformers\ProductCategoryTransformer;
-use Modules\Company\Transformers\SimpleCompanyTransformer;
-
 class ProductTransformer extends JsonTransformer
 {
     /**
@@ -54,7 +52,7 @@ class ProductTransformer extends JsonTransformer
                 Schema::string('description')->nullable(),
                 Schema::string('batch_product_id')->nullable(),
                 Schema::boolean('created_with_ai')->default(false),
-                Schema::ref('#/components/schemas/SimpleCompanyTransformer', 'company'),
+                Schema::ref('#/components/schemas/CompanyTransformer', 'company'),
                 Schema::ref('#/components/schemas/MediaTransformer', 'image'),
                 Schema::array('images')
                     ->items(Schema::ref('#/components/schemas/MediaTransformer'))
