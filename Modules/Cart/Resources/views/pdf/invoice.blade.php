@@ -167,7 +167,7 @@
             width: 15%;
             vertical-align: middle;
             text-align: center;
-            padding-left: 36px;
+            padding-left: 50px;
         }
 
         .company-left {
@@ -175,7 +175,7 @@
             width: 35%;
             vertical-align: middle;
             text-align: left;
-            padding-right: 15px;
+            padding-right: 30px;
         }
 
         .company-buttons-container {
@@ -186,7 +186,7 @@
         .whatsapp-button {
             background: #73c8a6;
             color: #246c46;
-            padding: 4px 18px;
+            padding: 4px 14px;
             border-radius: 4px;
             font-size: 15px;
             display: inline-block;
@@ -198,7 +198,7 @@
         .info-button {
             background: #010e1f;
             color: #939fa1;
-            padding: 4px 22px;
+            padding: 4px 14px;
             border-radius: 4px;
             font-size: 15px;
             display: inline-block;
@@ -217,7 +217,7 @@
         }
 
         .company-address {
-            font-size: 13px;
+            font-size: 14px;
             color: #08080b;
             line-height: 0.9;
             text-align: right;
