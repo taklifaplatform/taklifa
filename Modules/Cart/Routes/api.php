@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Cart\Http\Controllers\CartController;
-use Modules\Cart\Http\Controllers\PdfCartController;
 
 /*
 |--------------------------------------------------------------------------

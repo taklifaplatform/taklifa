@@ -3,7 +3,6 @@
 namespace Modules\Cart\Transformers;
 
 use Modules\Core\Transformers\JsonTransformer;
-use Modules\Company\Transformers\CompanyTransformer;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Modules\Cart\Transformers\CartItemTransformer;
 

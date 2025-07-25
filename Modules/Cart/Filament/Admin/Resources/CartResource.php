@@ -34,11 +34,6 @@ class CartResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('company.name')
-                    ->label(__('Company'))
-                    ->searchable()
-                    ->sortable(),
-
                 TextColumn::make('total_items')
                     ->label(__('Total Items'))
                     ->numeric()

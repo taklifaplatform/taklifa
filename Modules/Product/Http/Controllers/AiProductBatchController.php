@@ -9,7 +9,6 @@ use Modules\Product\Services\AiProductService;
 use Modules\Api\Attributes as OpenApi;
 use Modules\Product\Http\Requests\BatchCreateProductRequest;
 use Modules\Product\Transformers\BatchProductTransformer;
-use Modules\Product\Transformers\ProductTransformer;
 use Modules\Auth\OpenApi\SecuritySchemes\BearerTokenSecurityScheme;
 
 #[OpenApi\PathItem]
