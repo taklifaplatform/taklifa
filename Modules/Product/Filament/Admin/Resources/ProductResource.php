@@ -44,12 +44,12 @@ class ProductResource extends Resource
 
                         Forms\Components\Textarea::make('short_description')
                             ->label(__('Short Description'))
-                            ->rows(5)
-                            ->required(),
+                            ->rows(5),
 
                         Forms\Components\Textarea::make('description')
                             ->label(__('Description'))
-                            ->rows(5),
+                            ->rows(5)
+                            ->required(),
                     ])->columns(2)
             ]);
     }

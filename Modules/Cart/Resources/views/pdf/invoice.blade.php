@@ -78,14 +78,15 @@
 
         .validity-banner {
             background-color: #12583c;
-            color: #fffefb;
-            padding: 4px 5px;
+            color: #ffffff;
+            padding: 4px 8px;
             margin-top: 10px;
             border-radius: 4px;
-            font-size: 15px;
+            font-size: 14px;
             display: inline-block;
             line-height: 1;
             height: auto;
+            font-weight: bold;
         }
 
         .taklifa-logo {
