@@ -48,7 +48,7 @@ class ManageProductController extends Controller
             }
 
             if (isset($productData['images'])) {
-                $this->addMultipleMedia($product, $product['images'], 'images', true);
+                $this->addMultipleMedia($product, $productData['images'], 'images', true);
             }
 
             return new ProductTransformer($product->refresh());
