@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Cart\Http\Controllers\PdfCartController;
+use Modules\Product\Services\AiProductService;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,14 @@ use Modules\Cart\Http\Controllers\PdfCartController;
 // Invoice System Routes
 
 Route::get('/download/cart/invoice/{code}', [PdfCartController::class, 'downloadCartInvoice']);
+
+/**
+ * TODO: add product info
+ * tags
+ * colors
+ * details (array of key value pairs)
+ */
+Route::get('test-ai', function() {
+    $imageUrl = 'https://taklifa.fra1.digitaloceanspaces.com/501/68872d0c6ae4c.jpg';
+    return AiProductService::analyzeImageForProduct($imageUrl);
+});
