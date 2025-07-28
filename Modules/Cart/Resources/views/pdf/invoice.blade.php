@@ -440,7 +440,7 @@
                     @foreach ($companyData->items as $item)
                         <tr class="color td-style">
                             <td class="td-style">
-                                {{ number_format($item->unit_price, 2) }}
+                                {{ number_format($item->total_price, 2) }}
                             </td>
                             <td class="td-style">
                                 {{ $item->quantity }}
