@@ -33,7 +33,7 @@ class AiProductService
                 'created_with_ai' => true,
                 'is_available' => false,
                 'is_published' => false,
-                
+
             ]);
 
             // Copy the image to the product (instead of move)
@@ -110,7 +110,82 @@ class AiProductService
     /**
      * Analyze the image using OpenAI's Vision API and generate product details with Arabic support.
      */
-    private function analyzeImageForProduct(string $imageUrl): ?array
+    public static function analyzeImageForProduct(string $imageUrl): ?array
+    {
+        try {
+            $client = OpenAI::client(env('OPENAI_API_KEY'));
+
+            $prompt = <<<EOD
+        Analyze this image carefully, understand what is the product in the image.
+        - If the image has a multiple product count it as a package.
+        - If in the image there's a price tag, use it as the suggested price.
+        - If in the image there's meta info use it to help generate the name and description.
+
+        Note: all text should be in Arabic language (العربية), Saudi style.
+        ---
+        JSON response Template:
+        - name: the name of the product.
+        - short_description: a short description of the product.
+        - description: a marketing description to highlight the product.
+        - suggested_price: the suggested price of the product (only numbers.
+        EOD;
+        /**
+         * 
+        - extracted_tags: the tags extracted from the image.
+        - extracted_colors: array of the colors extracted from the image. (keys: name, hex)
+        - extracted_details: the details extracted from the image.
+         */
+
+            $response = $client->chat()->create([
+                'model' => 'gpt-4o',
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => "You are a helpful assistant that can analyze images and provide product details.",
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => [
+                            ['type' => 'text', 'text' => $prompt],
+                            ['type' => 'image_url', 'image_url' => ['url' => $imageUrl]]
+                        ]
+                    ],
+                ],
+                'response_format' => ['type' => 'json_object'],
+            ]);
+            $p = json_decode($response->choices[0]->message->content, true);
+            return $p;
+
+            dd($response, $p);
+            $content = $response->choices[0]->message->content;
+
+            // Extract JSON from response
+            if (preg_match('/```json\s*\n(.*?)\n```/s', $content, $matches)) {
+                $json = json_decode($matches[1], true);
+                if (json_last_error() === JSON_ERROR_NONE)
+                    return $json;
+            }
+
+            if (preg_match('/\{.*\}/s', $content, $matches)) {
+                $json = json_decode($matches[0], true);
+                if (json_last_error() === JSON_ERROR_NONE)
+                    return $json;
+            }
+
+            // Fallback response with Arabic
+            return [
+                'name' => 'منتج مُولد بالذكاء الاصطناعي',
+                'description' => 'منتج تم إنشاؤه بواسطة الذكاء الاصطناعي من تحليل الصورة. يتميز بجودة عالية ومناسب للاستخدام اليومي.',
+                'suggested_price' => 0,
+                'category' => 'عام',
+            ];
+        } catch (\Exception $e) {
+            Log::error('Image analysis error: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    public static function __analyzeImageForProduct(string $imageUrl): ?array
     {
         try {
             $client = OpenAI::client(env('OPENAI_API_KEY'));
