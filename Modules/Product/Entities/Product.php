@@ -20,11 +20,20 @@ class Product extends BaseModel
         'is_available',
         'is_published',
         'created_with_ai',
+        'extracted_tags',
+        'extracted_colors',
+        'extracted_details',
     ];
 
     protected $attributes = [
         'is_available' => true,
         'created_with_ai' => false,
+    ];
+
+    protected $casts = [
+        'extracted_tags' => 'array',
+        'extracted_colors' => 'array',
+        'extracted_details' => 'array',
     ];
 
     public function company()

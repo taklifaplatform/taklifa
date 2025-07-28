@@ -27,8 +27,7 @@ class AiProductService
 
             // Create the product under the company
             $product = $company->products()->create([
-                'name' => $productDetails['name'],
-                'description' => $productDetails['description'],
+                ...$productDetails,
                 'batch_product_id' => $batchProduct?->id,
                 'created_with_ai' => true,
                 'is_available' => false,
@@ -128,16 +127,14 @@ class AiProductService
         - short_description: a short description of the product.
         - description: a marketing description to highlight the product.
         - suggested_price: the suggested price of the product (only numbers.
-        EOD;
-        /**
-         * 
         - extracted_tags: the tags extracted from the image.
         - extracted_colors: array of the colors extracted from the image. (keys: name, hex)
-        - extracted_details: the details extracted from the image.
-         */
+        - extracted_details: the details extracted from the image. (keys: name, value)
+        EOD;
 
             $response = $client->chat()->create([
                 'model' => 'gpt-4o',
+                // 'model' => 'gpt-4o-mini',
                 'messages' => [
                     [
                         'role' => 'system',

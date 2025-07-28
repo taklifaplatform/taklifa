@@ -40,6 +40,10 @@ class ProductTransformer extends JsonTransformer
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+
+            'extracted_tags' => $this->extracted_tags,
+            'extracted_colors' => $this->extracted_colors,
+            'extracted_details' => $this->extracted_details,
         ];
     }
 
@@ -63,7 +67,15 @@ class ProductTransformer extends JsonTransformer
                 Schema::boolean('is_published')->default(true),
                 Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME),
                 Schema::string('updated_at')->format(Schema::FORMAT_DATE_TIME),
-
+                Schema::array('extracted_tags')->items(Schema::string())->nullable(),
+                Schema::array('extracted_colors')->items(Schema::object('Color')->properties(
+                    Schema::string('name')->required(),
+                    Schema::string('hex')->required(),
+                ))->nullable(),
+                Schema::array('extracted_details')->items(Schema::object('Detail')->properties(
+                    Schema::string('name')->required(),
+                    Schema::string('value')->required(),
+                ))->nullable(),
             );
     }
 }

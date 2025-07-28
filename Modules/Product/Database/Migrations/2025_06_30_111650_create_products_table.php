@@ -31,6 +31,10 @@ return new class extends Migration
             $table->boolean('created_with_ai')->default(false);
 
 
+            $table->json('extracted_tags')->nullable();
+            $table->json('extracted_colors')->nullable();
+            $table->json('extracted_details')->nullable();
+
             $table->timestamps();
         });
     }
