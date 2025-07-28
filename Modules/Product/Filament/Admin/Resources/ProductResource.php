@@ -59,13 +59,15 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('Name')),
+                    ->label(__('Name'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('company.name')
                     ->label(__('Company')),
 
                 Tables\Columns\IconColumn::make('is_available')
                     ->boolean()
-                    ->label(__('Is Available')),
+                    ->label(__('Is Available'))
+                    ->sortable(),
             ])
             ->filters([
                 //
