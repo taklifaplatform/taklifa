@@ -30,7 +30,7 @@ class AiProductService
                 ...$productDetails,
                 'batch_product_id' => $batchProduct?->id,
                 'created_with_ai' => true,
-                'is_available' => false,
+                'is_available' => true,
                 'is_published' => false,
 
             ]);

@@ -21,6 +21,7 @@ class ProductTransformer extends JsonTransformer
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'short_description' => $this->short_description,
             'description' => $this->description,
 
             'image' => MediaTransformer::make($this->getFirstMedia('images')),
@@ -53,6 +54,7 @@ class ProductTransformer extends JsonTransformer
             ->properties(
                 Schema::string('id')->required(),
                 Schema::string('name')->required(),
+                Schema::string('short_description')->nullable(),
                 Schema::string('description')->nullable(),
                 Schema::string('batch_product_id')->nullable(),
                 Schema::boolean('created_with_ai')->default(false),
