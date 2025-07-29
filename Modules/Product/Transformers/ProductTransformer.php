@@ -35,8 +35,8 @@ class ProductTransformer extends JsonTransformer
 
             'variant' => ProductVariantTransformer::make($this->variant),
             
-            'is_available' => $this->is_available,
-            'is_published' => $this->is_published,
+            'is_available' => (bool) $this->is_available,
+            'is_published' => (bool) $this->is_published,
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
