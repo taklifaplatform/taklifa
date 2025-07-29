@@ -16,6 +16,64 @@
             return $chunks;
         }
     }
+
+    if (!function_exists('translateUnitToArabic')) {
+        function translateUnitToArabic($unit)
+        {
+            $unitTranslations = [
+                // Weight units
+                'g' => 'غرام',
+                'kg' => 'كيلوغرام',
+                'lb' => 'باوند',
+                'oz' => 'أونصة',
+                'ton' => 'طن',
+                't' => 'طن',
+                
+                // Size units
+                'cm' => 'سنتيمتر',
+                'm' => 'متر',
+                'in' => 'إنش',
+                'ft' => 'قدم',
+                'mm' => 'مليمتر',
+                'km' => 'كيلومتر',
+                'yd' => 'ياردة',
+                
+                // Area units
+                'm2' => 'متر مربع',
+                'sqm' => 'متر مربع',
+                'sqft' => 'قدم مربع',
+                'sqin' => 'إنش مربع',
+                
+                // Volume units
+                'm3' => 'متر مكعب',
+                'l' => 'لتر',
+                'ml' => 'مليلتر',
+                'gal' => 'جالون',
+                
+                // Count units
+                'pcs' => 'قطعة',
+                'unit' => 'وحدة',
+                'item' => 'عنصر',
+                'piece' => 'قطعة',
+                'set' => 'طقم',
+                'pair' => 'زوج',
+                'dozen' => 'دزينة',
+                
+                // Time units
+                'hr' => 'ساعة',
+                'hour' => 'ساعة',
+                'day' => 'يوم',
+                'week' => 'أسبوع',
+                'month' => 'شهر',
+                'year' => 'سنة',
+                
+                // Default fallback
+                'default' => 'وحدة'
+            ];
+
+            return $unitTranslations[$unit] ?? $unit;
+        }
+    }
 @endphp
 
 <head>
@@ -446,10 +504,9 @@
                                 {{ $item->quantity }}
                             </td>
                             <td class="td-style">
-                                {{ $item->variant->type_unit }} /
+                                <span>{{ translateUnitToArabic($item->variant->type_unit) }} </span> / 
                                 <span>ريال</span>
-                                {{ number_format($item->unit_price, 2) }}
-
+                                <span>{{ number_format($item->unit_price, 2) }}</span>
                             </td>
                             <td class="td-style" style="padding: 0; line-height: 0.9;">
                                 @php
