@@ -20,11 +20,8 @@ class ProductController extends Controller
     public function fetchAllProduct(ListProductsRequest $request)
     {
         $query = Product::query();
-        $user = auth()->user();
 
-        if ($request->company_id && $user?->getActiveCompany()?->id === $request->company_id) {
-            //
-        } else if (!$request->include_unpublished) {
+        if (!$request->include_unpublished) {
             // should be published
             $query->where('is_published', true);
             $query->where('is_available', true);
