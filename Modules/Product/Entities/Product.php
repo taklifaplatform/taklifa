@@ -14,6 +14,7 @@ class Product extends BaseModel
     protected $fillable = [
         'name',
         'description',
+        'short_description',
         'company_id',
         'category_id',
         'batch_product_id',
