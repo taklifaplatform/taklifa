@@ -26,8 +26,10 @@ class ProductController extends Controller
             //
         } else {
             // should be published
-            $query->where('is_published', true);
-            $query->where('is_available', true);
+            if (!$request->include_unpublished) {
+                $query->where('is_published', true);
+                $query->where('is_available', true);
+            }
             // price should be bigger than 0
             $query->whereHas('variant', function ($q) {
                 $q->where('price', '>', 0);
