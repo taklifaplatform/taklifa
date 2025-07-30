@@ -13,56 +13,47 @@ class AiProductService
 {
     public function generateProductFromImage(Media $image, Company $company, ?BatchProduct $batchProduct = null): ?Product
     {
-        try {
-            // Get the image URL for OpenAI Vision API
-            $imageUrl = $image->getUrl();
+        // Get the image URL for OpenAI Vision API
+        $imageUrl = $image->getUrl();
 
-            // Generate product details using OpenAI Vision API
-            $productDetails = $this->analyzeImageForProduct($imageUrl);
+        // Generate product details using OpenAI Vision API
+        $productDetails = $this->analyzeImageForProduct($imageUrl);
 
-            if (!$productDetails) {
-                Log::error('Failed to analyze image', ['image_id' => $image->id]);
-                return null;
-            }
-
-            // Create the product under the company
-            $product = $company->products()->create([
-                ...$productDetails,
-                'batch_product_id' => $batchProduct?->id,
-                'created_with_ai' => true,
-                'is_available' => true,
-                'is_published' => false,
-
-            ]);
-
-            // Copy the image to the product (instead of move)
-            $imageAdded = $this->addImageToProduct($product, $imageUrl);
-            if (!$imageAdded) {
-                Log::warning('Image could not be added to product, but continuing with product creation', [
-                    'product_id' => $product->id,
-                    'image_url' => $imageUrl
-                ]);
-            }
-
-            // Create a default product variant
-            $product->variants()->create([
-                'name' => $productDetails['name'],
-                'price' => $productDetails['suggested_price'] ?? 0,
-                'price_currency' => 'SAR',
-                'type' => 'count',
-                'stock' => 0,
-            ]);
-
-            // Return the product with refreshed data
-            return $product->refresh();
-        } catch (\Exception $e) {
-            Log::error('Product creation error: ' . $e->getMessage(), [
-                'image_id' => $image->id,
-                'company_id' => $company->id,
-                'batch_product_id' => $batchProduct?->id
-            ]);
+        if (!$productDetails) {
+            Log::error('Failed to analyze image', ['image_id' => $image->id]);
             return null;
         }
+
+        // Create the product under the company
+        $product = $company->products()->create([
+            ...$productDetails,
+            'batch_product_id' => $batchProduct?->id,
+            'created_with_ai' => true,
+            'is_available' => true,
+            'is_published' => false,
+
+        ]);
+
+        // Copy the image to the product (instead of move)
+        $imageAdded = $this->addImageToProduct($product, $imageUrl);
+        if (!$imageAdded) {
+            Log::warning('Image could not be added to product, but continuing with product creation', [
+                'product_id' => $product->id,
+                'image_url' => $imageUrl
+            ]);
+        }
+
+        // Create a default product variant
+        $product->variants()->create([
+            'name' => $productDetails['name'],
+            'price' => $productDetails['suggested_price'] ?? 0,
+            'price_currency' => 'SAR',
+            'type' => 'count',
+            'stock' => 0,
+        ]);
+
+        // Return the product with refreshed data
+        return $product->refresh();
     }
 
     /**
@@ -111,10 +102,9 @@ class AiProductService
      */
     public static function analyzeImageForProduct(string $imageUrl): ?array
     {
-        try {
-            $client = OpenAI::client(env('OPENAI_API_KEY'));
+        $client = OpenAI::client(env('OPENAI_API_KEY'));
 
-            $prompt = <<<EOD
+        $prompt = <<<EOD
         Analyze this image carefully, understand what is the product in the image.
         - If the image has a multiple product count it as a package.
         - If in the image there's a price tag, use it as the suggested price.
@@ -132,54 +122,25 @@ class AiProductService
         - extracted_details: the details extracted from the image. (keys: name, value)
         EOD;
 
-            $response = $client->chat()->create([
-                'model' => 'gpt-4o',
-                // 'model' => 'gpt-4o-mini',
-                'messages' => [
-                    [
-                        'role' => 'system',
-                        'content' => "You are a helpful assistant that can analyze images and provide product details.",
-                    ],
-                    [
-                        'role' => 'user',
-                        'content' => [
-                            ['type' => 'text', 'text' => $prompt],
-                            ['type' => 'image_url', 'image_url' => ['url' => $imageUrl]]
-                        ]
-                    ],
+        $response = $client->chat()->create([
+            'model' => 'gpt-4o',
+            // 'model' => 'gpt-4o-mini',
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => "You are a helpful assistant that can analyze images and provide product details.",
                 ],
-                'response_format' => ['type' => 'json_object'],
-            ]);
-            $p = json_decode($response->choices[0]->message->content, true);
-            return $p;
-
-            dd($response, $p);
-            $content = $response->choices[0]->message->content;
-
-            // Extract JSON from response
-            if (preg_match('/```json\s*\n(.*?)\n```/s', $content, $matches)) {
-                $json = json_decode($matches[1], true);
-                if (json_last_error() === JSON_ERROR_NONE)
-                    return $json;
-            }
-
-            if (preg_match('/\{.*\}/s', $content, $matches)) {
-                $json = json_decode($matches[0], true);
-                if (json_last_error() === JSON_ERROR_NONE)
-                    return $json;
-            }
-
-            // Fallback response with Arabic
-            return [
-                'name' => 'منتج مُولد بالذكاء الاصطناعي',
-                'description' => 'منتج تم إنشاؤه بواسطة الذكاء الاصطناعي من تحليل الصورة. يتميز بجودة عالية ومناسب للاستخدام اليومي.',
-                'suggested_price' => 0,
-                'category' => 'عام',
-            ];
-        } catch (\Exception $e) {
-            Log::error('Image analysis error: ' . $e->getMessage());
-            return null;
-        }
+                [
+                    'role' => 'user',
+                    'content' => [
+                        ['type' => 'text', 'text' => $prompt],
+                        ['type' => 'image_url', 'image_url' => ['url' => $imageUrl]]
+                    ]
+                ],
+            ],
+            'response_format' => ['type' => 'json_object'],
+        ]);
+        return json_decode($response->choices[0]->message->content, true);
     }
 
     public static function __analyzeImageForProduct(string $imageUrl): ?array

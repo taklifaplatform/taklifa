@@ -26,6 +26,6 @@ Route::get('/download/cart/invoice/{code}', [PdfCartController::class, 'download
  * details (array of key value pairs)
  */
 Route::get('test-ai', function() {
-    $imageUrl = 'https://taklifa.fra1.digitaloceanspaces.com/501/68872d0c6ae4c.jpg';
+    $imageUrl = 'https://taklifa.fra1.digitaloceanspaces.com/222/5790796d-2f4a-4eff-8aae-9a3e5dd9a903.jpg';
     return AiProductService::analyzeImageForProduct($imageUrl);
 });
