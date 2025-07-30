@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('short_description')->nullable();
 
             $table->foreignUuid('company_id')->constrained('companies')->onDelete('cascade');
 
