@@ -22,7 +22,7 @@ class ProductController extends Controller
         $query = Product::query();
         $user = auth()->user();
 
-        if ($request->company_id && $user->active_company_id === $request->company_id) {
+        if ($request->company_id && $user?->getActiveCompany()?->id === $request->company_id) {
             //
         } else {
             // should be published

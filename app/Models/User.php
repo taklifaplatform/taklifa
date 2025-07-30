@@ -254,6 +254,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         $this->save();
     }
 
+    public function getActiveCompany()
+    {
+        if (! $this->active_company_id) {
+            $firstCompany = $this->companies()->first();
+            if (! $firstCompany) {
+                return null;
+            }
+            $this->active_company_id = $firstCompany->id;
+            $this->save();
+        }
+
+        return $this->activeCompany();
+    }
+
     public function activeCompany()
     {
         return $this->belongsTo(Company::class, 'active_company_id');
@@ -264,7 +278,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
      */
     public function company()
     {
-        return $this->activeCompany();
+        return $this->getActiveCompany();
     }
 
     public function location()
