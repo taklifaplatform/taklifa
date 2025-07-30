@@ -24,12 +24,10 @@ class ProductController extends Controller
 
         if ($request->company_id && $user?->getActiveCompany()?->id === $request->company_id) {
             //
-        } else {
+        } else if (!$request->include_unpublished) {
             // should be published
-            if (!$request->include_unpublished) {
-                $query->where('is_published', true);
-                $query->where('is_available', true);
-            }
+            $query->where('is_published', true);
+            $query->where('is_available', true);
             // price should be bigger than 0
             $query->whereHas('variant', function ($q) {
                 $q->where('price', '>', 0);
