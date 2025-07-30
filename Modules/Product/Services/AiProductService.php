@@ -46,7 +46,7 @@ class AiProductService
         // Create a default product variant
         $product->variants()->create([
             'name' => $productDetails['name'],
-            'price' => $productDetails['suggested_price'] ?? 0,
+            'price' => (float) ($productDetails['suggested_price'] ?? 0.00),
             'price_currency' => 'SAR',
             'type' => 'count',
             'stock' => 0,
