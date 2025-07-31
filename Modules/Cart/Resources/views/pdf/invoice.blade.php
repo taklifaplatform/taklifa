@@ -690,13 +690,19 @@
                                     {{ $item->quantity }}
                                 </td>
                                 <td class="td-style">
+                                    @if ($item->variant->type_unit)
                                     <span>{{ translateUnitToArabic($item->variant->type_unit) }} </span> /
+                                    @endif
                                     <span>ريال</span>
                                     <span>{{ number_format($item->unit_price, 2) }}</span>
                                 </td>
                                 <td class="td-style" style="padding: 0; line-height: 0.9;">
-                                    @php
-                                        $descriptions = strip_tags(html_entity_decode($item->product->description ?? ''));
+                                        @php
+                                            if ($item->product->short_description) {
+                                            $descriptions = strip_tags(html_entity_decode($item->product->short_description ?? ''));
+                                        } else {
+                                            $descriptions = strip_tags(html_entity_decode($item->product->description ?? ''));
+                                        }
                                         $shortDescription = implode(' ', array_slice(explode(' ', $descriptions), 0, 5));
                                         if (str_word_count($descriptions) > 5) {
                                             $shortDescription .= '...';
