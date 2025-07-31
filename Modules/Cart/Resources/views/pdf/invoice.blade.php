@@ -28,7 +28,7 @@
                 'oz' => 'أونصة',
                 'ton' => 'طن',
                 't' => 'طن',
-                
+
                 // Size units
                 'cm' => 'سنتيمتر',
                 'm' => 'متر',
@@ -37,19 +37,19 @@
                 'mm' => 'مليمتر',
                 'km' => 'كيلومتر',
                 'yd' => 'ياردة',
-                
+
                 // Area units
                 'm2' => 'متر مربع',
                 'sqm' => 'متر مربع',
                 'sqft' => 'قدم مربع',
                 'sqin' => 'إنش مربع',
-                
+
                 // Volume units
                 'm3' => 'متر مكعب',
                 'l' => 'لتر',
                 'ml' => 'مليلتر',
                 'gal' => 'جالون',
-                
+
                 // Count units
                 'pcs' => 'قطعة',
                 'unit' => 'وحدة',
@@ -58,7 +58,7 @@
                 'set' => 'طقم',
                 'pair' => 'زوج',
                 'dozen' => 'دزينة',
-                
+
                 // Time units
                 'hr' => 'ساعة',
                 'hour' => 'ساعة',
@@ -66,7 +66,7 @@
                 'week' => 'أسبوع',
                 'month' => 'شهر',
                 'year' => 'سنة',
-                
+
                 // Default fallback
                 'default' => 'وحدة'
             ];
@@ -97,6 +97,16 @@
             position: relative;
             background: white;
             margin-bottom: 80px;
+            page-break-after: avoid;
+        }
+
+        /* Page header styling */
+        .page-header {
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            page-break-inside: avoid;
         }
 
         .header-right {
@@ -117,7 +127,7 @@
         }
 
         .header-title {
-            font-size: 32px;
+            font-size: 28px;
             color: #12583c;
             line-height: 0.5;
             font-weight: bold;
@@ -189,6 +199,47 @@
             page-break-before: always;
         }
 
+        /* Ensure header appears on every page */
+        .company-section {
+            page-break-inside: avoid;
+        }
+
+        /* Force page break before each company section except the first */
+        .company-section:not(:first-child) {
+            page-break-before: always;
+        }
+
+        /* Ensure each company section starts on a new page */
+        .company-section {
+            page-break-before: always;
+        }
+
+        /* First company should not have page break */
+        .company-section:first-child {
+            page-break-before: auto;
+        }
+
+        /* Header for each page */
+        .page-header {
+            position: running(header);
+            width: 100%;
+            background: white;
+            margin-bottom: 80px;
+        }
+
+        @page {
+            @top-center {
+                content: element(header);
+            }
+
+            margin-top: 120px;
+        }
+
+        /* Ensure proper spacing for content after header */
+        .companies-container {
+            margin-top: 20px;
+        }
+
         /* Ensure tables don't break across pages */
         .table-style {
             page-break-inside: avoid;
@@ -212,6 +263,84 @@
         /* Ensure company sections have proper spacing */
         .companies-container {
             width: 100%;
+        }
+
+        /* Force header to appear on every page */
+        .page-header {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        /* Adjust body to account for fixed header */
+        body {
+            padding-top: 180px;
+        }
+
+        /* Print styles to ensure header on every page */
+        @media print {
+            .page-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                z-index: 1000;
+            }
+
+            .companies-container {
+                margin-top: 150px;
+            }
+
+            /* Ensure each company section starts on a new page with header */
+            .company-section:not(:first-child) {
+                page-break-before: always;
+            }
+
+            /* Force header to appear on every page */
+            .company-section:not(:first-child) .page-header {
+                display: block !important;
+                position: relative;
+                margin-bottom: 30px;
+            }
+
+            /* Ensure proper page breaks */
+            .company-section {
+                page-break-inside: avoid;
+            }
+
+            /* Force new page for each company except first */
+            .company-section:not(:first-child) {
+                page-break-before: always;
+            }
+
+            /* Ensure header appears at top of each page */
+            .page-header {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Additional print styles for header */
+            @page {
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+
+            /* Ensure header is visible on every page */
+            .company-section:not(:first-child) {
+                margin-top: 0;
+            }
+
+            /* Force header to be included in each page */
+            .page-header {
+                display: block;
+                width: 100%;
+                background: white;
+                margin-bottom: 20px;
+            }
         }
 
         .company-info {
@@ -266,7 +395,7 @@
         }
 
         .company-name {
-            font-size: 26px;
+            font-size: 24px;
             color: #12583c;
             margin-bottom: 3px;
             line-height: 0.5;
@@ -388,8 +517,8 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <div class="header">
+    <!-- Header for each page -->
+    <div class="page-header">
         <div class="header-content">
             <div class="header-right">
                 <div class="header-title">عرض الأسعار</div>
@@ -450,140 +579,197 @@
         @foreach ($companies as $companyData)
             <!-- Company Section -->
             <div class="company-section">
-            <div class="company-info">
-                <div class="company-left">
-                    <div class="company-buttons-container">
-                        <a href="https://taklifa.com/page/contact-us" class="whatsapp-button" target="_blank">
-                            <span>تواصل بنا مباشر</span>
-                            <i class="fa fa-whatsapp icon-style"></i>
-                        </a>
-                        <a href="https://taklifa.com/page/about-us" class="info-button">
-                            <span>معلومات عنا</span>
-                            <i class="fa fa-commenting-o icon-style"></i>
-                        </a>
-                    </div>
-                </div>
+                <!-- Header for each company section -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <div class="header-right">
+                            <div class="header-title">عرض الأسعار</div>
+                            <div>
+                                <span class="value">
+                                    {{ substr($cart->code, 0, 3) }}
+                                </span>
+                                <span class="title">رقم عرض الأسعار:</span>
+                            </div>
+                            <div style="line-height: 0.6;">
+                                <span class="value">{{ $invoiceDate ?? date('d/m/Y') }}</span>
+                                <span class="title">تاريخ عرض الأسعار:</span>
+                            </div>
+                            <div class="validity-banner">
+                                هذا السعر صالح لمدة {{ $validityDays ?? 7 }} أيام من تاريخه
+                            </div>
+                        </div>
 
-                <div class="company-name">
-                    {{ $companyData->company->name }}
-                </div>
-                <div class="company-address">
-                    <span> {{ $companyData->company->location->address ?? 'لا يوجد عنوان' }}</span>
-                    <i class="fa fa-map-marker icon-marker"></i>
-                </div>
-
-                <div class="company-right">
-                    <div class="company-avatar-circle">
-                        @php
-                            $companyInitials = $companyData->company->name
-                                ? mb_substr($companyData->company->name, 0, 2)
-                                : 'شر';
-                        @endphp
-                        {{ $companyInitials }}
-                    </div>
-                </div>
-            </div>
-
-            <table class="table-style table-product">
-                <thead style="background-color: #06593a;">
-                    <tr style="color: #FFFFFF;">
-                        <th class="th-style">المجموع</th>
-                        <th class="th-style">الكمية</th>
-                        <th class="th-style">السعر</th>
-                        <th class="th-style">الوصف</th>
-                        <th class="th-style">اسم المنتج</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($companyData->items as $item)
-                        <tr class="color td-style">
-                            <td class="td-style">
-                                {{ number_format($item->total_price, 2) }}
-                            </td>
-                            <td class="td-style">
-                                {{ $item->quantity }}
-                            </td>
-                            <td class="td-style">
-                                <span>{{ translateUnitToArabic($item->variant->type_unit) }} </span> / 
-                                <span>ريال</span>
-                                <span>{{ number_format($item->unit_price, 2) }}</span>
-                            </td>
-                            <td class="td-style" style="padding: 0; line-height: 0.9;">
+                        <div class="header-center">
+                            <div class="taklifa-logo">
                                 @php
-                                    $descriptions = strip_tags(html_entity_decode($item->product->description ?? ''));
-                                    $shortDescription = implode(' ', array_slice(explode(' ', $descriptions), 0, 5));
-                                    if (str_word_count($descriptions) > 5) {
-                                        $shortDescription .= '...';
-                                    }
+                                    $logoPath = public_path('images/taklifa.png');
+                                    $logoExists = file_exists($logoPath);
+                                    $logoBase64 = $logoExists
+                                        ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
+                                        : null;
                                 @endphp
-                                @if ($shortDescription)
-                                    @foreach (splitParagraphIntoChunks($shortDescription, 4) as $shortDescription)
-                                        <p style="margin: 0 0 3px 0;">{{ $shortDescription }}</p>
-                                    @endforeach
+                                @if ($logoBase64)
+                                    <img src="{{ $logoBase64 }}" alt="Taklifa Logo">
+                                @else
+                                    <img src="{{ asset('images/taklifa.png') }}" alt="Taklifa Logo">
                                 @endif
-                            </td>
-                            <td class="td-style">
-                                <table class="product-name-img">
-                                    <tr>
-                                        @php
-                                            $productName = strip_tags(html_entity_decode($item->product->name ?? ''));
-                                        @endphp
-                                        @if ($productName)
-                                            @foreach (splitParagraphIntoChunks($productName, 3) as $nameChunk)
-                                                <div style="margin-bottom: 2px; line-height: 1.5;">{{ $nameChunk }}</div>
-                                            @endforeach
-                                        @else
-                                            -
-                                        @endif
-                                        @php
-                                            $productImage = null;
-                                            $imagePath = $item->product?->getFirstMediaUrl('images') ?? $item->product?->image;
+                            </div>
+                        </div>
+                        <div>
+                            <div class="scan-logo">
+                                @php
+                                    $scanImagePath = public_path('images/qrcode-taklifa.png');
+                                    $scanImageExists = file_exists($scanImagePath);
+                                    $scanImageBase64 = $scanImageExists
+                                        ? 'data:image/png;base64,' . base64_encode(file_get_contents($scanImagePath))
+                                        : null;
+                                @endphp
+                                @if ($scanImageBase64)
+                                    <img src="{{ $scanImageBase64 }}" alt="QR Code">
+                                @else
+                                    <img src="{{ asset('images/qrcode-taklifa.png') }}" alt="QR Code">
+                                @endif
+                            </div>
+                            <div class="scan-text">
+                                حمل تطبيق تكلفة
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-info">
+                    <div class="company-left">
+                        <div class="company-buttons-container">
+                            <a href="https://taklifa.com/page/contact-us" class="whatsapp-button" target="_blank">
+                                <span>تواصل بنا مباشر</span>
+                                <i class="fa fa-whatsapp icon-style"></i>
+                            </a>
+                            <a href="https://taklifa.com/page/about-us" class="info-button">
+                                <span>معلومات عنا</span>
+                                <i class="fa fa-commenting-o icon-style"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                                            if ($imagePath) {
-                                                if (filter_var($imagePath, FILTER_VALIDATE_URL)) {
-                                                    // Handle URL
-                                                    $imageContent = @file_get_contents($imagePath);
-                                                    if ($imageContent) {
-                                                        $productImage = 'data:image/jpeg;base64,' . base64_encode($imageContent);
-                                                    }
-                                                } else {
-                                                    // Handle local path
-                                                    $fullPath = public_path($imagePath);
-                                                    if (file_exists($fullPath)) {
-                                                        $productImage = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($fullPath));
+                    <div class="company-name">
+                        {{ $companyData->company->name }}
+                    </div>
+                    <div class="company-address">
+                        <span> {{ $companyData->company->location->address ?? 'لا يوجد عنوان' }}</span>
+                        <i class="fa fa-map-marker icon-marker"></i>
+                    </div>
+
+                    <div class="company-right">
+                        <div class="company-avatar-circle">
+                            @php
+                                $companyInitials = $companyData->company->name
+                                    ? mb_substr($companyData->company->name, 0, 2)
+                                    : 'شر';
+                            @endphp
+                            {{ $companyInitials }}
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table-style table-product">
+                    <thead style="background-color: #06593a;">
+                        <tr style="color: #FFFFFF;">
+                            <th class="th-style">المجموع</th>
+                            <th class="th-style">الكمية</th>
+                            <th class="th-style">السعر</th>
+                            <th class="th-style">الوصف</th>
+                            <th class="th-style">اسم المنتج</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($companyData->items as $item)
+                            <tr class="color td-style">
+                                <td class="td-style">
+                                    {{ number_format($item->total_price, 2) }}
+                                </td>
+                                <td class="td-style">
+                                    {{ $item->quantity }}
+                                </td>
+                                <td class="td-style">
+                                    <span>{{ translateUnitToArabic($item->variant->type_unit) }} </span> /
+                                    <span>ريال</span>
+                                    <span>{{ number_format($item->unit_price, 2) }}</span>
+                                </td>
+                                <td class="td-style" style="padding: 0; line-height: 0.9;">
+                                    @php
+                                        $descriptions = strip_tags(html_entity_decode($item->product->description ?? ''));
+                                        $shortDescription = implode(' ', array_slice(explode(' ', $descriptions), 0, 5));
+                                        if (str_word_count($descriptions) > 5) {
+                                            $shortDescription .= '...';
+                                        }
+                                    @endphp
+                                    @if ($shortDescription)
+                                        @foreach (splitParagraphIntoChunks($shortDescription, 4) as $shortDescription)
+                                            <p style="margin: 0 0 3px 0;">{{ $shortDescription }}</p>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                <td class="td-style">
+                                    <table class="product-name-img">
+                                        <tr>
+                                            @php
+                                                $productName = strip_tags(html_entity_decode($item->product->name ?? ''));
+                                            @endphp
+                                            @if ($productName)
+                                                @foreach (splitParagraphIntoChunks($productName, 3) as $nameChunk)
+                                                    <div style="margin-bottom: 2px; line-height: 1.5;">{{ $nameChunk }}</div>
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
+                                            @php
+                                                $productImage = null;
+                                                $imagePath = $item->product?->getFirstMediaUrl('images') ?? $item->product?->image;
+
+                                                if ($imagePath) {
+                                                    if (filter_var($imagePath, FILTER_VALIDATE_URL)) {
+                                                        // Handle URL
+                                                        $imageContent = @file_get_contents($imagePath);
+                                                        if ($imageContent) {
+                                                            $productImage = 'data:image/jpeg;base64,' . base64_encode($imageContent);
+                                                        }
+                                                    } else {
+                                                        // Handle local path
+                                                        $fullPath = public_path($imagePath);
+                                                        if (file_exists($fullPath)) {
+                                                            $productImage = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($fullPath));
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                        @endphp
-                                        <td style="border: none">
-                                            @if ($productImage)
-                                                <div style="flex-shrink: 0;">
-                                                    <img src="{{ $productImage }}" alt="صورة المنتج" class="img-product">
-                                                </div>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                            @endphp
+                                            <td style="border: none">
+                                                @if ($productImage)
+                                                    <div style="flex-shrink: 0;">
+                                                        <img src="{{ $productImage }}" alt="صورة المنتج" class="img-product">
+                                                    </div>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-            <table class="sale-summary">
-                <tr>
-                    <td style="font-size: 15pt">
-                        <span>ريال</span>
-                        {{ number_format($companyData->total_cost, 2) }}
-                    </td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td style="font-size: 16pt">الإجمالي</td>
-                </tr>
-            </table>
-        </div>
-    @endforeach
+                <table class="sale-summary">
+                    <tr>
+                        <td style="font-size: 15pt">
+                            <span>ريال</span>
+                            {{ number_format($companyData->total_cost, 2) }}
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td style="font-size: 16pt">الإجمالي</td>
+                    </tr>
+                </table>
+            </div>
+        @endforeach
     </div>
 </body>
 
