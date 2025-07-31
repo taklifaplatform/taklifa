@@ -36,7 +36,7 @@ class AiProductBatchController extends Controller
         $validatedData = $request->validated();
         $images = $validatedData['images'];
 
-        if ($user->company->ai_products_limit < $images) {
+        if ($user->company->ai_products_limit < count($images)) {
             abort(403, 'لقد وصلت إلى الحد الأقصى لإنشاء المنتجات باستخدام الذكاء الاصطناعي.');
         }
 
