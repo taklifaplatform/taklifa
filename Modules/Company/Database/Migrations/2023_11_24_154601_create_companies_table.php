@@ -17,6 +17,11 @@ return new class extends Migration
             $blueprint->text('about')->nullable();
             $blueprint->foreignUuid('owner_id')->nullable()->constrained('users')->onDelete('SET NULL');
 
+            $blueprint->boolean('has_saudi_products')->default(false);
+            $blueprint->boolean('has_international_products')->default(true);
+
+            $blueprint->integer('ai_products_limit')->default(30);
+
             $blueprint->string('verification_status')->default(
                 \Modules\Company\Entities\Company::VERIFICATION_STATUS_PENDING
             );

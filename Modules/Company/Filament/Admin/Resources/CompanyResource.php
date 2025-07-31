@@ -83,6 +83,26 @@ class CompanyResource extends Resource
                         Forms\Components\Toggle::make('is_enabled')
                             ->required()
                             ->label(__('Is Enabled')),
+
+                        Forms\Components\Toggle::make('has_saudi_products')
+                            ->required()
+                            ->label(__('Has Saudi Products')),
+
+                        Forms\Components\Toggle::make('has_international_products')
+                            ->required()
+                            ->label(__('Has International Products')),
+
+                        Forms\Components\Toggle::make('ai_products_limit')
+                            ->required()
+                            ->label(__('AI Products Limit')),
+                    ])->columns(2),
+
+                Forms\Components\Section::make(__('AI Products'))
+                    ->schema([
+                        Forms\Components\TextInput::make('ai_products_limit')
+                            ->required()
+                            ->numeric()
+                            ->label(__('AI Products Limit')),
                     ])->columns(2),
             ]);
     }
@@ -113,6 +133,17 @@ class CompanyResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('verifiedBy.name')
                     ->label(__('Verified By'))
+                    ->badge()
+                    ->sortable(),
+                Tables\Columns\ToggleColumn::make('has_saudi_products')
+                    ->label(__('Has Saudi Products'))
+                    ->sortable(),
+                // Tables\Columns\ToggleColumn::make('has_international_products')
+                //     ->label(__('Has International Products'))
+                //     ->sortable(),
+                Tables\Columns\TextColumn::make('ai_products_limit')
+                    ->label(__('AI Products Limit'))
+                    ->inline()
                     ->badge()
                     ->sortable(),
             ])

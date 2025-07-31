@@ -25,6 +25,12 @@ class CompanyController extends Controller
                 ->when($request->search, static function ($query, $search): void {
                     $query->where('name', 'like', sprintf('%%%s%%', $search));
                 })
+                ->when($request->has_saudi_products, static function ($query): void {
+                    $query->where('has_saudi_products', true);
+                })
+                ->when($request->has_international_products, static function ($query): void {
+                    $query->where('has_international_products', true);
+                })
                 ->paginate($request->per_page ?? 10)
         );
     }

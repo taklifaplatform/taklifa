@@ -74,6 +74,9 @@ class Company extends BaseModel implements HasMedia
         'name',
         'about',
         'owner_id',
+        'ai_products_limit',
+        'has_saudi_products',
+        'has_international_products',
     ];
 
     protected static function boot()

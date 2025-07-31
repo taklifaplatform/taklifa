@@ -33,9 +33,15 @@ class AiProductBatchController extends Controller
             abort(403, 'User must have a company to create products.');
         }
 
-        return DB::transaction(function () use ($user, $request) {
-            $validatedData = $request->validated();
-            $images = $validatedData['images'];
+        $validatedData = $request->validated();
+        $images = $validatedData['images'];
+
+        if ($user->company->ai_products_limit < $images) {
+            abort(403, 'You have reached the AI products limit.');
+        }
+
+        return DB::transaction(function () use ($user, $images) {
+
 
             // Create the batch product
             $batchProduct = BatchProduct::create([

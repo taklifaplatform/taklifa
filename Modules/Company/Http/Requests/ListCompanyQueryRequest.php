@@ -16,6 +16,8 @@ class ListCompanyQueryRequest extends QueryRequest
     {
         return [
             'search' => ['nullable', 'string'],
+            'has_saudi_products' => ['nullable', 'boolean'],
+            'has_international_products' => ['nullable', 'boolean'],
         ];
     }
 }

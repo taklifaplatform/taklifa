@@ -18,6 +18,7 @@ class AiProductService
 
         // Generate product details using OpenAI Vision API
         $productDetails = $this->analyzeImageForProduct($imageUrl);
+        $company->decrement('ai_products_limit');
 
         if (!$productDetails) {
             Log::error('Failed to analyze image', ['image_id' => $image->id]);
