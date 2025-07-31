@@ -78,6 +78,9 @@ class AiProductBatchController extends Controller
                 'published_count' => count($generatedProducts)
             ]);
 
+            $user->company->ai_products_limit = ($user->company->ai_products_limit - count($images));
+            $user->company->save();
+
             // Load the batch product with its relationships
             $batchProduct->load(['products.variants', 'products.media', 'media']);
 
