@@ -17,7 +17,7 @@ class UpdateProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'category_id' => ['nullable', 'string', 'exists:product_categories,id'],
             'variant' => ['array'],
-            'variant.price' => ['numeric', 'min:0.01'],
+            'variant.price' => ['numeric'],
             'variant.price_currency' => ['string', 'max:3'],
             // 'variant.type' => ['string', 'in:count,weight,size'],
             'variant.type_unit' => ['string'],
