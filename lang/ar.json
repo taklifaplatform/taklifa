@@ -470,5 +470,9 @@
     "Cannot delete categories" : "لا يمكن حذف الفئات",
     "Some categories have subcategories. Please delete subcategories first." : "بعض الفئات تحتوي على فئات فرعية. يرجى حذف الفئات الفرعية أولاً.",
     "Add Sub Category" : "إضافة فئة فرعية",
-    "Image" : "الصورة"
+    "Image" : "الصورة",
+    "Has Saudi Products" : "يحتوي على منتجات سعودية",
+    "AI Products Limit" : "حدود منتجات الذكاء الاصطناعي",
+    "AI Products" : "منتجات الذكاء الاصطناعي",
+    "Has International Products" : "يحتوي على منتجات دولية"
 }
