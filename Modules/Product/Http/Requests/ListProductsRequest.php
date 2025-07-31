@@ -16,7 +16,7 @@ class ListProductsRequest extends QueryRequest
     public function rules(): array
     {
         return [
-            'search' => ['string', 'max:255'],
+            'search' => ['string', 'max:255', 'nullable'],
             'company_id' => ['string', 'exists:companies,id', 'nullable'],
             'order_by' => ['string', 'nullable'],
             'order_direction' => ['string', 'nullable'],
