@@ -18,14 +18,15 @@ class ProductTransformer extends JsonTransformer
      */
     public function toArray($request)
     {
+        $images = $this->getMedia('images');
         return [
             'id' => $this->id,
             'name' => $this->name,
             'short_description' => $this->short_description,
             'description' => $this->description,
 
-            'image' => MediaTransformer::make($this->getFirstMedia('images')),
-            'images' => MediaTransformer::collection($this->getMedia('images')),
+            'image' => MediaTransformer::make($images->first()),
+            'images' => MediaTransformer::collection($images),
 
             'company' => CompanyTransformer::make($this->company),
             'category' => ProductCategoryTransformer::make($this->category),
@@ -35,7 +36,7 @@ class ProductTransformer extends JsonTransformer
             'created_with_ai' => $this->created_with_ai,
 
             'variant' => ProductVariantTransformer::make($this->variant),
-            
+
             'is_available' => (bool) $this->is_available,
             'is_published' => (bool) $this->is_published,
 
